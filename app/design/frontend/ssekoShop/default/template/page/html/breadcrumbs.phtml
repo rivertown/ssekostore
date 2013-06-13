@@ -10,15 +10,13 @@
  */
 ?>
 
-<?php if($crumbs && is_array($crumbs)): ?>
+<?php if($crumbs && is_array($crumbs)):?>
 <div class="breadcrumbs subnav">
     <ul class="nav nav-pills"> 
         <?php foreach($crumbs as $_crumbName=>$_crumbInfo): ?>
             <?php if($_crumbInfo['link']): ?>
                 <li class="<?php echo $_crumbName ?>">
-                	<a href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->htmlEscape($_crumbInfo['title']) ?>">
-                		<?php if($_crumbInfo['first']):?><span class="icon-home"></span><?php else: ?><?php echo $this->htmlEscape($_crumbInfo['label']) ?><?php endif; ?>
-                	</a>
+                	<a href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->htmlEscape($_crumbInfo['title']) ?>"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></a>
                 </li>
             <?php elseif($_crumbInfo['last']): ?>
                 <li class="<?php echo $_crumbName ?> active"><a href="#" title="<?php echo $this->htmlEscape($_crumbInfo['title']) ?>"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></a></li>
