@@ -17,6 +17,7 @@ Default layout, loads most of the pages
 -->
 
     <default>
+    	<remove name="tags_popular"/>
         <reference name="left">
             <block type="catalog/navigation" name="catalog.leftnav.custom" before="wordpress_sidebar_left" template="catalog/navigation/left.custom.phtml"/>
             <action method="unsetChild"><name>left.permanent.callout</name></action>
