@@ -28,6 +28,22 @@
 <?php else: ?>
 <div class="category-products">
     <?php echo $this->getToolbarHtml() ?>
+    <?php
+        /* @var $toolbar Mage_Catalog_Block_Product_List_Toolbar */
+        // get toolbars limits - overrides default pager limit
+        $toolbar = Mage::getBlockSingleton('catalog/product_list_toolbar')->getAvailableLimit();
+
+        /* @var $pager Mage_Page_Block_Html_Pager */
+        $pager = $this->getLayout()->createBlock('page/html_pager', 'bootstrapped.standalone.pager');
+
+        // set limit - uses category's instead of default pager's (10-20-50)
+        $pager->setAvailableLimit($toolbar);
+        // need to set collection
+        $pager->setCollection($_productCollection);
+        //set custom template
+        $pager->setTemplate('catalog/product/list/pager.phtml');
+        echo $pager->toHtml();
+    ?>
     <?php // List mode ?>
     <?php if($this->getMode()!='grid'): ?>
     <?php $_iterator = 0; ?>
@@ -119,7 +135,7 @@
     <script type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd','even','first','last'])</script>
     <?php endif; ?>
 
-    <div class="toolbar-bottom">
+    <!--div class="toolbar-bottom">
         <?php
         /* @var $toolbar Mage_Catalog_Block_Product_List_Toolbar */
         // get toolbars limits - overrides default pager limit
@@ -136,6 +152,6 @@
         $pager->setTemplate('catalog/product/list/pager.phtml');
         echo $pager->toHtml();
         ?>
-    </div>
+    </div-->
 </div>
 <?php endif; ?>

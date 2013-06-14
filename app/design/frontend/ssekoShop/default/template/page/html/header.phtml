@@ -11,13 +11,13 @@
 /**
  * @var Mage_Page_Block_Html_Header $this
  */
-?>
-<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+get_header();?>
+<!--a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
 </a>
-<!--<div class="brand">-->
+<!--<div class="brand">>
     <?php if ($this->getIsHomePage()): ?>
     <?php /*?>
         <h1 class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
@@ -27,7 +27,7 @@
         <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="brand span3"><strong><?php echo $this->getLogoAlt() ?></strong></a>
     <?php endif ?>
 <!--</div>-->
-<div class="nav-collapse">
+<!--div class="nav-collapse">
 
         <?php echo $this->getChildHtml('topLinks') ?>
 <?php /*?>
@@ -36,6 +36,3 @@
                 
     <?php echo $this->getChildHtml('topSearch') ?>
 </div><!--/.nav-collapse -->
-
-<?php //echo $this->getChildHtml('topContainer'); ?>
-<?php //echo $this->getChildHtml('topMenu') ?>

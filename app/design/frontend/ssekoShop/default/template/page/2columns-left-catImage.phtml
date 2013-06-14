@@ -19,24 +19,22 @@
 <div class="wrapper">
                     
     <div class="page">
-        <div class="navbar navbar-fixed-top">
+        <div class="navbar">
             <div class="navbar-inner">
                 <div class="container">
                     <?php echo $this->getChildHtml('header') ?>
                 </div>
             </div>
         </div>
-        <div class="container">                
-                    <header>
-                        <?php echo $this->getChildHtml('breadcrumbs') ?>
+        <div class="container">                         
                         <?php echo $this->getChildHtml('catImage') ?>
-                    </header>
             <div class="row">
                 <div class="span3">
                         <?php echo $this->getChildHtml('left') ?>
                 </div>
                 <div class="span9">
                         <?php echo $this->getChildHtml('global_messages') ?>
+                        <?php echo $this->getChildHtml('breadcrumbs') ?>
                         <?php echo $this->getChildHtml('content') ?>
                 </div>
             </div>

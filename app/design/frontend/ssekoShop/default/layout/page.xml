@@ -46,7 +46,6 @@ Default layout, loads most of the pages
                 <action method="addItem"><type>skin_js</type><name>js/ie6.js</name><params/><if>lt IE 7</if></action-->
 
                 <action method="addCss"><stylesheet>css/bootstrap.css</stylesheet></action>
-                <action method="addCss"><stylesheet>css/bootstrap-responsive.css</stylesheet></action>
 
                 <action method="addCss"><stylesheet>css/docs.css</stylesheet></action>
 				<action method="addCss"><stylesheet>js/google-code-prettify/prettify.css</stylesheet></action>
