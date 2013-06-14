@@ -19,11 +19,8 @@
 <div class="wrapper">
                     
     <div class="page">
-        <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
-                <div class="container">
-                    <?php echo $this->getChildHtml('header') ?>
-                </div>
+            	<?php echo $this->getChildHtml('header') ?>
             </div>
         </div>
         <div class="container">                
@@ -42,12 +39,9 @@
         </div>
     </div>
 </div>
-        <footer class="footer">
-            <div class="container">
-                <?php echo $this->getChildHtml('footer') ?>
-                <?php echo $this->getChildHtml('global_notices') ?>
-            </div>
-        </footer>
+        <?php echo $this->getChildHtml('footer') ?>
+        <?php echo $this->getChildHtml('global_notices') ?>
+
         <!-- Le javascript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
