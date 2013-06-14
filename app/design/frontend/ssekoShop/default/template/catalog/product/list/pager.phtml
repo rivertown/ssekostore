@@ -19,11 +19,15 @@
 /* @var $this Mage_Page_Block_Html_Pager */
 ?>
 <?php if($this->getCollection()->getSize()): ?>
-
+<?php $defaultLimit = $this->getDefaultPerPageValue();
+Mage::getSingleton('catalog/session')->setData("limit_page",$defaultLimit);?>
     <?php if($this->getLastPageNum()>1): ?>
         <div class="navbar-toolbar">
             <div class="pagination pagination-centered">
                 <ul class="nav">
+                	<a href="<?php echo $this->getLimitUrl('all')?>" title="<?php echo $this->__('Show All Products') ?>">
+						<?php echo $this->__('Show All') ?>
+					</a>
                     <?php if (!$this->isFirstPage()): ?>
                         <li>
                             <a class="previous<?php if(!$this->getAnchorTextForPrevious()): ?> i-previous<?php endif;?>" href="<?php echo $this->getPreviousPageUrl() ?>" title="<?php echo $this->__('Previous') ?>">
@@ -51,8 +55,7 @@
                             <li><a href="<?php echo $this->getPageUrl($_page) ?>"><?php echo $_page ?></a></li>
                         <?php endif;?>
                     <?php endforeach;?>
-
-
+					
                     <?php if ($this->canShowNextJump()): ?>
                         <li><a class="next_jump" title="" href="<?php echo $this->getNextJumpUrl() ?>">...</a></li>
                     <?php endif;?>
