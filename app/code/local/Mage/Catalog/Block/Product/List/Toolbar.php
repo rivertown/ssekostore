@@ -321,9 +321,7 @@ class Mage_Catalog_Block_Product_List_Toolbar extends Mage_Core_Block_Template
         }
 
         $orders = $this->getAvailableOrders();
-		error_log('orders '.json_encode($orders));
         $defaultOrder = 'entity_id';
-		error_log('defaut '.$defaultOrder);
 
         if (!isset($orders[$defaultOrder])) {
             $keys = array_keys($orders);
@@ -331,7 +329,6 @@ class Mage_Catalog_Block_Product_List_Toolbar extends Mage_Core_Block_Template
         }
 
         $order = $this->getRequest()->getParam($this->getOrderVarName());
-		error_log('request order '.$order);
         if ($order && isset($orders[$order])) {
             if ($order == $defaultOrder) {
                 Mage::getSingleton('catalog/session')->unsSortOrder();
@@ -346,7 +343,6 @@ class Mage_Catalog_Block_Product_List_Toolbar extends Mage_Core_Block_Template
             $order = $defaultOrder;
         }
         $this->setData('_current_grid_order', $order);
-		error_log('end '.$order);
         return $order;
     }
 
