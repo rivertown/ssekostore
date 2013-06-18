@@ -1,0 +1,9 @@
+
+    .tabs_title{list-style:none; position:relative; z-index:11;}
+    .tabs_title li{border:1px solid #c1c1c1; float:left; margin:5px 5px 0 0;}
+    .tabs_title li.active{border-bottom:1px solid #fff;}
+    .tabs_title li a{display:block; padding:4px 10px; text-decoration:none; color:#777; background:#F3F2F2;}
+    .tabs_title li.active a{color:#444; background:#FFF;}
+    .tabs_content{list-style:none; width:100%; padding:0px; border:1px solid #C1C1C1; background:#FFF; position:relative; z-index:10; margin:-1px 0 15px 0; display:inline-block;}	
+    .tabs_content > div{padding:15px;}
+    .sub-tabs.tabs_title{}

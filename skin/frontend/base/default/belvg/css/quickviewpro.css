@@ -1,0 +1,292 @@
+
+.quickviewpro-block{position: relative;}
+
+    .quickviewpro-block:hover .quickviewpro-button {
+        display: block !important;
+    }
+
+
+.quickviewpro-hider {
+	background: none repeat scroll 0 0 #333333;
+	display: block;
+	left: 0px;
+	opacity: 0.3;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=30) padding: 6px 9px;
+	overflow: hidden;
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	z-index: 10090;
+}
+
+.quickviewpro-popup {
+	left: 50%;
+	position: absolute;
+	margin-left: -465px;
+	top: 15%;
+	width: 930px;
+	z-index: 10100;
+}
+
+    .quickviewpro-popup .popup {
+        background: none repeat scroll 0 0 #FFFFFF;
+        border: 10px solid #727272;
+        border-radius: 0 0 0 0;
+        position: relative;
+    }
+
+.quickviewpro-popup .popup-header{
+    border-bottom: 1px solid #C4C6C8;
+    overflow: hidden;
+}
+
+    .quickviewpro-popup .product-name{
+        text-align: left;
+        float: left;
+    }
+
+        .quickviewpro-popup .product-name h1{
+            font-size: 24px;
+            font-weight: normal;
+            line-height: 48px;
+            padding: 4px 25px 0;
+        }
+
+    .quickviewpro-popup .goto-product-view{
+        float: right;
+        margin: 20px 60px 0 0;
+    }
+
+    .quickviewpro-popup .close-popap {
+        background: url("../images/quickviewpro/popap-close.png") no-repeat scroll right center transparent;
+        cursor: pointer;
+        padding: 22px;
+        position: absolute;
+        right: 10px;
+        top: 6px;
+    }
+
+.quickviewpro-popup .main-popup{
+    clear: both;
+    background: url("../images/bkg_product-view.gif") no-repeat scroll 100% 0 #FFFFFF;
+    position: relative;
+}
+
+    .quickviewpro-popup .product-view{border: 0px}
+
+        .quickviewpro_scroll{overflow-y: scroll}
+
+        .quickviewpro-popup .product-essential{
+            background: none;
+            padding: 25px;
+        }
+ 
+    .quickviewpro-popup .product-shop{
+        width: 550px;
+        text-align: left;
+        margin-top: 20px;
+    }
+
+    .quickviewpro_popup_alpha{
+        opacity: 0.8;
+        filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80);
+        position: absolute;
+        background: #FFFFFF;
+        top: 0px;
+        z-index: 20000;
+    }
+    
+    .quickview_block_related{display:inline-block}
+        .quickview_block_related li {float:left;}
+            .quickview_related_item{width:120px; margin-right:10px}
+                .quickview_related_item_image{}
+                .quickview_related_item_details{}
+                    .quickview_related_checkbox{float: left; margin-top: 4px}
+                    .quickview_related_item_details .price-box{margin:5px 0px !important}
+
+    .quickviewpro-popup .product-view .product-shop .short-description {
+        background: url("../images/bkg_divider1.gif") repeat-x scroll 0 100% transparent;
+        margin: 0 0 10px;
+        padding: 0 0 10px;
+    }
+
+    .ie9 .quickviewpro-button, .ie8 .quickviewpro-button, .ie9 .quickviewpro-button {
+        color: #fff !important;
+    }
+
+    .ie8 .quickviewpro-button {
+        color: #FFF !important;
+    }
+
+    .quickviewpro-button {
+        font-size: 14px;
+        color: #fff;
+        padding: 3px 20px;
+        background: rgb(0,0,0); /* Old browsers */
+        background: -moz-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(80,80,80,1) 99%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(0,0,0,1)), color-stop(99%, rgba(80,80,80,1))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(80,80,80,1) 99%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(80,80,80,1) 99%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(80,80,80,1) 99%); /* IE10+ */
+        background: linear-gradient(left, rgba(0,0,0,1) 0%, rgba(80,80,80,1) 99%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#555555', GradientType=1 ); /* IE6-9 */
+        border-radius: 0px;
+        -moz-border-radius: 0px;
+        -webkit-border-radius: 0px;
+        border: 1px solid rgb(0,0,0);
+        display: none !important;
+        top: 110px;
+        opacity: 0.8;
+        filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80) padding: 6px 9px;
+        position: absolute;
+        text-align: center;
+        text-decoration: none !important;
+        left: 0px;
+        margin-left: 44px;
+    }
+    
+    .products-grid .quickviewpro-button{
+
+    }
+
+    .quickviewpro-button:hover {
+        color: #fff;
+        background: rgb(68,68,68); /* Old browsers */
+        background: -moz-linear-gradient(left, rgba(68,68,68,1) 0%, rgba(80,80,80,1) 99%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(68,68,68,1)), color-stop(99%, rgba(80,80,80,1))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(left, rgba(68,68,68,1) 0%, rgba(80,80,80,1) 99%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(left, rgba(68,68,68,1) 0%, rgba(80,80,80,1) 99%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(left, rgba(68,68,68,1) 0%, rgba(80,80,80,1) 99%); /* IE10+ */
+        background: linear-gradient(left, rgba(68,68,68,1) 0%, rgba(80,80,80,1) 99%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', endColorstr='#555555', GradientType=1 ); /* IE6-9 */
+        border-radius: 0px;
+        -moz-border-radius: 0px;
+        -webkit-border-radius: 0px;
+        border: 1px solid rgb(68,68,68);
+    }
+
+    .quickviewpro-popup .quickviewpro_share{
+        float: right;
+        margin: 6px 2px 0 0;
+    }
+    .quickviewpro-popup .sharethis{
+        position: relative;
+        display: inline-block;
+    }
+
+        .quickviewpro-popup .sharethis .share-popup{
+            display: none;
+            background: none repeat scroll 0 0 #FFFFFF;
+            border: 1px solid #CCCCCC;
+            box-shadow: 1px 1px 1px #CCCCCC;
+            padding: 5px;
+            position: absolute;
+            top: 17px;
+            right: -15px;
+            width: 205px;
+            z-index: 105;
+        }
+        .quickviewpro-popup .sharethis:hover .share-popup{
+            display: block;
+        }
+
+            .quickviewpro-popup .share-block li{
+                float: left;
+                display: block;
+                margin-left: 3px;
+            }
+
+            .quickviewpro-popup .share-popup li{
+                float: left;
+                display: block;
+                margin-left: 5px;
+                width: 90px;
+            }
+
+            .quickviewpro-popup .share-block li span{
+                background: url("../images/quickviewpro/soc_icons_grey.png") no-repeat;
+            }
+            .quickviewpro-popup .share-popup li span{
+                background: url("../images/quickviewpro/soc_icons_dark_grey.png") no-repeat;
+            }
+
+            .quickviewpro-popup .share-block li a:hover span,
+            .quickviewpro-popup .share-popup li a:hover span{
+                filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80);
+                opacity: 0.8;
+            }
+
+            .quickviewpro-popup .share-block li span{
+                display: block;
+                width: 17px;
+                height: 17px;
+                overflow: hidden;
+                text-indent: 25px;
+            }
+
+            .quickviewpro-popup .share-block .share-title span{
+                width: 40px;
+                text-indent: 0px;
+                background: none;
+            }
+
+            .quickviewpro-popup .share-popup li span{
+                padding-left: 21px;
+                display: block;
+                line-height: 18px;
+                margin: 4px 2px 2px;
+            }
+            .quickviewpro-popup .share-popup a{text-decoration: none}
+            
+                .quickviewpro-popup li.share-email span             {background-position: 0 -126px}
+                .quickviewpro-popup li.share-facebook span       {background-position: 0 -2px}
+                .quickviewpro-popup li.share-twitter span         {background-position: 0 -27px}
+                .quickviewpro-popup li.share-googleplus span   {background-position: 0 -52px}
+                .quickviewpro-popup li.share-pinterest span     {background-position: 0 -625px}
+                .quickviewpro-popup li.share-linkedin span       {background-position: 0 -176px}
+                .quickviewpro-popup li.share-myspace span         {background-position: 0 -226px}
+                .quickviewpro-popup li.share-livejournal span {background-position: 0 -251px}
+                .quickviewpro-popup li.share-delicious span     {background-position: 0 -275px}
+                .quickviewpro-popup li.share-stumbleupon span {background-position: 0 -151px}
+                .quickviewpro-popup li.share-reddit span           {background-position: 0 -201px}
+
+    .crosssell .quickviewpro-button,
+    .block-related .quickviewpro-button{
+        top: 15px;
+        padding: 7px 14px;
+        font-size: 13px;
+    }
+
+    .box-up-sell .quickviewpro-button{
+        top: 44px;
+        margin-left: -53px;
+    }
+
+
+
+.quickviewpro-popup .next-product-view {
+	background: url("../images/quickviewpro/popap-next.png") no-repeat scroll right center transparent;
+	display: block;
+	font-size: 0;
+	padding: 22px;
+	position: absolute;
+	right: -57px;
+	top: 180px;
+	z-index: 101;
+}
+
+.quickviewpro-popup .prev-product-view {
+	background: url("../images/quickviewpro/popap-prev.png") no-repeat scroll right center transparent;
+	display: block;
+	font-size: 0;
+	left: -60px;
+	padding: 22px;
+	position: absolute;
+	top: 180px;
+	z-index: 101;
+}
+
+.quickviewpro-popup .next-product-view:hover, .quickviewpro-popup .prev-product-view:hover, .quickviewpro-popup .close-popap:hover {
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80) padding: 6px 9px;
+ 	opacity: 0.8;
+}

@@ -1,0 +1,127 @@
+<div class="sharethis">
+    <ul class="share-block">
+        <li class="share-title">
+            <span>
+                <?php echo $this->__('Share') ?>
+            </span>
+        </li>
+        <?php if ($this->canEmailToFriend()): ?>
+            <li class="share-email">
+                <a href="<?php echo $this->getUrl('sendfriend/product/send') . 'id/' . $this->getProductId() . '/' ?>" rel="nofollow">
+                    <span>
+                        <?php echo $this->__('Email') ?>
+                    </span>
+                </a>
+            </li>
+        <?php endif ?>
+        <li class="share-facebook">
+            <a href="http://www.facebook.com/sharer/sharer.php?u=<?php echo $this->getPageUrl() ?>&t=<?php echo $this->getPageTitle() ?>" target="_blank" rel="nofollow">
+                <span>
+                    <?php echo $this->__('Facebook') ?>
+                </span>
+            </a>
+        </li>
+        <li class="share-twitter">
+            <a href="http://twitter.com/share?url=<?php echo $this->getPageUrl() ?>&text=<?php echo $this->getPageTitle() ?>" target="_blank" rel="nofollow">
+                <span>
+                    <?php echo $this->__('Twitter') ?>
+                </span>
+            </a>
+        </li>
+        <li class="share-pinterest">
+            <a href="http://pinterest.com/pin/create/button/?url=<?php echo $this->getPageUrl() ?>&media=<?php echo $this->getPageImg() ?>&description=<?php echo $this->getPageDesc() ?>"class="pin-it-button" target="_blank" rel="nofollow">
+                <span>
+                    <?php echo $this->__('Pinterest') ?>
+                </span>
+            </a>
+        </li>
+        <li class="share-googleplus">
+            <a href="https://plus.google.com/share?url=<?php echo $this->getPageUrl() ?>&t=<?php echo $this->getPageTitle() ?>&gpsrc=frameless" target="_blank" rel="nofollow">
+                <span>
+                    <?php echo $this->__('Google+') ?>
+                </span>
+            </a>
+        </li>
+    </ul>
+    <ul class="share-popup">
+        <?php if ($this->canEmailToFriend()): ?>
+            <li class="share-email">
+                <a href="<?php echo $this->getUrl('sendfriend/product/send') . 'id/' . $this->getProductId() . '/' ?>" rel="nofollow">
+                    <span>
+                        <?php echo $this->__('Email') ?>
+                    </span>
+                </a>
+            </li>
+        <?php endif ?>
+        <li class="share-facebook">
+            <a href="http://www.facebook.com/sharer/sharer.php?u=<?php echo $this->getPageUrl() ?>&t=<?php echo $this->getPageTitle() ?>" target="_blank" rel="nofollow">
+                <span>
+                    <?php echo $this->__('Facebook') ?>
+                </span>
+            </a>
+        </li>
+        <li class="share-twitter">
+            <a href="http://twitter.com/share?url=<?php echo $this->getPageUrl() ?>&text=<?php echo $this->getPageTitle() ?>" target="_blank" rel="nofollow">
+                <span>
+                    <?php echo $this->__('Twitter') ?>
+                </span>
+            </a>
+        </li>
+        <li class="share-pinterest">
+            <a href="http://pinterest.com/pin/create/button/?url=<?php echo $this->getPageUrl() ?>&media=<?php echo $this->getPageImg() ?>&description=<?php echo $this->getPageDesc() ?>"class="pin-it-button" target="_blank" rel="nofollow">
+                <span>
+                    <?php echo $this->__('Pinterest') ?>
+                </span>
+            </a>
+        </li>
+        <li class="share-googleplus">
+            <a href="https://plus.google.com/share?url=<?php echo $this->getPageUrl() ?>&t=<?php echo $this->getPageTitle() ?>&gpsrc=frameless" target="_blank" rel="nofollow">
+                <span>
+                    <?php echo $this->__('Google+') ?>
+                </span>
+            </a>
+        </li>
+        <li class="share-linkedin">
+            <a href="http://www.linkedin.com/shareArticle?mini=true&url=<?php echo $this->getPageUrl() ?>&title=<?php echo $this->getPageTitle() ?>&summary=&source=" target="_blank" rel="nofollow">
+                <span>
+                    <?php echo $this->__('LinkedIn') ?>
+                </span>
+            </a>
+        </li>
+        <li class="share-myspace">
+            <a href="http://www.myspace.com/Modules/PostTo/Pages/?u=<?php echo $this->getPageUrl() ?>&t=<?php echo $this->getPageTitle() ?>" target="_blank" rel="nofollow">
+                <span>
+                    <?php echo $this->__('MySpace') ?>
+                </span>
+            </a>
+        </li>
+        <li class="share-livejournal">
+            <a href="http://www.livejournal.com/update.bml?event=%3Cbr%20/%3E%3Cbr%20/%3E%3Ca%20href=\"<?php echo $this->getPageUrl() ?>\"%20target=\"_blank\"%20rel=\"nofollow\"%3E<?php echo $this->getPageTitle() ?>%3C/a%3E" target="_blank" rel="nofollow">
+                <span>
+                    <?php echo $this->__('LiveJournal') ?>
+                </span>
+            </a>
+        </li>
+        <li class="share-delicious">
+            <a href="http://delicious.com/save?url=<?php echo $this->getPageUrl() ?>&title=<?php echo $this->getPageTitle() ?>" target="_blank" rel="nofollow">
+                <span>
+                    <?php echo $this->__('Delicious') ?>
+                </span>
+            </a>
+        </li>
+        <li class="share-stumbleupon">
+            <a href="http://www.stumbleupon.com/submit?url=<?php echo $this->getPageUrl() ?>&title=<?php echo $this->getPageTitle() ?>" target="_blank" rel="nofollow">
+                <span>
+                    <?php echo $this->__('Stumbleupon') ?>
+                </span>
+            </a>
+        </li>
+        <li class="share-reddit">
+            <a href="http://www.reddit.com/submit?url=<?php echo $this->getPageUrl() ?>&title=<?php echo $this->getPageTitle() ?>" target="_blank" rel="nofollow">
+                <span>
+                    <?php echo $this->__('Reddit') ?>
+                </span>
+            </a>
+        </li>
+    </ul>
+</div>

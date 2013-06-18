@@ -1,0 +1,664 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BelVG LLC.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ *
+/**********************************************
+ *        MAGENTO EDITION USAGE NOTICE        *
+ **********************************************/
+/* This package designed for Magento COMMUNITY edition
+ * BelVG does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * BelVG does not provide extension support in case of
+ * incorrect edition usage.
+/**********************************************
+ *        DISCLAIMER                          *
+ **********************************************/
+/* Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future.
+ **********************************************
+ * @category   Belvg
+ * @package    Belvg_Quickviewpro
+ * @copyright  Copyright (c) 2010 - 2012 BelVG LLC. (http://www.belvg.com)
+ * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ */
+-->
+<config>
+    <sections>
+        <quickviewpro translate="label">
+            <label>Quick View Pro</label>
+            <tab>belvg</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <settings translate="label">
+                    <label>Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment>
+                    <![CDATA[
+                            <div style="padding:10px;background-color:#fff;border:1px solid #ddd;margin-bottom:7px;">
+                            This module was developed by <a href="http://www.belvg.com" target="_blank">www.BelVG.com</a>.
+                            For docs & examples refer to the BelVG <a href="http://www.belvg.com" target="_blank">web site</a>.
+                            <br/>We have the largest selections of  <a href="http://store.belvg.com/extensions.html" target="_blank">extensions</a> and <a href="http://store.belvg.com/themes.html" target="_blank">themes</a> on Magento.
+                            </div>
+                    ]]>
+                    </comment>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <add_to_cart translate="label">
+                            <label>Add to cart button <![CDATA[&]]> Attributes</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </add_to_cart>
+                        <navigation translate="label">
+                            <label>Next <![CDATA[&]]> Previous navigation</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </navigation>
+                        <!--<navigation_preview translate="label">
+                            <label>Show Navigation Preview</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <navigation>1</navigation>
+                            </depends>
+                        </navigation_preview>-->
+                        <review translate="label">
+                            <label>Review</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </review>
+                        <share translate="label">
+                            <label>Share to Friends</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </share>
+                        <product_page_link translate="label">
+                            <label>Product Page Link</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </product_page_link>
+                        <overlay_show translate="label">
+                            <label>Display Overlay</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>65</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </overlay_show>
+                        <overlay_opacity translate="label tooltip">
+                            <label>Overlay Opacity</label>
+                            <tooltip><![CDATA[Default value <b>0.7</b><br><br>]]>Where 0 is fully transparent, and 1 is fully opaque.</tooltip>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-not-negative-number</validate>
+                            <sort_order>66</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <overlay_show>1</overlay_show>
+                            </depends>
+                        </overlay_opacity>
+                        <overlay_color translate="label tooltip">
+                            <label>Overlay Color</label>
+                            <tooltip>Specifies a overlay color. Colors should be specified in hex format, e.g. '#aa00aa'.</tooltip>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>67</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <overlay_show>1</overlay_show>
+                            </depends>
+                        </overlay_color>
+                        <quickview_scroll translate="label">
+                            <label>Quickview Scroll</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </quickview_scroll>
+                        <max_height translate="label tooltip">
+                            <label>Quickview Height</label>
+                            <tooltip><![CDATA[<b>in pixels</b><br><br>Default value <b>400</b><br><br>]]></tooltip>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-not-negative-number</validate>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <quickview_scroll>1</quickview_scroll>
+                            </depends>
+                        </max_height>
+                    </fields>
+                </settings>
+                <media translate="label">
+                    <label>Media Zoom alternatives</label>
+                    <frontend_type>text</frontend_type>
+                    <frontend_model>quickviewpro/adminhtml_global</frontend_model>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active>
+                            <frontend_type>radios</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <default translate="label comment">
+                            <label>Default</label>
+                            <comment>default or your media viewer</comment>
+                            <frontend_type>radio</frontend_type>
+                            <frontend_element_name>media/active</frontend_element_name>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </default>
+                        <cloudzoom translate="label comment">
+                            <label>Cloud-zoom</label>
+                            <comment>a free jQuery image zoom plugin</comment>
+                            <copyright><![CDATA[© 2010 by R Cecco]]></copyright>
+                            <demo_url><![CDATA[http://www.professorcloud.com/mainsite/cloud-zoom.htm]]></demo_url>
+                            <frontend_type>radio</frontend_type>
+                            <frontend_element_name>media/active</frontend_element_name>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </cloudzoom>
+                        <fancybox translate="label comment">
+                            <label>Fancybox</label>
+                            <comment>"lightbox" jQuery tool for displaying images</comment>
+                            <copyright><![CDATA[© 2010 Janis Skarnelis]]></copyright>
+                            <demo_url><![CDATA[http://www.fancybox.net/]]></demo_url>
+                            <frontend_type>radio</frontend_type>
+                            <frontend_element_name>media/active</frontend_element_name>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </fancybox>
+                    </fields>
+                </media>
+                <cloudzoom translate="label">
+                    <label>Professor Cloud Zoom</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <title_quickview translate="label">
+                            <label>only Quick View</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>quickviewpro/adminhtml_title</frontend_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title_quickview>
+                        <zoom_width_quickview translate="label tooltip">
+                            <label>Zoom Width</label>
+                            <tooltip><![CDATA[<b>in pixels</b>. 0 - 'auto'<br><br>]]>The <![CDATA[<b>width</b>]]> of the zoom window in pixels.<![CDATA[<br><br>]]>If 'auto' is specified, the width will be the same as the small image. <![CDATA[<div class='quickviewpro_tooltip'></div>]]></tooltip>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-not-negative-number</validate>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </zoom_width_quickview>
+                        <zoom_height_quickview translate="label tooltip">
+                            <label>Zoom Height</label>
+                            <tooltip><![CDATA[<b>in pixels</b>. 0 - 'auto'<br><br>]]>The <![CDATA[<b>height</b>]]> of the zoom window in pixels.<![CDATA[<br><br>]]>If 'auto' is specified, the height will be the same as the small image.</tooltip>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-not-negative-number</validate>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </zoom_height_quickview>
+                        <position_quickview translate="label tooltip">
+                            <label>Position</label>
+                            <tooltip>Specifies the position of the zoom window relative to the small image.<![CDATA[<br><br>]]>Allowable values are 'left', 'right', 'top', 'bottom', 'inside' or you can specifiy the id of an html element to place the zoom window.</tooltip>
+                            <frontend_type>select</frontend_type>
+                            <source_model>quickviewpro/source_media_cloudzoom_position</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </position_quickview>
+                        <position_element_quickview translate="label">
+                            <label>Position id of an html element</label>
+                            <tooltip>id of an html element to place the zoom window.<![CDATA[<br><br>Example: element1<br>html: &lt;div id="element1"&gt;]]></tooltip>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <position_quickview separator=",">0,no,none</position_quickview>
+                            </depends>
+                        </position_element_quickview>
+                        <adjust_x_quickview translate="label tooltip">
+                            <label>Adjust X</label>
+                            <tooltip><![CDATA[<b>in pixels</b><br><br>]]>Allows you to fine tune the <![CDATA[<b>x-position</b>]]> of the zoom window.</tooltip>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-number</validate>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </adjust_x_quickview>
+                        <adjust_y_quickview translate="label tooltip">
+                            <label>Adjust Y</label>
+                            <tooltip><![CDATA[<b>in pixels</b><br><br>]]>Allows you to fine tune the <![CDATA[<b>y-position</b>]]> of the zoom window.</tooltip>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-number</validate>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </adjust_y_quickview>
+                        
+                        <!--  -->
+                        <title_default translate="label">
+                            <label>Default</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>quickviewpro/adminhtml_title</frontend_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title_default>
+                        
+                        <zoom_width translate="label tooltip">
+                            <label>Zoom Width</label>
+                            <tooltip><![CDATA[<b>in pixels</b>. 0 - 'auto'<br><br>]]>The <![CDATA[<b>width</b>]]> of the zoom window in pixels.<![CDATA[<br><br>]]>If 'auto' is specified, the width will be the same as the small image. <![CDATA[<div class='quickviewpro_tooltip'></div>]]></tooltip>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-not-negative-number</validate>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </zoom_width>
+                        <zoom_height translate="label tooltip">
+                            <label>Zoom Height</label>
+                            <tooltip><![CDATA[<b>in pixels</b>. 0 - 'auto'<br><br>]]>The <![CDATA[<b>height</b>]]> of the zoom window in pixels.<![CDATA[<br><br>]]>If 'auto' is specified, the height will be the same as the small image.</tooltip>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-not-negative-number</validate>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </zoom_height>
+                        <position translate="label tooltip">
+                            <label>Position</label>
+                            <tooltip>Specifies the position of the zoom window relative to the small image.<![CDATA[<br><br>]]>Allowable values are 'left', 'right', 'top', 'bottom', 'inside' or you can specifiy the id of an html element to place the zoom window.</tooltip>
+                            <frontend_type>select</frontend_type>
+                            <source_model>quickviewpro/source_media_cloudzoom_position</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </position>
+                        <position_element translate="label">
+                            <label>Position id of an html element</label>
+                            <tooltip>id of an html element to place the zoom window.<![CDATA[<br><br>Example: element1<br>html: &lt;div id="element1"&gt;]]></tooltip>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <position separator=",">0,no,none</position>
+                            </depends>
+                        </position_element>
+                        <adjust_x translate="label tooltip">
+                            <label>Adjust X</label>
+                            <tooltip><![CDATA[<b>in pixels</b><br><br>]]>Allows you to fine tune the x-position of the zoom window in pixels.</tooltip>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-number</validate>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </adjust_x>
+                        <adjust_y translate="label tooltip">
+                            <label>Adjust Y</label>
+                            <tooltip><![CDATA[<b>in pixels</b><br><br>]]>Allows you to fine tune the <![CDATA[<b>y-position</b>]]> of the zoom window.</tooltip>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-number</validate>
+                            <sort_order>130</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </adjust_y>
+                        <tint_show translate="label tooltip">
+                            <label>Display Tint</label>
+                            <tooltip><![CDATA[<b>empty - disable</b><br><br>]]>Specifies a tint color which will cover the small image.<![CDATA[<br><br>effects with <b>Blur Effect.</b> are applied with some restrictions]]></tooltip>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>140</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </tint_show>
+                        <tint translate="label tooltip">
+                            <label>Tint Color</label>
+                            <tooltip>Colors should be specified in hex format, e.g. '#aa00aa'. <![CDATA[<br><br>effects with <b>Blur Effect.</b> are applied with some restrictions]]></tooltip>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>145</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <tint_show>1</tint_show>
+                            </depends>
+                        </tint>
+                        <tint_opacity translate="label tooltip">
+                            <label>Tint Opacity</label>
+                            <tooltip><![CDATA[Default value <b>0.5</b><br><br>]]>Where 0 is fully transparent, and 1 is fully opaque.</tooltip>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-not-negative-number</validate>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <tint_show>1</tint_show>
+                            </depends>
+                        </tint_opacity>
+                        <soft_focus translate="label tooltip">
+                            <label>Blur Effect</label>
+                            <tooltip>Applies a subtle blur effect to the small image. Set to true or false. <![CDATA[<br><br>effects with <b>Tint Effect.</b> are applied with some restrictions.]]></tooltip>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>160</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </soft_focus>
+                        <lens_opacity translate="label tooltip">
+                            <label>Lens mouse pointer opacity</label>
+                            <tooltip><![CDATA[Default value <b>0.5</b><br><br>]]>Where 0 is fully transparent, and 1 is fully opaque. In Tint and Blur modes, it will always be transparent</tooltip>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-not-negative-number</validate>
+                            <sort_order>170</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <tint_show>0</tint_show>
+                                <soft_focus>0</soft_focus>
+                            </depends>
+                        </lens_opacity>
+                        <smooth_move translate="label tooltip">
+                            <label>Smooth Move</label>
+                            <tooltip><![CDATA[Default value <b>3</b><br><br>]]>Amount of smoothness/drift of the zoom image as it moves. The higher the number, the smoother/more drifty the movement will be. 1 = no smoothing.</tooltip>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-not-negative-number</validate>
+                            <sort_order>180</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </smooth_move>
+                        <show_title translate="label tooltip">
+                            <label>Show Title</label>
+                            <tooltip>Shows the title tag of the image.</tooltip>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>190</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show_title>
+                        <title_opacity translate="label tooltip">
+                            <label>Title Opacity</label>
+                            <tooltip><![CDATA[Default value <b>0.5</b><br><br>]]>Specifies the opacity of the title if displayed, where 0 is fully transparent, and 1 is fully opaque.</tooltip>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-not-negative-number</validate>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <show_title>1</show_title>
+                            </depends>
+                        </title_opacity>
+                    </fields>
+                </cloudzoom>
+                <fancybox translate="label">
+                    <label>Fancybox</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <padding translate="label tooltip">
+                            <label>Padding</label>
+                            <tooltip><![CDATA[<b>in pixels</b><br><br>Default value <b>10</b><br><br>]]>Space between FancyBox wrapper and content</tooltip>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-not-negative-number</validate>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </padding>
+                        <margin translate="label tooltip">
+                            <label>Margin</label>
+                            <tooltip><![CDATA[<b>in pixels</b><br><br>Default value <b>20</b><br><br>]]>Space between viewport and FancyBox wrapper</tooltip>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-not-negative-number</validate>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </margin>
+                        <cyclic translate="label tooltip">
+                            <label>Galleries will be cyclic</label>
+                            <tooltip>When true, galleries will be cyclic, allowing you to keep pressing next/back.</tooltip>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </cyclic>
+                        <overlay_show translate="label">
+                            <label>Display Overlay</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </overlay_show>
+                        <overlay_opacity translate="label tooltip">
+                            <label>Overlay Opacity</label>
+                            <tooltip><![CDATA[Default value <b>0.3</b><br><br>]]>Where 0 is fully transparent, and 1 is fully opaque.</tooltip>
+                            <validate>validate-not-negative-number</validate>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <overlay_show>1</overlay_show>
+                            </depends>
+                        </overlay_opacity>
+                        <overlay_color translate="label tooltip">
+                            <label>Color of the Overlay</label>
+                            <tooltip>Specifies a overlay color. Colors should be specified in hex format, e.g. '#aa00aa'.</tooltip>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <overlay_show>1</overlay_show>
+                            </depends>
+                        </overlay_color>
+                        <title_show translate="label tooltip">
+                            <label>Show Title</label>
+                            <tooltip>Shows the title tag of the image.</tooltip>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title_show>
+                        <title_position translate="label tooltip">
+                            <label>Title Position</label>
+                            <tooltip>The position of title. Can be set to 'outside', 'inside' or 'over'</tooltip>
+                            <frontend_type>select</frontend_type>
+                            <source_model>quickviewpro/source_media_fancybox_title</source_model>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <title_show>1</title_show>
+                            </depends>
+                        </title_position>
+                        <transition_in translate="label tooltip">
+                            <label>Transition In</label>
+                            <tooltip>The transition type. Can be set to 'elastic', 'fade' or 'none'</tooltip>
+                            <frontend_type>select</frontend_type>
+                            <source_model>quickviewpro/source_media_fancybox_transition</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </transition_in>
+                        <transition_in_elastic translate="label">
+                            <label>Transition In Easing</label>
+                            <tooltip>Easing used for elastic animations</tooltip>
+                            <frontend_type>select</frontend_type>
+                            <source_model>quickviewpro/source_media_fancybox_elastic</source_model>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <transition_in separator=",">elastic</transition_in>
+                            </depends>
+                        </transition_in_elastic>
+                        <transition_out translate="label tooltip">
+                            <label>Transition Out</label>
+                            <tooltip>The transition type. Can be set to 'elastic', 'fade' or 'none'</tooltip>
+                            <frontend_type>select</frontend_type>
+                            <source_model>quickviewpro/source_media_fancybox_transition</source_model>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </transition_out>
+                        <transition_out_elastic translate="label">
+                            <label>Transition Out Easing</label>
+                            <tooltip>Easing used for elastic animations</tooltip>
+                            <frontend_type>select</frontend_type>
+                            <source_model>quickviewpro/source_media_fancybox_elastic</source_model>
+                            <sort_order>130</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <transition_out separator=",">elastic</transition_out>
+                            </depends>
+                        </transition_out_elastic>
+                        <opacity translate="label tooltip">
+                            <label>Opacity Transitions</label>
+                            <tooltip>When enable, transparency of content is changed for elastic transitions</tooltip>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <!--<depends>
+                                <transition_in>elastic</transition_in>
+                                <transition_out>elastic</transition_out>
+                            </depends>-->
+                        </opacity>
+                        <speed_in translate="label tooltip">
+                            <label>Speed In</label>
+                            <tooltip><![CDATA[<b>in milliseconds</b><br><br>Default value <b>300</b><br><br>]]>Speed of the fade and elastic transitions</tooltip>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-not-negative-number</validate>
+                            <sort_order>160</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </speed_in>
+                        <speed_out translate="label tooltip">
+                            <label>Speed Out</label>
+                            <tooltip><![CDATA[<b>in milliseconds</b><br><br>Default value <b>300</b><br><br>]]>Speed of the fade and elastic transitions</tooltip>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-not-negative-number</validate>
+                            <sort_order>170</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </speed_out>
+                    </fields>
+                </fancybox>
+            </groups>
+        </quickviewpro>
+    </sections>
+</config>

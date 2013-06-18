@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BelVG LLC.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ *
+/**********************************************
+ *        MAGENTO EDITION USAGE NOTICE        *
+ **********************************************/
+/* This package designed for Magento COMMUNITY edition
+ * BelVG does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * BelVG does not provide extension support in case of
+ * incorrect edition usage.
+/**********************************************
+ *        DISCLAIMER                          *
+ **********************************************/
+/* Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future.
+ **********************************************
+ * @category   Belvg
+ * @package    Belvg_Quickviewpro
+ * @copyright  Copyright (c) 2010 - 2012 BelVG LLC. (http://www.belvg.com)
+ * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ */
+-->
+<config>
+    <modules>
+        <Belvg_Quickviewpro>
+            <version>1.0.8</version>
+        </Belvg_Quickviewpro>
+    </modules>
+    <frontend>
+        <routers>
+            <quickviewpro>
+                <use>standard</use>
+                <args>
+                    <module>Belvg_Quickviewpro</module>
+                    <frontName>quickviewpro</frontName>
+                </args>
+            </quickviewpro>
+        </routers>
+        <layout>
+            <updates>
+                <quickviewpro>
+                    <file>belvg/quickviewpro.xml</file>
+                </quickviewpro>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Belvg_Quickviewpro>
+                    <files>
+                        <default>Belvg_Quickviewpro.csv</default>
+                    </files>
+                </Belvg_Quickviewpro>
+            </modules>
+        </translate>        
+    </frontend>
+    <adminhtml>
+        <layout>
+            <updates>
+                <quickviewpro>
+                    <file>belvg/quickviewpro.xml</file>
+                </quickviewpro>
+            </updates>
+        </layout>
+    </adminhtml>
+    <global>
+        <helpers>
+            <quickviewpro>
+                <class>Belvg_Quickviewpro_Helper</class>
+            </quickviewpro>
+        </helpers>
+        <blocks>
+            <quickviewpro>
+                <class>Belvg_Quickviewpro_Block</class>
+            </quickviewpro>
+        </blocks>
+        <models>
+            <quickviewpro>
+                <class>Belvg_Quickviewpro_Model</class>
+            </quickviewpro>
+        </models>
+    </global>
+    <default>
+        <quickviewpro>
+            <settings>
+                <add_to_cart>1</add_to_cart>
+                <navigation>1</navigation>
+                <review>1</review>
+                <share>1</share>
+                <product_page_link>1</product_page_link>
+                <overlay_show>1</overlay_show>
+                <overlay_opacity>0.7</overlay_opacity>
+                <overlay_color>#888888</overlay_color>
+                <quickview_scroll>0</quickview_scroll>
+            </settings>
+            <media>
+                <active>quickviewpro_media_default</active>
+                <default>1</default>
+            </media>
+            <cloudzoom>
+                <zoom_width_quickview>0</zoom_width_quickview>
+                <zoom_height_quickview>0</zoom_height_quickview>
+                <zoom_width>0</zoom_width>
+                <zoom_height>0</zoom_height>
+                <position_quickview>right</position_quickview>
+                <adjust_x_quickview>10</adjust_x_quickview>
+                <adjust_y_quickview>-3</adjust_y_quickview>
+                <position>right</position>
+                <adjust_x>10</adjust_x>
+                <adjust_y>-3</adjust_y>
+                <tint_show>0</tint_show>
+                <tint_opacity>0.5</tint_opacity>
+                <lens_opacity>0.5</lens_opacity>
+                <soft_focus>1</soft_focus>
+                <smooth_move>3</smooth_move>
+                <show_title>1</show_title>
+                <title_opacity>0.5</title_opacity>
+            </cloudzoom>
+            <fancybox>
+                <padding>10</padding>
+                <margin>20</margin>
+                <overlay_show>1</overlay_show>
+                <overlay_opacity>0.3</overlay_opacity>
+                <title_show>1</title_show>
+                <title_position>over</title_position>
+                <transition_in>elastic</transition_in>
+                <transition_in_elastic>swing</transition_in_elastic>
+                <transition_out>elastic</transition_out>
+                <transition_out_elastic>swing</transition_out_elastic>
+                <speed_in>300</speed_in>
+                <speed_out>300</speed_out>
+            </fancybox>
+        </quickviewpro>
+    </default>
+
+</config> 

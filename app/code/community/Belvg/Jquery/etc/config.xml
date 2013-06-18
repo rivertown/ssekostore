@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Belvg_Jquery>
+            <version>1.8.3</version>
+        </Belvg_Jquery>
+    </modules>
+    
+    <frontend>
+        <layout>
+            <updates>
+                <jquery>
+                    <file>belvg/jquery.xml</file>
+                </jquery>
+            </updates>
+        </layout>
+    </frontend>
+    
+    <adminhtml>
+        <translate>
+            <modules>
+                <Belvg_Jquery>
+                    <files>
+                        <default>Belvg_Jquery.csv</default>
+                    </files>
+                </Belvg_Jquery>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <jquery>
+                    <file>belvg/jquery.xml</file>
+                </jquery>
+            </updates>
+        </layout>
+    </adminhtml>
+    
+    <global>
+        <events>
+            <controller_action_layout_render_before>
+                <observers>
+                    <belvg_action_layout_render_before>
+                        <type>singleton</type>
+                        <class>jquery/observer</class>
+                        <method>addLibz</method>
+                    </belvg_action_layout_render_before>
+                </observers>
+            </controller_action_layout_render_before>
+        </events>
+        <models>
+            <jquery>
+                <class>Belvg_Jquery_Model</class>
+            </jquery>
+        </models>
+        <blocks>
+            <jquery>
+                <class>Belvg_Jquery_Block</class>
+            </jquery>
+        </blocks>
+        <helpers>
+            <jquery>
+                <class>Belvg_Jquery_Helper</class>
+            </jquery>
+        </helpers>
+    </global>
+    
+    <default>
+        <jquery>
+            <settings>
+                <enabled>1</enabled>
+            </settings>
+        </jquery>
+    </default>
+    
+</config>
