@@ -1,0 +1,44 @@
+
+.system-tooltip-box {
+    border-left: 1px solid #CCCCCC !important;
+    float: left !important;
+    line-height: 16px !important;
+    margin-left: 5px !important;
+    padding-left: 5px !important;
+    width: 180px !important;
+    clear: none !important;
+}
+
+#quickviewpro_settings_enabled {margin-bottom:20px}
+
+.quickviewpro_media_selection {width:100%}
+    .quickviewpro_media_selection th {
+        font-size: 13px;
+        padding: 5px 0;
+        text-align: left;
+        vertical-align: middle;
+    }
+    .quickviewpro_media_selection td {
+        background: none repeat scroll 0 0 #F2F2F2;
+        border-bottom: 5px solid #FFFFFF;
+        padding: 5px;
+        vertical-align: top;
+    }
+        .quickviewpro_media_selection td input {
+            height: 13px;
+            margin-right: 15px;
+            overflow: hidden;
+            position: relative;
+            top: -1px;
+            vertical-align: middle;
+            width: 13px;
+        }
+        .quickviewpro_media_selection td label {
+            display: block;
+            padding-left: 30px;
+            text-indent: -30px;
+        }
+        .quickviewpro_media_selection td a {color:#2997D8}
+    .quickviewpro_demo_url{text-align:right}
+
+

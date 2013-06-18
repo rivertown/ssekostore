@@ -1,0 +1,55 @@
+<?php
+/**
+ * BelVG LLC.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ *
+/**********************************************
+ *        MAGENTO EDITION USAGE NOTICE        *
+ **********************************************/
+/* This package designed for Magento COMMUNITY edition
+ * BelVG does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * BelVG does not provide extension support in case of
+ * incorrect edition usage.
+/**********************************************
+ *        DISCLAIMER                          *
+ **********************************************/
+/* Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future.
+ **********************************************
+ * @category   Belvg
+ * @package    Belvg_Quickviewpro
+ * @copyright  Copyright (c) 2010 - 2012 BelVG LLC. (http://www.belvg.com)
+ * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ */
+    
+    $helper     = $this->helper('quickviewpro');
+?>
+<?php if ($helper->isEnabled()): ?>
+    <?php
+        $settings   = $helper->getSettings();
+        $hider      = '';
+        if($settings['overlay_show']){
+            $hider  = 'background-color: ' . $settings['overlay_color'] . ';' .
+                      'opacity: ' . $settings['overlay_opacity'] . ';' .
+                      'filter:progid:DXImageTransform.Microsoft.Alpha(opacity=' . 100*$settings['overlay_opacity'] . ');' .
+                      '-moz-opacity: ' . $settings['overlay_opacity'] . ';' .
+                      '-khtml-opacity: ' . $settings['overlay_opacity'] . ';';
+        }
+    ?>
+    <script type="text/javascript">
+        var loader     = new prototypeLoader('<?php echo $this->getSkinUrl('belvg/images/prototype_loader/ajax-loader.gif') ?>');
+        var quickview  = new Quickview(<?php echo $this->helper('quickviewpro')->getJsonSettings() ?>, '<?php echo $helper->getJsCachePrefix() ?>');
+        quickview.init();
+    </script>
+    <input type="hidden" id="base_url" value="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB) ?>" />
+
+    <div id="quickviewpro-hider" onclick="quickview.close()" class="quickviewpro-hider" style="display:none;<?php echo $hider ?>"></div>
+    <div id="popup" class="quickviewpro-popup" style="display:none;"></div>
+<?php endif; ?>

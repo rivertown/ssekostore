@@ -1,0 +1,72 @@
+<?php
+/**
+ * BelVG LLC.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ *
+/**********************************************
+ *        MAGENTO EDITION USAGE NOTICE        *
+ **********************************************/
+/* This package designed for Magento COMMUNITY edition
+ * BelVG does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * BelVG does not provide extension support in case of
+ * incorrect edition usage.
+/**********************************************
+ *        DISCLAIMER                          *
+ **********************************************/
+/* Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future.
+ **********************************************
+ * @category   Belvg
+ * @package    Belvg_Quickviewpro
+ * @copyright  Copyright (c) 2010 - 2012 BelVG LLC. (http://www.belvg.com)
+ * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ */
+
+    $_helper    = $this->helper('catalog/output');
+    $_product   = $this->getProduct();
+
+    $title      = array();
+    $desc       = array();
+    if ($_product->getShortDescription()) {
+        $title[]    = $this->__('Quick Overview');
+        $desc[]     = $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description');
+    }
+    $block  = trim($this->getChildHtml('additional'));
+    if ($block) {
+        $title[]    = $this->__('Additional Information');
+        $desc[]     = $block;
+    }
+    $block  = trim($this->getChildHtml('quickviewpro_related'));
+    if ($block) {
+        $title[]    = $this->__('Related Products');
+        $desc[]     = $block;
+    }
+?>
+
+<?php if ( $_product->getShortDescription() && count($title)==1 ): ?>
+    <div class="short-description">
+        <h2><?php echo $this->__('Quick Overview') ?></h2>
+        <div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
+    </div>
+<?php else: ?>
+    <div class="quickviewpro_tabs_block">
+        <ul class="tabs_title quickviewpro_tabs">
+            <?php foreach ($title AS $key => $value): ?>
+                <li id="tabs_item<?php echo $key ?>" class="item active"><a href="javascript:;"><?php echo $value ?></a></li>
+            <?php endforeach ?>
+        </ul>
+        <div class="tabs_content">
+            <?php foreach ($desc AS $key => $value): ?>
+                <div id="tabs_item<?php echo $key ?>_content"><?php echo $value ?></div>
+            <?php endforeach ?>
+        </div>
+    </div>
+<?php endif ?> 
+
