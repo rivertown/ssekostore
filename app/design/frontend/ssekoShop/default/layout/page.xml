@@ -48,7 +48,6 @@ Default layout, loads most of the pages
 
                 <action method="addCss"><stylesheet>css/bootstrap.css</stylesheet></action>
 
-                <action method="addCss"><stylesheet>css/docs.css</stylesheet></action>
 				<action method="addCss"><stylesheet>js/google-code-prettify/prettify.css</stylesheet></action>
                 <action method="addCss"><stylesheet>css/diff.css</stylesheet></action>
 
