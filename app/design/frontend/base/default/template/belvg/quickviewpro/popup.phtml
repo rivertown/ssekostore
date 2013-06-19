@@ -47,12 +47,9 @@
         <div class="product-name">
             <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
         </div>
-        <?php if ($this->_settings['product_page_link']): ?>
-            <div class="goto-product-view">
-                <a href="<?php echo $product_url?>">
-                    <?php echo $this->__('Go to product details page')?>
-                </a>
-            </div>
+        <?php echo $this->getPriceHtml($_product, true) ?>
+        <?php if ($this->_settings['review']): ?>
+            <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
         <?php endif ?>
         <a class="close-popap" onclick="quickview.close()" href="javascript:void(0);"></a>
     </div>
@@ -73,7 +70,13 @@
                     <div class="product-img-box">
                         <?php echo $this->getChildHtml('media') ?>
                     </div>
-
+			        <?php if ($this->_settings['product_page_link']): ?>
+			            <div class="goto-product-view">
+			                <a href="<?php echo $product_url?>">
+			                    <?php echo $this->__('View Full Details')?>
+			                </a>
+			            </div>
+			        <?php endif ?>
                     <div class="product-shop">
                         <?php echo $this->getChildHtml('quickviewpro_tabs') ?>
 
@@ -83,30 +86,27 @@
                             </div>
                         <?php endif ?>
 
-                        <?php if ($this->_settings['review']): ?>
-                            <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
-                        <?php endif ?>
                         <?php echo $this->getChildHtml('alert_urls') ?>
-                        <?php echo $this->getChildHtml('product_type_data') ?>
-                        <?php echo $this->getTierPriceHtml() ?>
-                        <?php echo $this->getChildHtml('extrahint') ?>
+                        <!--?php echo $this->getChildHtml('product_type_data') ?-->
+                        <!--?php echo $this->getTierPriceHtml() ?-->
+                        <!--?php echo $this->getChildHtml('extrahint') ?-->
 
                         <?php if ($this->_settings['add_to_cart']):?>
                             <?php if (!$this->hasOptions()):?>
                                 <div class="add-to-box">
                                     <?php if ($_product->isSaleable()): ?>
                                         <?php echo $this->getChildHtml('addtocart') ?>
-                                        <?php if ( $this->helper('wishlist')->isAllow() || $_compareUrl=$this->helper('catalog/product_compare')->getAddUrl($_product)): ?>
+                                        <!--<?php if ( $this->helper('wishlist')->isAllow() || $_compareUrl=$this->helper('catalog/product_compare')->getAddUrl($_product)): ?>
                                             <span class="or"><?php echo $this->__('OR') ?></span>
-                                        <?php endif ?>
+                                        <?php endif ?>-->
                                     <?php endif ?>
-                                    <?php echo $this->getChildHtml('addto') ?>
+                                    <!--?php echo $this->getChildHtml('addto') ?-->
                                 </div>
-                                <?php echo $this->getChildHtml('extra_buttons') ?>
-                            <?php elseif (!$_product->isSaleable()): ?>
+                                <!--?php echo $this->getChildHtml('extra_buttons') ?-->
+                            <!--?php elseif (!$_product->isSaleable()): ?>
                                 <div class="add-to-box">
                                     <?php echo $this->getChildHtml('addto') ?>
-                                </div>
+                                </div-->
                             <?php endif ?>
                         <?php endif ?>
 
