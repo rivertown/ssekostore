@@ -33,9 +33,11 @@ Whoops, it looks like you have an invalid PHP version.</h3></div><p>Magento supp
  Magento using PHP-CGI as a work-around.</p></div>';
     exit;
 }
-
-define('WP_USE_THEMES', false);
-require_once($_SERVER['DOCUMENT_ROOT'].'/wp-blog-header.php');//'/home/username/public_html/media/wp-load.php');
+if ( strpos($_SERVER['REQUEST_URI'], 'index.php/admin') === FALSE )
+{
+	define('WP_USE_THEMES', false);
+	require_once($_SERVER['DOCUMENT_ROOT'].'/wp-blog-header.php');
+}
 /**
  * Error reporting
  */
