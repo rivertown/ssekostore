@@ -9,86 +9,83 @@
  * @author      Vedran Subotic <vedran@magenthon.com>
  */
 ?>
-<div class="page-title well">
+<div class="page-title">
     <h1><?php echo $this->__('Edit Account Information') ?></h1>
 </div>
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
-<form action="<?php echo $this->getUrl('customer/account/editPost') ?>" method="post" id="form-validate" class="form well">
+<form action="<?php echo $this->getUrl('customer/account/editPost') ?>" method="post" id="form-validate" class="form">
     <div class="row">
-    <fieldset class="span4">
-        <?php echo $this->getBlockHtml('formkey')?>
-        <legend><h2 class="legend"><?php echo $this->__('Account Information') ?></h2></legend>
-            <div class="controls">
+    <fieldset class="span6 offset1">
+    	<?php echo $this->getBlockHtml('formkey')?>
+    	<h2><?php echo $this->__('My Info') ?></h2>
+    	<div class="row">
+    		<div class="fields">
                 <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getCustomer())->toHtml() ?>
+                <div class="control-group">
+	                <label for="email" class="control-label span3"><em>*</em><?php echo $this->__('Email Address') ?></label>
+	                <div class="controls span3">
+	                    <input type="text" name="email" id="email" value="<?php echo $this->htmlEscape($this->getCustomer()->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>" class="input-text required-entry validate-email" />
+	                </div>
+	            </div>
+	            <?php $_dob = $this->getLayout()->createBlock('customer/widget_dob') ?>
+		        <?php if ($_dob->isEnabled()): ?>
+		            <div class="controls"><?php echo $_dob->setDate($this->getCustomer()->getDob())->toHtml() ?></div>
+		        <?php endif ?>
+		        <?php $_taxvat = $this->getLayout()->createBlock('customer/widget_taxvat') ?>
+		        <?php if ($_taxvat->isEnabled()): ?>
+		            <div class="controls"><?php echo $_taxvat->setTaxvat($this->getCustomer()->getTaxvat())->toHtml() ?></div>
+		        <?php endif ?>
+		        <?php $_gender = $this->getLayout()->createBlock('customer/widget_gender') ?>
+		        <?php if ($_gender->isEnabled()): ?>
+		            <div class="controls"><?php echo $_gender->setGender($this->getCustomer()->getGender())->toHtml() ?></div>
+		        <?php endif ?>
+		        <div class="control-group">
+	                <label for="change_password" class="checkbox span3"><?php echo $this->__('Change Password') ?></label>
+					<div class="controls span3">
+						<input type="checkbox" name="change_password" id="change_password" value="1" onclick="setPasswordForm(this.checked)" title="<?php echo $this->__('Change Password') ?>"<?php if($this->getCustomer()->getChangePassword()==1): ?> checked="checked"<?php endif; ?> class="checkbox" />
+            		</div>
+            	</div>
             </div>
-            <div class="control-group">
-                <label for="email" class="control-label"><em>*</em><?php echo $this->__('Email Address') ?></label>
-                <div class="controls">
-                    <input type="text" name="email" id="email" value="<?php echo $this->htmlEscape($this->getCustomer()->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>" class="input-text required-entry validate-email" />
-                </div>
-            </div>
-        <?php $_dob = $this->getLayout()->createBlock('customer/widget_dob') ?>
-        <?php if ($_dob->isEnabled()): ?>
-            <div class="controls"><?php echo $_dob->setDate($this->getCustomer()->getDob())->toHtml() ?></div>
-        <?php endif ?>
-        <?php $_taxvat = $this->getLayout()->createBlock('customer/widget_taxvat') ?>
-        <?php if ($_taxvat->isEnabled()): ?>
-            <div class="controls"><?php echo $_taxvat->setTaxvat($this->getCustomer()->getTaxvat())->toHtml() ?></div>
-        <?php endif ?>
-        <?php $_gender = $this->getLayout()->createBlock('customer/widget_gender') ?>
-        <?php if ($_gender->isEnabled()): ?>
-            <div class="controls"><?php echo $_gender->setGender($this->getCustomer()->getGender())->toHtml() ?></div>
-        <?php endif ?>
-            <div class="controls">
-                <label for="change_password" class="checkbox">
-                    <input type="checkbox" name="change_password" id="change_password" value="1" onclick="setPasswordForm(this.checked)" title="<?php echo $this->__('Change Password') ?>"<?php if($this->getCustomer()->getChangePassword()==1): ?> checked="checked"<?php endif; ?> class="checkbox" />
-                    <?php echo $this->__('Change Password') ?>
-                </label>
-                
-            </div>
+    	</div>
     </fieldset>
-    <fieldset class="span4" style="display:none;">
-        <legend><h2 class="legend"><?php echo $this->__('Change Password') ?></h2></legend>
-                <label for="current_password" class="required"><em>*</em><?php echo $this->__('Current Password') ?></label>
-                <div class="controls">
+    <fieldset class="span6 offset1" id="password-box" style="display:none;">
+        <h3><?php echo $this->__('Change Password') ?></h3>
+			<div class="row">
+				<label for="current_password" class="required span3"><em>*</em><?php echo $this->__('Current Password') ?></label>
+                <div class="controls span3">
                     <input type="password" title="<?php echo $this->__('Current Password') ?>" class="input-text" name="current_password" id="current_password" />
                 </div>
                 <div class="control-group">
-                    <label for="password" class="required"><em>*</em><?php echo $this->__('New Password') ?></label>
-                    <div class="controls">
+                    <label for="password" class="required span3"><em>*</em><?php echo $this->__('New Password') ?></label>
+                    <div class="controls span3">
                         <input type="password" title="<?php echo $this->__('New Password') ?>" class="input-text validate-password" name="password" id="password" />
                     </div>
                 </div>
                 <div class="control-group">
-                    <label for="confirmation" class="required"><em>*</em><?php echo $this->__('Confirm New Password') ?></label>
-                    <div class="controls">
+                    <label for="confirmation" class="required span3"><em>*</em><?php echo $this->__('Confirm New Password') ?></label>
+                    <div class="controls span3">
                         <input type="password" title="<?php echo $this->__('Confirm New Password') ?>" class="input-text validate-cpassword" name="confirmation" id="confirmation" />
                     </div>
                 </div>
+			</div>      
     </fieldset>
+    <div class="span3 offset4">
+        <button type="submit" title="<?php echo $this->__('Save') ?>" class="button btn btn-primary btn-lrg"><span><span><?php echo $this->__('Save') ?></span></span></button>
     </div>
-    <div class="form-actions">
-        <p class="help-block"><?php echo $this->__('* Required Fields') ?></p>
-        <button type="submit" title="<?php echo $this->__('Save') ?>" class="btn pull-right"><span><span><?php echo $this->__('Save') ?></span></span></button>
-        <p class="back-link">
-            <span class="icon-backward"></span>
-            <a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>"><?php echo $this->__('Back') ?></a>
-        </p>
-        
-    </div>
+</div>
 </form>
 <script type="text/javascript">
 //<![CDATA[
     var dataForm = new VarienForm('form-validate', true);
     function setPasswordForm(arg){
         if(arg){
-            $('current_password').up(1).show();
+            $('#password-box').show();
             $('current_password').addClassName('required-entry');
             $('password').addClassName('required-entry');
             $('confirmation').addClassName('required-entry');
 
         }else{
-            $('current_password').up(1).hide();
+            $('#password-box').hide();
             $('current_password').removeClassName('required-entry');
             $('password').removeClassName('required-entry');
             $('confirmation').removeClassName('required-entry');

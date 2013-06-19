@@ -18,36 +18,28 @@
 /** @var $this Mage_Customer_Block_Form_Login */
 ?>
 <div class="account-login">
-    <div class="page-title well">
-        <h1><?php echo $this->__('Login or Create an Account') ?></h1>
+    <div class="page-title">
+        <h1><?php echo $this->__('Sign In') ?></h1>
     </div>
     <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
     
         <div class="row">
-            <div class="span6">
-                <div class="hero-unit">
-                    <h2><?php echo $this->__('New Customers') ?></h2>
-                    <p><?php echo $this->__('By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.') ?></p>
-                </div>
-                    <button type="button" title="<?php echo $this->__('Create an Account') ?>" class="button btn btn-primary" onclick="window.location='<?php echo Mage::helper('persistent')->getCreateAccountUrl($this->getCreateAccountUrl()) ?>';"><span><span><?php echo $this->__('Create an Account') ?></span></span></button>
-            </div>
-            <div class="span6">
-                <div class="well">
-                <h2><?php echo $this->__('Registered Customers') ?></h2>
+            <div class="span5">
+                <h2><?php echo $this->__('Returning Customers') ?></h2>
                 <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="login-form"  class="form-vertical">
                     <fieldset>
-                        <legend><?php echo $this->__('If you have an account with us, please log in.') ?></legend>
-                            <div class="control-group">
-                                <?php /*?><label for="email" class="control-label"><em>*</em><?php echo $this->__('Email Address') ?></label><?php */?>
-                                <div class="controls">
-                                    <input placeholder="*<?php echo $this->__('Email Address') ?>" type="text" name="login[username]" value="<?php echo $this->htmlEscape($this->getUsername()) ?>" id="email" class="input-text required-entry validate-email" title="<?php echo $this->__('Email Address') ?>" />
+                            <div class="control-group row">
+                                <label for="email" class="control-label span2"><?php echo $this->__('Email Address') ?></label>
+                                <div class="controls span3">
+                                    <input type="text" name="login[username]" value="<?php echo $this->htmlEscape($this->getUsername()) ?>" id="email" class="input-text required-entry validate-email" title="<?php echo $this->__('Email Address') ?>" />
                                 </div>
                             </div>
-                            <div class="control-group">    
-                                <?php /*?><label for="pass" class="control-label"><em>*</em><?php echo $this->__('Password') ?></label><?php */?>
-                                <div class="controls">
-                                    <input placeholder="*<?php echo $this->__('Password') ?>" type="password" name="login[password]" class="input-text required-entry validate-password" id="pass" title="<?php echo $this->__('Password') ?>" />
+                            <div class="control-group row">    
+                                <label for="pass" class="control-label span2" style="margin-bottom:0; margin-top:5px;line-height:18px;"><?php echo $this->__('Password') ?></label>
+                                <div class="controls span3">
+                                    <input type="password" name="login[password]" class="input-text required-entry validate-password" id="pass" title="<?php echo $this->__('Password') ?>" />
                                 </div>
+                                <a href="<?php echo $this->getForgotPasswordUrl() ?>" class="forgot-left span2"><?php echo $this->__('Forgot Password?') ?></a>
                             </div>
                             <?php echo $this->getChildHtml('persistent.remember.me'); ?>
                             <?php //echo $this->getChildHtml('persistent.remember.me.tooltip'); ?>
@@ -56,18 +48,18 @@
                             <?php if (Mage::helper('checkout')->isContextCheckout()): ?>
                                 <input name="context" type="hidden" value="checkout" />
                             <?php endif; ?>
-                        <div class="form-actions">
-                            <p class="help-block"><?php echo $this->__('* Required Fields') ?></p>
-                            <button type="submit" class="button btn btn-success pull-right" title="<?php echo $this->__('Login') ?>" name="send" id="send2"><span><span><?php echo $this->__('Login') ?></span></span></button>
-                            <a href="<?php echo $this->getForgotPasswordUrl() ?>" class="f-left"><?php echo $this->__('Forgot Your Password?') ?></a>
+                        <div class="row">
+                        	<div class="span3 offset2">
+	                            <button type="submit" class="button btn btn-primary btn-lrg" title="<?php echo $this->__('Sign in & Checkout') ?>" name="send" id="send2"><?php echo $this->__('Sign in & Checkout') ?></button>
+	                        </div>
                         </div>
                     </fieldset>
-
-
-
-
                 </form>
-                </div>
+            </div>
+            <div class="span4 offset1">
+				<h2><?php echo $this->__('Guest Checkout') ?></h2>
+				<p style="margin-bottom:40px;"><?php echo $this->__('Continue checkout as a Sseko guest.<br /><br />If you’re new to our site, you may create an account during this checkout process.') ?></p>
+				<button type="button" title="<?php echo $this->__('Checkout as our Guest') ?>" class="button btn btn-primary btn-lrg" onclick="window.location='<?php echo Mage::helper('persistent')->getCreateAccountUrl($this->getCreateAccountUrl()) ?>';"><?php echo $this->__('Checkout as our Guest') ?></button>
             </div>
         </div>
 

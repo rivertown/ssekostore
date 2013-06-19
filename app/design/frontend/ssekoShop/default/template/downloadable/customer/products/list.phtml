@@ -30,7 +30,7 @@
  */
 ?>
 <?php $_items = $this->getItems(); ?>
-<div class="page-title well">
+<div class="page-title">
     <h1><?php echo Mage::helper('downloadable')->__('My Downloadable Products') ?></h1>
 </div>
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
@@ -69,9 +69,3 @@
     <p><?php echo Mage::helper('downloadable')->__('You have not purchased any downloadable products yet.'); ?></p>
 <?php endif; ?>
 <?php echo $this->getChildHtml('pager'); ?>
-<div class="buttons-set">
-    <p class="back-link">
-        <span class="icon-backward"></span>
-        <a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>"><?php echo $this->__('Back') ?></a>
-    </p>
-</div>

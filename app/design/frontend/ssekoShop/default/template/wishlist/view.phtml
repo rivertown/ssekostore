@@ -12,7 +12,7 @@
 ?>
 <?php if ($this->helper('wishlist')->isAllow()) : ?>
 <div class="my-wishlist">
-    <div class="page-title title-buttons well">
+    <div class="page-title title-buttons">
         <?php if ($this->helper('wishlist')->isRssAllow() && $this->hasWishlistItems()): ?>
             <a href="<?php echo $this->helper('wishlist')->getRssUrl(); ?>" class="link-rss pull-right"><?php echo $this->__('RSS Feed') ?></a>
         <?php endif; ?>
