@@ -34,35 +34,32 @@ NOTE: Regarding styles - if we leave it this way, we'll move it to boxes.css
  * @see Mage_Customer_Block_Widget_Dob
  */
 ?>
-<div class="control-group">
-	<label for="<?php echo $this->getFieldId('month')?>" class="control-label<?php if ($this->isRequired()) echo ' required' ?>" ><?php if ($this->isRequired()) echo '<em>*</em>' ?><?php echo $this->__('Date of Birth') ?></label>
-	<div class="controls customer-dob">
+<div class="field dob">
+	<label for="<?php echo $this->getFieldId('month')?>" class="control-label span3"><?php echo $this->__('Birthday') ?></label>
 	<?php
 	    $this->setDateInput('d',
-	        '<div class="dob-day">
+	        '<div class="dob-day span1">
 	             <input placeholder="' . $this->__('DD') . '" type="text" id="' . $this->getFieldId('day') . '" name="' . $this->getFieldName('day') . '" value="' . $this->getDay() . '" title="' . $this->__('Day') . '" class="input-text validate-custom" ' . $this->getFieldParams() . ' />
 	         </div>'
 	    );
 	
 	    $this->setDateInput('m',
-	        '<div class="dob-month">
+	        '<div class="dob-month span1">
 	             <input placeholder="' . $this->__('MM')  . '" type="text" id="' . $this->getFieldId('month') . '" name="' . $this->getFieldName('month') . '" value="' . $this->getMonth()  . '" title="' . $this->__('Month')  . '" class="input-text validate-custom" ' . $this->getFieldParams()  . ' />
 	         </div>'
 	    );
 	
 	    $this->setDateInput('y',
-	        '<div class="dob-year">
+	        '<div class="dob-year span1">
 	             <input placeholder="' . $this->__('YYYY')  . '" type="text" id="' . $this->getFieldId('year') . '" name="' . $this->getFieldName('year') . '" value="' . $this->getYear()  . '" title="' . $this->__('Year')  . '" class="input-text validate-custom" ' . $this->getFieldParams()  . ' />
 	         </div>'
 	    );
 	?>
-	    <?php echo $this->getSortedDateInputs() ?>
-	    <div class="dob-full" style="display:none;">
-	        <input type="hidden" id="<?php echo $this->getFieldId('dob')?>" name="<?php echo $this->getFieldName('dob')?>" />
-	    </div>
-	
-	    <div class="validation-advice" style="display:none;"></div>
+	<?php echo $this->getSortedDateInputs() ?>
+	<div class="dob-full" style="display:none;">
+		<input type="hidden" id="<?php echo $this->getFieldId('dob')?>" name="<?php echo $this->getFieldName('dob')?>" />
 	</div>
+	<div class="validation-advice" style="display:none;"></div>
 </div>
 <script type="text/javascript">
 //<![CDATA[

@@ -25,7 +25,7 @@
  */
 ?>
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
-<div class="page-title well">
+<div class="page-title">
     <h1><?php echo $this->__('My Product Reviews') ?></h1>
 </div>
 <?php if( $this->getCollection() && $this->count()): ?>
@@ -59,9 +59,3 @@
 <?php else: ?>
     <p><?php echo $this->__('You have submitted no reviews.') ?></p>
 <?php endif; ?>
-<div class="buttons-set">
-    <p class="back-link">
-        <span class="icon-backward"></span>
-        <a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>"><?php echo $this->__('Back') ?></a>
-    </p>
-</div>
