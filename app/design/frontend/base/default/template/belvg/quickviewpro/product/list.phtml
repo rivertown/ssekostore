@@ -48,14 +48,23 @@
 	        /* -------------------- */	
 	    ?>
 	    <?php echo $this->getToolbarHtml() ?>
-	    <?php $_categoryId = Mage::getModel('catalog/layer')->getCurrentCategory()->getId(); ?>
+	    <?php $_category = Mage::getModel('catalog/layer')->getCurrentCategory();
+	    	if($_category->getLevel() == 2){
+	    		$_categoryId = Mage::getModel('catalog/layer')->getCurrentCategory()->getId();
+			}
+			else
+			{
+				$_categoryId = $_category->getParentId();
+			}
+		?>
 	    <?php $_category = Mage::getModel('catalog/category')->load($_categoryId) ?>
 	    <?php $_subcategories = $_category->getChildrenCategories() ?>
 	    <?php if (count($_subcategories) > 0): ?>
 	    	<div>
-		    	<select name="" style="width:220px;" onchange="location.href=this.value">		
-				 <?php foreach ($_subcategories as $category) {  $i++;
-				 	$cat = Mage::getModel('catalog/category')->load($category->getID()); ?>
+		    	<select name="" style="width:220px;" onchange="location.href=this.value">
+		    		<option value="all">View All</option>		
+				 	<?php foreach ($_subcategories as $category) {  $i++;
+				 	$cat = Mage::getModel('catalog/category')->load($category->getID()); ?>				 	
 				  	<option value="<?php echo $cat->geturl(); ?>"  <? if(Mage::registry('current_category')->getId()==$category->getID()) echo 'selected';?>><?php echo $category->getName(); ?></option>
 				 <?php } ?>			
 				 </select>
