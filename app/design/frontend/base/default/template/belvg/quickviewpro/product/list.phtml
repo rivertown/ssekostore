@@ -39,32 +39,45 @@
 <p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
 <?php else: ?>
 <div class="category-products">
-    <?php
-        
-        /*    QUICK VIEW PRO    */
-        $products   = $_productCollection->getColumnValues('entity_id');
-        Mage::getSingleton('core/session')->setCurrentCategoryProducts($products);
-        unset($products);
-        /* -------------------- */
-
-    ?>
-    <?php echo $this->getToolbarHtml() ?>
-    <?php
-        /* @var $toolbar Mage_Catalog_Block_Product_List_Toolbar */
-        // get toolbars limits - overrides default pager limit
-        $toolbar = Mage::getBlockSingleton('catalog/product_list_toolbar')->getAvailableLimit();
-
-        /* @var $pager Mage_Page_Block_Html_Pager */
-        $pager = $this->getLayout()->createBlock('page/html_pager', 'bootstrapped.standalone.pager');
-
-        // set limit - uses category's instead of default pager's (10-20-50)
-        $pager->setAvailableLimit($toolbar);
-        // need to set collection
-        $pager->setCollection($_productCollection);
-        //set custom template
-        $pager->setTemplate('catalog/product/list/pager.phtml');
-        echo $pager->toHtml();
-    ?>
+	<div class="span12">
+	    <?php	        
+	        /*    QUICK VIEW PRO    */
+	        $products   = $_productCollection->getColumnValues('entity_id');
+	        Mage::getSingleton('core/session')->setCurrentCategoryProducts($products);
+	        unset($products);
+	        /* -------------------- */	
+	    ?>
+	    <?php echo $this->getToolbarHtml() ?>
+	    <?php $_categoryId = Mage::getModel('catalog/layer')->getCurrentCategory()->getId(); ?>
+	    <?php $_category = Mage::getModel('catalog/category')->load($_categoryId) ?>
+	    <?php $_subcategories = $_category->getChildrenCategories() ?>
+	    <?php if (count($_subcategories) > 0): ?>
+	    	<div>
+		    	<select name="" style="width:220px;" onchange="location.href=this.value">		
+				 <?php foreach ($_subcategories as $category) {  $i++;
+				 	$cat = Mage::getModel('catalog/category')->load($category->getID()); ?>
+				  	<option value="<?php echo $cat->geturl(); ?>"  <? if(Mage::registry('current_category')->getId()==$category->getID()) echo 'selected';?>><?php echo $category->getName(); ?></option>
+				 <?php } ?>			
+				 </select>
+			</div>
+		<?php endif;?>
+	    <?php
+	        /* @var $toolbar Mage_Catalog_Block_Product_List_Toolbar */
+	        // get toolbars limits - overrides default pager limit
+	        $toolbar = Mage::getBlockSingleton('catalog/product_list_toolbar')->getAvailableLimit();
+	
+	        /* @var $pager Mage_Page_Block_Html_Pager */
+	        $pager = $this->getLayout()->createBlock('page/html_pager', 'bootstrapped.standalone.pager');
+	
+	        // set limit - uses category's instead of default pager's (10-20-50)
+	        $pager->setAvailableLimit($toolbar);
+	        // need to set collection
+	        $pager->setCollection($_productCollection);
+	        //set custom template
+	        $pager->setTemplate('catalog/product/list/pager.phtml');
+	        echo $pager->toHtml();
+	    ?>
+    </div>
     <?php // List mode ?>
     <?php if($this->getMode()!='grid'): ?>
     <?php $_iterator = 0; ?>
@@ -157,22 +170,26 @@
     <?php endif; ?>
 
     <div class="toolbar-bottom">
-        <?php
-        /* @var $toolbar Mage_Catalog_Block_Product_List_Toolbar */
-        // get toolbars limits - overrides default pager limit
-        $toolbar = Mage::getBlockSingleton('catalog/product_list_toolbar')->getAvailableLimit();
-
-        /* @var $pager Mage_Page_Block_Html_Pager */
-        $pager = $this->getLayout()->createBlock('page/html_pager', 'bootstrapped.standalone.pager');
-
-        // set limit - uses category's instead of default pager's (10-20-50)
-        $pager->setAvailableLimit($toolbar);
-        // need to set collection
-        $pager->setCollection($_productCollection);
-        //set custom template
-        $pager->setTemplate('catalog/product/list/pager.phtml');
-        echo $pager->toHtml();
-        ?>
+    	<div class="navbar-toolbar">
+            <div class="pagination pagination-centered">
+	        <?php
+	        /* @var $toolbar Mage_Catalog_Block_Product_List_Toolbar */
+	        // get toolbars limits - overrides default pager limit
+	        $toolbar = Mage::getBlockSingleton('catalog/product_list_toolbar')->getAvailableLimit();
+	
+	        /* @var $pager Mage_Page_Block_Html_Pager */
+	        $pager = $this->getLayout()->createBlock('page/html_pager', 'bootstrapped.standalone.pager');
+	
+	        // set limit - uses category's instead of default pager's (10-20-50)
+	        $pager->setAvailableLimit($toolbar);
+	        // need to set collection
+	        $pager->setCollection($_productCollection);
+	        //set custom template
+	        $pager->setTemplate('catalog/product/list/pager.phtml');
+	        echo $pager->toHtml();
+	        ?>
+	       	</div>
+	 	</div>
     </div>
 </div>
 <?php endif; ?>

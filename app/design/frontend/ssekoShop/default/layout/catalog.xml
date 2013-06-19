@@ -125,9 +125,9 @@ Category layered navigation layout
 		<reference name="catImage">
   			<block type="catalog/category_view" name="cat.image" template="catalog/category/catImage.phtml"/>
 		</reference>
-        <reference name="left">
+        <!--reference name="left">
             <block type="catalog/layer_view" name="catalog.leftnav" after="currency" template="catalog/layer/view.phtml"/>
-        </reference>
+        </reference-->
         <reference name="content">
             <block type="catalog/category_view" name="category.products" template="catalog/category/view.phtml">
                 <block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml">

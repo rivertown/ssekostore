@@ -45,16 +45,16 @@ Default layout, loads most of the pages
 
     <catalog_category_default translate="label">
         <remove name="catalog.leftnav" />
-        <reference name="breadcrumbs">
+        <!--reference name="breadcrumbs">
             <block type="catalog/layer_view" name="catalog.leftnav.breadcrumbs" after="currency" template="catalog/layer/view.phtml"/>
-        </reference>
+        </reference-->
     </catalog_category_default>
     
     <catalog_category_layered translate="label">
         <remove name="catalog.leftnav" />
-        <reference name="breadcrumbs">
+        <!--reference name="breadcrumbs">
             <block type="catalog/layer_view" name="catalog.leftnav.breadcrumbs" after="currency" template="catalog/layer/view.phtml"/>
-        </reference>
+        </reference-->
     </catalog_category_layered>
 
     <tag_list_index translate="label">

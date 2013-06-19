@@ -22,8 +22,8 @@
 <?php $defaultLimit = $this->getDefaultPerPageValue();
 Mage::getSingleton('catalog/session')->setData("limit_page",$defaultLimit);?>
     <?php if($this->getLastPageNum()>1): ?>
-        <div class="navbar-toolbar">
-            <div class="pagination pagination-centered">
+        <!--div class="navbar-toolbar">
+            <div class="pagination pagination-centered"-->
                 <ul class="nav">
                 	<a href="<?php echo $this->getLimitUrl('all')?>" title="<?php echo $this->__('Show All Products') ?>">
 						<?php echo $this->__('Show All') ?>
@@ -76,8 +76,8 @@ Mage::getSingleton('catalog/session')->setData("limit_page",$defaultLimit);?>
                         </li>
                     <?php endif;?>
                 </ul>
-            </div>
-        </div>
+            <!--/div>
+        </div-->
     <?php endif; ?>
 
 <?php endif ?>
