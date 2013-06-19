@@ -237,8 +237,12 @@
                 <action method="unsetCallChild"><child>container2</child><call>ifEquals</call><if>0</if><key>alias_in_layout</key><key>options_container</key></action>
 
                 <block type="catalog/product_view" name="quickviewpro.tabs" as="quickviewpro_tabs" template="belvg/quickviewpro/product/tabs.phtml">
-                    <block type="catalog/product_view_attributes" name="product.attributes" as="additional" template="catalog/product/view/attributes.phtml"/>
-                    <block type="catalog/product_list_related" name="quickviewpro.related" as="quickviewpro_related" template="belvg/quickviewpro/product/tabs/related.phtml"/>
+                	<block type="cms/block" name="size_guide" as="size_guide">
+		                <action method="setBlockId"><block_id>size_guide</block_id></action>
+		            </block>                    
+                    <block type="cms/block" name="impact" as="impact">
+		                <action method="setBlockId"><block_id>impact</block_id></action>
+		            </block>
                 </block>
 
                 <block type="quickviewpro/share" name="product.share" as="product_share">

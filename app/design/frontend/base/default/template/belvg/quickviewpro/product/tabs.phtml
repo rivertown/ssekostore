@@ -35,17 +35,17 @@
     $title      = array();
     $desc       = array();
     if ($_product->getShortDescription()) {
-        $title[]    = $this->__('Quick Overview');
+        $title[]    = $this->__('Description');
         $desc[]     = $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description');
     }
-    $block  = trim($this->getChildHtml('additional'));
+    $block  = trim($this->getChildHtml('size_guide'));
     if ($block) {
-        $title[]    = $this->__('Additional Information');
+        $title[]    = $this->__('Sandal Size Guide');
         $desc[]     = $block;
     }
-    $block  = trim($this->getChildHtml('quickviewpro_related'));
+    $block  = trim($this->getChildHtml('impact'));
     if ($block) {
-        $title[]    = $this->__('Related Products');
+        $title[]    = $this->__('Impact');
         $desc[]     = $block;
     }
 ?>

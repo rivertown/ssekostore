@@ -14,7 +14,7 @@
 <?php if($_product->isSaleable()): ?>
     <div class="form-inline">
         <?php if(!$_product->isGrouped()): ?>
-        <label for="qty"><strong><?php echo $this->__('Qty:') ?></strong></label>
+        <label for="qty"><strong><?php echo $this->__('Quantity') ?></strong></label>
         <input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="span1 input-text qty" />
         <?php endif; ?>
         <button type="button" title="<?php echo $buttonTitle ?>" class="btn btn-primary" onclick="productAddToCartForm.submit(this)"><span><span><?php echo $buttonTitle ?></span></span></button>
