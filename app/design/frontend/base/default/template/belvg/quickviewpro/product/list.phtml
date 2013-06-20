@@ -57,7 +57,7 @@
 				$_categoryId = $_category->getParentId();
 			}
 		?>
-	    <?php $_category = Mage::getModel('catalog/category')->load($_categoryId) ?>
+	    <?php $_category = Mage::getModel('catalog/category')->load($_categoryId) ?>	    
 	    <?php $_subcategories = $_category->getChildrenCategories() ?>
 	    <?php if (count($_subcategories) > 0): ?>
 	    	<div>
@@ -70,7 +70,18 @@
 				 <?php } ?>			
 				 </select>
 			</div>
-		<?php endif;?>
+		<?php endif;?>	
+		<div>
+			<?php 
+				$currentPage = Mage::getBlockSingleton('page/html_pager')->getCurrentPage();
+				$totalProductsOnPage = count($_productCollection);
+				$perPage = Mage::getStoreConfig('catalog/frontend/grid_per_page');
+
+				$x = (($currentPage - 1) * $perPage) + 1;
+				$y = (($currentPage - 1) * $perPage) + $totalProductsOnPage;
+			?>
+			<p>VIEWING <?php echo $x?>-<?php echo $y;?> OF <?php echo Mage::getModel('catalog/layer')->getCurrentCategory()->getProductCount();?></p>
+		</div>
 	    <?php
 	        /* @var $toolbar Mage_Catalog_Block_Product_List_Toolbar */
 	        // get toolbars limits - overrides default pager limit
