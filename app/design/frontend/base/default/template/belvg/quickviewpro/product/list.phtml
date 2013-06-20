@@ -61,8 +61,9 @@
 	    <?php $_subcategories = $_category->getChildrenCategories() ?>
 	    <?php if (count($_subcategories) > 0): ?>
 	    	<div>
+	    		<label><?php echo $this->__('Show')?></label>
 		    	<select name="" style="width:220px;" onchange="location.href=this.value">
-		    		<option value="all">View All</option>		
+		    		<option value="<?php echo $_category->geturl();?>">View All</option>		
 				 	<?php foreach ($_subcategories as $category) {  $i++;
 				 	$cat = Mage::getModel('catalog/category')->load($category->getID()); ?>				 	
 				  	<option value="<?php echo $cat->geturl(); ?>"  <? if(Mage::registry('current_category')->getId()==$category->getID()) echo 'selected';?>><?php echo $category->getName(); ?></option>
