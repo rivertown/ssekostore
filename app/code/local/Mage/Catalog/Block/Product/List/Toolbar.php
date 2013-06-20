@@ -230,6 +230,17 @@ class Mage_Catalog_Block_Product_List_Toolbar extends Mage_Core_Block_Template
             $this->_collection->setPageSize($limit);
         }
         if ($this->getCurrentOrder()) {
+        	if ($this->getCurrentOrder() == 'ordered_qty') {
+        		$select = Mage::getSingleton('core/resource')->getConnection('core_read')
+		        	->select()
+			        ->from('sales_flat_order_item', array('product_id', 'count' => 'SUM(`qty_ordered`)'))
+		        	->group('product_id');
+				 
+				$this->_collection->getSelect()
+					->joinLeft( array ('bs' => $select),
+							'bs.product_id = e.entity_id')
+					->order('bs.count DESC');
+	        }
             $this->_collection->setOrder($this->getCurrentOrder(), $this->getCurrentDirection());
         }
         return $this;
@@ -413,7 +424,7 @@ class Mage_Catalog_Block_Product_List_Toolbar extends Mage_Core_Block_Template
     public function getAvailableOrders()
     {
         //return $this->_availableOrder;
-        $t = array('entity_id' => 'New', 'price' => 'Price', 'position' => 'Most Popular');
+        $t = array('entity_id' => 'New', 'price' => 'Price', 'ordered_qty' => 'Most Popular');
 		return $t;
     }
 
