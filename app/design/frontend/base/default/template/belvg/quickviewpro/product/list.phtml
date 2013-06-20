@@ -162,10 +162,6 @@
     		$now = date("Y-m-d");
 			$newsFrom= substr($_product->getData('news_from_date'),0,10);
 			$newsTo=  substr($_product->getData('news_to_date'),0,10);
-			if ($now>=$newsFrom && $now<=$newsTo)
-			{
-				echo 'new';
-			}
     	?>
         <?php ;if ($i++%$_columnCount==0): ?>
         <ul class="products-grid unstyled thubmnails row-fluid">
