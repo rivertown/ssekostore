@@ -22,10 +22,10 @@
 <div class="btn-group">					
     <label><?php echo $this->__('Sort')?></label>
     <select onchange="setLocation(this.value)">	            					
-		<option value="<?php echo $this->getOrderUrl('entity_id', 'desc') ?>"<?php if($this->isOrderCurrent('entity_id') && $this->getCurrentDirection() == 'desc'): ?> selected="selected"<?php endif; ?>>Newest</option>
-		<option value="<?php echo $this->getOrderUrl('price', 'asc') ?>"<?php if($this->isOrderCurrent('price') && $this->getCurrentDirection() == 'asc'): ?> selected="selected"<?php endif; ?>>Price - Low / High</option>						
-		<option value="<?php echo $this->getOrderUrl('price', 'desc') ?>"<?php if($this->isOrderCurrent('price') && $this->getCurrentDirection() == 'desc'): ?> selected="selected"<?php endif; ?>>Price - High / Low</option>
-		<option value="<?php echo $this->getOrderUrl('ordered_qty', 'desc') ?>"<?php if($this->isOrderCurrent('ordered_qty') && $this->getCurrentDirection() == 'desc'): ?> selected="selected"<?php endif; ?>>Most Popular</option>						
+		<option value="<?php echo $this->getOrderUrl('entity_id', 'desc') ?>"<?php if($this->isOrderCurrent('entity_id') && $this->getCurrentDirection() == 'desc'): ?> selected="selected"<?php endif; ?>>NEWEST</option>
+		<option value="<?php echo $this->getOrderUrl('price', 'asc') ?>"<?php if($this->isOrderCurrent('price') && $this->getCurrentDirection() == 'asc'): ?> selected="selected"<?php endif; ?>>PRICE - LOW / HIGH</option>						
+		<option value="<?php echo $this->getOrderUrl('price', 'desc') ?>"<?php if($this->isOrderCurrent('price') && $this->getCurrentDirection() == 'desc'): ?> selected="selected"<?php endif; ?>>PRICE - HIGH / LOW</option>
+		<option value="<?php echo $this->getOrderUrl('ordered_qty', 'desc') ?>"<?php if($this->isOrderCurrent('ordered_qty') && $this->getCurrentDirection() == 'desc'): ?> selected="selected"<?php endif; ?>>MOST POPULAR</option>						
     </select>
 </div>        
 <?php endif ?>
