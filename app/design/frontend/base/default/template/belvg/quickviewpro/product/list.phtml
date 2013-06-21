@@ -79,11 +79,8 @@
 
 				$x = (($currentPage - 1) * $perPage) + 1;
 				$y = (($currentPage - 1) * $perPage) + $totalProductsOnPage;
-				
-				$category_object = Mage::getModel('catalog/category')->load( Mage::getModel('catalog/layer')->getCurrentCategory()->getId() ); // If you don't already have one
-				$total = Mage::getModel('catalog/layer')->setCurrentCategory( $category_object )->getProductCollection()->getSize();
 			?>
-			<p>VIEWING <?php echo $x?>-<?php echo $y;?> OF <?php echo $total?></p>
+			<p>VIEWING <?php echo $x?>-<?php echo $y;?> OF <?php echo Mage::getModel('catalog/layer')->getCurrentCategory()->getProductCount();?></p>
 		</div>
 	    <?php
 	        /* @var $toolbar Mage_Catalog_Block_Product_List_Toolbar */
@@ -183,7 +180,7 @@
 				<div>				
 	                <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(225); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
 	                <div class="caption">
-		                <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php if ($now>=$newsFrom && $now<=$newsTo):?><span id="newProduct">NEW! </span><?php endif;?><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></h2>		                
+		                <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php if ($now>=$newsFrom && $now<=$newsTo):?><span id="newProduct">NEW! </span><?php endif;?><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></h2>
 		                <?php echo $this->getPriceHtml($_product, true) ?>
 		                <?php if($_product->getRatingSummary()): ?>
 		                <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
@@ -200,7 +197,15 @@
 
     <div class="toolbar-bottom">
 	    <div class="matt-nav bottom-matt-nav">
-			<p>VIEWING <?php echo $x?>-<?php echo $y;?> OF <?php echo $total?></p>
+			<?php 
+				$currentPage = Mage::getBlockSingleton('page/html_pager')->getCurrentPage();
+				$totalProductsOnPage = count($_productCollection);
+				$perPage = Mage::getStoreConfig('catalog/frontend/grid_per_page');
+
+				$x = (($currentPage - 1) * $perPage) + 1;
+				$y = (($currentPage - 1) * $perPage) + $totalProductsOnPage;
+			?>
+			<p>VIEWING <?php echo $x?>-<?php echo $y;?> OF <?php echo Mage::getModel('catalog/layer')->getCurrentCategory()->getProductCount();?></p>
 	        <?php
 	        /* @var $toolbar Mage_Catalog_Block_Product_List_Toolbar */
 	        // get toolbars limits - overrides default pager limit
