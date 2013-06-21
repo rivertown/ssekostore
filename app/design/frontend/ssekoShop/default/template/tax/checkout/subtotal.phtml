@@ -46,7 +46,14 @@
     </td>
 </tr>
 <?php else : ?>
-<span class="cart-price">
-<?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValue()) ?>                           
-</span>
+<div class="row price-box">
+	<div class="span2">
+		<h6>Subtotal</h6>
+	</div>
+	<div class="span2">
+		<span class="cart-price">
+			<?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValue()) ?>  
+		</span>
+	</div>
+</div>
 <?php endif;?>

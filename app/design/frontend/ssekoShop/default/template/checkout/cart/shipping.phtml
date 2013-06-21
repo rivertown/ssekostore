@@ -70,25 +70,28 @@
             
                 <?php foreach ($_shippingRateGroups as $code => $_rates): ?>
                     <div class="control-group">
-                    <label class="control-label"><?php echo $this->getCarrierName($code) ?></label>
+                    <label class="control-label">Shipping Method</label>
+                    	<select id="estimate_method" name="estimate_method">   
+                    		<option value="">Select</option>                 	
                         <?php foreach ($_rates as $_rate): ?>
-                               <?php if ($_rate->getErrorMessage()): ?>
-                                    <?php echo $_rate->getErrorMessage() ?>
-                               <?php else: ?>
-                                    <div class="controls">
-                                    <label for="s_method_<?php echo $_rate->getCode() ?>" class="radio">
-                                        <?php echo $_rate->getMethodTitle() ?>
-                                        <input name="estimate_method" type="radio" value="<?php echo $this->htmlEscape($_rate->getCode()) ?>" id="s_method_<?php echo $_rate->getCode() ?>"<?php if($_rate->getCode()===$this->getAddressShippingMethod()) echo ' checked="checked"' ?> class="radio" />
-                                        <?php $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax()); ?>
-                                        <?php $_incl = $this->getShippingPrice($_rate->getPrice(), true); ?>
-                                        <?php echo $_excl; ?>
-                                        <?php if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl): ?>
-                                            (<?php echo $this->__('Incl. Tax'); ?> <?php echo $_incl; ?>)
-                                        <?php endif; ?>
-                                    </label>
-                                    </div>
-                               <?php endif ?>
+                           	<?php if ($_rate->getErrorMessage()): ?>
+                                <?php echo $_rate->getErrorMessage() ?>
+                           	<?php else: ?>                               	
+                           	<?php $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax()); ?>
+                           	<?php $_incl = $this->getShippingPrice($_rate->getPrice(), true); ?>
+                           	<option value="<?php echo $this->htmlEscape($_rate->getCode()) ?>" <?php if($_rate->getCode()===$this->getAddressShippingMethod()) echo ' selected="selected"' ?>><?php echo $_rate->getMethodTitle() ?> <?php echo $_excl; ?><?php if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl): ?>(<?php echo $this->__('Incl. Tax'); ?> <?php echo $_incl; ?>)<?php endif; ?></option>
+                                <!--div class="controls">
+                                <label for="s_method_<?php echo $_rate->getCode() ?>" class="radio">
+                                    <?php echo $_rate->getMethodTitle() ?>
+                                    <input name="estimate_method" type="radio" value="<?php echo $this->htmlEscape($_rate->getCode()) ?>" id="s_method_<?php echo $_rate->getCode() ?>"<?php if($_rate->getCode()===$this->getAddressShippingMethod()) echo ' checked="checked"' ?> class="radio" />
+                                    <?php $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax()); ?>
+                                    <?php $_incl = $this->getShippingPrice($_rate->getPrice(), true); ?>
+                                    <?php echo $_excl; ?><?php if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl): ?>(<?php echo $this->__('Incl. Tax'); ?> <?php echo $_incl; ?>)<?php endif; ?>
+                                </label>
+                                </div-->
+                           <?php endif ?>
                         <?php endforeach; ?>
+                        </select>
                      </div> 
                 <?php endforeach; ?>
                                                       
