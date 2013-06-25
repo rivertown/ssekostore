@@ -31,44 +31,26 @@
     <div class="row-fluid">
         <div class="span12">
 
-                <h2 class="well"><?php echo $this->__('Customer Reviews') ?></h2>
+                <h2><?php echo $this->__('Customer Reviews') ?><span id="review-count"> <?php echo count($_items)?> <?php if(count($_items)==1): ?>REVIEW<?php else:?> REVIEWS<?php endif; ?></span></h2>                
                 <?php echo $this->getChildHtml('toolbar') ?>
 
                 <?php foreach ($_items as $_review):?>
-                <div class="well">
-                        <h6>
-                            <a href="<?php echo $this->getReviewUrl($_review->getId()) ?>"><?php echo $this->htmlEscape($_review->getTitle()) ?></a>
-                        </h6>
-                        <div class="row-fluid">
-                            <div class="span6">
-                                <blockquote>
-                                    <p><?php echo nl2br($this->htmlEscape($_review->getDetail())) ?></p>
-                                    <small> <?php echo $this->__('Review by <span>%s</span>', $this->htmlEscape($_review->getNickname())) ?> <cite><?php echo $this->__('(Posted on %s)', $this->formatDate($_review->getCreatedAt()), 'long') ?></cite></small>
-                                </blockquote>
-                            </div>
-                            <?php $_votes = $_review->getRatingVotes(); ?>
-                            <?php if (count($_votes)): ?>
-                            <div class="span6">
-                                <table class="ratings-table table">
-                                    <col class="span1" />
-                                    <col class="span2" />
-                                    <tbody>
-                                        <?php foreach ($_votes as $_vote): ?>
-                                        <tr>
-                                            <th><?php echo $this->escapeHtml($_vote->getRatingCode()) ?></th>
-                                            <td>
-                                                <div class="progress">
-                                                    <div class="bar" style="width:<?php echo $_vote->getPercent() ?>%;"></div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <?php endif; ?>
-
-                        </div>
+                <div>
+                    <h6>
+                        <div><?php echo $this->htmlEscape($_review->getTitle()) ?> <?php echo $this->__('by <span>%s</span>', $this->htmlEscape($_review->getNickname())) ?></div>
+                    </h6>
+                    <?php $_votes = $_review->getRatingVotes(); ?>
+                    <?php if (count($_votes)): ?>
+	                    <?php foreach ($_votes as $_vote): ?>
+	                    <div><?php echo $this->escapeHtml($_vote->getRatingCode()) ?></div>
+	                    <div class="rating-box">                    	                    	
+	                		<div class="rating" style="width:<?php echo $_vote->getPercent() ?>%"></div>	                	
+	            		</div>
+	            		<?php endforeach; ?>                    
+                    <?php endif; ?>
+                    <div class="row-fluid">
+                    	<p><?php echo nl2br($this->htmlEscape($_review->getDetail())) ?></p>                                               
+                    </div>
                 </div>
                 <?php endforeach; ?>
 
