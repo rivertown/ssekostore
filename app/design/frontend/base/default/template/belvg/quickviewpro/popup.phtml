@@ -70,13 +70,6 @@
                     <div class="product-img-box">
                         <?php echo $this->getChildHtml('media') ?>
                     </div>
-			        <?php if ($this->_settings['product_page_link']): ?>
-			            <div class="goto-product-view">
-			                <a href="<?php echo $product_url?>">
-			                    <?php echo $this->__('View Full Details')?>
-			                </a>
-			            </div>
-			        <?php endif ?>
                     <div class="product-shop">
                         <?php echo $this->getChildHtml('quickviewpro_tabs') ?>
 
@@ -123,6 +116,13 @@
                             <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
                         <?php endif ?>
                     <?php endif ?>
+                    <?php if ($this->_settings['product_page_link']): ?>
+			            <div class="goto-product-view">
+			                <a href="<?php echo $product_url?>">
+			                    <?php echo $this->__('View Full Detail')?>
+			                </a>
+			            </div>
+			        <?php endif ?>
                 </form>
 
             </div>
