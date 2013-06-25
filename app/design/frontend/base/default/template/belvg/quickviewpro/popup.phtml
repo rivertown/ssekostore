@@ -67,62 +67,68 @@
                         <input type="hidden" name="related_product" id="popup_related_products_field" value="" />
                         <input type="hidden" name="in_cart" id="product_in_cart" value="0" />
                     </div>
-                    <div class="product-img-box">
-                        <?php echo $this->getChildHtml('media') ?>
+                    <div class="row">
+                    	<div class="span3">
+	                    	<div class="product-img-box">
+		                        <?php echo $this->getChildHtml('media') ?>
+		                    </div>
+		                    <?php if ($this->_settings['product_page_link']): ?>
+				            <div class="goto-product-view">
+				                <a href="<?php echo $product_url?>">
+				                    <?php echo $this->__('View Full Detail')?>
+				                </a>
+				            </div>
+				        <?php endif ?>
+	                    </div>
+	                    <div class="span6">
+	                    	<div class="product-shop">
+		                        <?php echo $this->getChildHtml('quickviewpro_tabs') ?>
+		
+		                        <?php if ( $this->_settings['share'] ): ?>
+		                            <div class="quickviewpro_share">
+		                                <?php echo $this->getChildHtml('product_share') ?>
+		                            </div>
+		                        <?php endif ?>
+		
+		                        <?php echo $this->getChildHtml('alert_urls') ?>
+		                        <!--?php echo $this->getChildHtml('product_type_data') ?-->
+		                        <!--?php echo $this->getTierPriceHtml() ?-->
+		                        <!--?php echo $this->getChildHtml('extrahint') ?-->
+		
+		                        <?php if ($this->_settings['add_to_cart']):?>
+		                            <?php if (!$this->hasOptions()):?>
+		                                <div class="add-to-box">
+		                                    <?php if ($_product->isSaleable()): ?>
+		                                        <?php echo $this->getChildHtml('addtocart') ?>
+		                                        <!--<?php if ( $this->helper('wishlist')->isAllow() || $_compareUrl=$this->helper('catalog/product_compare')->getAddUrl($_product)): ?>
+		                                            <span class="or"><?php echo $this->__('OR') ?></span>
+		                                        <?php endif ?>-->
+		                                    <?php endif ?>
+		                                    <!--?php echo $this->getChildHtml('addto') ?-->
+		                                </div>
+		                                <!--?php echo $this->getChildHtml('extra_buttons') ?-->
+		                            <!--?php elseif (!$_product->isSaleable()): ?>
+		                                <div class="add-to-box">
+		                                    <?php echo $this->getChildHtml('addto') ?>
+		                                </div-->
+		                            <?php endif ?>
+		                        <?php endif ?>
+		
+		                        <?php echo $this->getChildHtml('other') ?>
+		
+		                        <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+		                            <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+		                        <?php endif ?>
+		                    </div>
+		
+		                    <div class="clearer"></div>
+		                    <?php if ($this->_settings['add_to_cart']):?>
+		                        <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+		                            <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+		                        <?php endif ?>
+		                    <?php endif ?>
+	                    </div>
                     </div>
-                    <div class="product-shop">
-                        <?php echo $this->getChildHtml('quickviewpro_tabs') ?>
-
-                        <?php if ( $this->_settings['share'] ): ?>
-                            <div class="quickviewpro_share">
-                                <?php echo $this->getChildHtml('product_share') ?>
-                            </div>
-                        <?php endif ?>
-
-                        <?php echo $this->getChildHtml('alert_urls') ?>
-                        <!--?php echo $this->getChildHtml('product_type_data') ?-->
-                        <!--?php echo $this->getTierPriceHtml() ?-->
-                        <!--?php echo $this->getChildHtml('extrahint') ?-->
-
-                        <?php if ($this->_settings['add_to_cart']):?>
-                            <?php if (!$this->hasOptions()):?>
-                                <div class="add-to-box">
-                                    <?php if ($_product->isSaleable()): ?>
-                                        <?php echo $this->getChildHtml('addtocart') ?>
-                                        <!--<?php if ( $this->helper('wishlist')->isAllow() || $_compareUrl=$this->helper('catalog/product_compare')->getAddUrl($_product)): ?>
-                                            <span class="or"><?php echo $this->__('OR') ?></span>
-                                        <?php endif ?>-->
-                                    <?php endif ?>
-                                    <!--?php echo $this->getChildHtml('addto') ?-->
-                                </div>
-                                <!--?php echo $this->getChildHtml('extra_buttons') ?-->
-                            <!--?php elseif (!$_product->isSaleable()): ?>
-                                <div class="add-to-box">
-                                    <?php echo $this->getChildHtml('addto') ?>
-                                </div-->
-                            <?php endif ?>
-                        <?php endif ?>
-
-                        <?php echo $this->getChildHtml('other') ?>
-
-                        <?php if ($_product->isSaleable() && $this->hasOptions()):?>
-                            <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
-                        <?php endif ?>
-                    </div>
-
-                    <div class="clearer"></div>
-                    <?php if ($this->_settings['add_to_cart']):?>
-                        <?php if ($_product->isSaleable() && $this->hasOptions()):?>
-                            <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
-                        <?php endif ?>
-                    <?php endif ?>
-                    <?php if ($this->_settings['product_page_link']): ?>
-			            <div class="goto-product-view">
-			                <a href="<?php echo $product_url?>">
-			                    <?php echo $this->__('View Full Detail')?>
-			                </a>
-			            </div>
-			        <?php endif ?>
                 </form>
 
             </div>
