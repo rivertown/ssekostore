@@ -29,58 +29,59 @@
             <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
             <input type="hidden" name="related_product" id="related-products-field" value="" />
         </div>                        
-            <div class="row-fluid">
-				<div class="span12">
-					<div class="row-fluid">
-						<div class="span5">
-					        <div class="product-img-box">
-					            <?php echo $this->getChildHtml('media') ?>
-					        </div>
-					        <div class="quickviewpro_share">
-                                <?php echo $this->getChildHtml('product_share') ?>
-                            </div>
+        <div class="row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="span5">
+				        <div class="product-img-box">
+				            <?php echo $this->getChildHtml('media') ?>
 				        </div>
-				        <div class="product-shop span6">
-				        	<?php 
-					    		$now = date("Y-m-d");
-								$newsFrom= substr($_product->getData('news_from_date'),0,10);
-								$newsTo=  substr($_product->getData('news_to_date'),0,10);
-					    	?>
-				        	<div class="product-name">
-				                <h2 class="productName"><?php if ($now>=$newsFrom && $now<=$newsTo):?><span id="newProduct">NEW! </span><?php endif;?><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
-				            </div>
-							
-							<?php echo $this->getPriceHtml($_product) ?>
-				            <?php echo $this->getChildHtml('extrahint') ?>
-				            <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
-				            <?php echo $this->getChildHtml('alert_urls') ?>					            
-				
-							<?php echo $this->getChildHtml('info_tabs') ?>
-							
-				            <?php if (!$this->hasOptions()):?>
-				                <div class="add-to-box">
-				                    <?php if($_product->isSaleable()): ?>
-				                        <?php echo $this->getChildHtml('addtocart') ?>
-				                    <?php endif; ?>
-				                    <?php echo $this->getChildHtml('addto') ?>
-				                </div>
-				                <?php echo $this->getChildHtml('extra_buttons') ?>
-				            <?php elseif (!$_product->isSaleable()): ?>
-				                <div class="add-to-box">
-				                    <?php echo $this->getChildHtml('addto') ?>
-				                </div>
-				            <?php endif; ?>													
-				
-				            <?php echo $this->getChildHtml('other');?>
-				
-				            <?php if ($_product->isSaleable() && $this->hasOptions()):?>
-				                <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
-				            <?php endif;?>
-				            <?php echo $this->getChildHtml('reviews') ?>
-				        </div>
-					</div>
+				        <div class="quickviewpro_share">
+                            <?php echo $this->getChildHtml('product_share') ?>
+                        </div>
+			        </div>
+			        <div class="product-shop span6">
+			        	<?php 
+				    		$now = date("Y-m-d");
+							$newsFrom= substr($_product->getData('news_from_date'),0,10);
+							$newsTo=  substr($_product->getData('news_to_date'),0,10);
+				    	?>
+			        	<div class="product-name">
+			                <h2 class="productName"><?php if ($now>=$newsFrom && $now<=$newsTo):?><span id="newProduct">NEW! </span><?php endif;?><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+			            </div>
+						
+						<?php echo $this->getPriceHtml($_product) ?>
+			            <?php echo $this->getChildHtml('extrahint') ?>
+			            <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
+			            <?php echo $this->getChildHtml('alert_urls') ?>					            
+			
+						<?php echo $this->getChildHtml('info_tabs') ?>									            			          
+			        </div>
 				</div>
-		    </div>
+			</div>
+	    </div>
+	    <div class="row-fluid">
+	    	<div class="span12">
+	    		<?php if (!$this->hasOptions()):?>
+	                <div class="add-to-box">
+	                    <?php if($_product->isSaleable()): ?>
+	                        <?php echo $this->getChildHtml('addtocart') ?>
+	                    <?php endif; ?>
+	                    <?php echo $this->getChildHtml('addto') ?>
+	                </div>
+	                <?php echo $this->getChildHtml('extra_buttons') ?>
+	            <?php elseif (!$_product->isSaleable()): ?>
+	                <div class="add-to-box">
+	                    <?php echo $this->getChildHtml('addto') ?>
+	                </div>
+	            <?php endif; ?>													
+	
+	            <?php echo $this->getChildHtml('other');?>
+	
+	            <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+	                <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+	            <?php endif;?>	
+	    	</div>
         <div class="clearer"></div>
         <?php if ($_product->isSaleable() && $this->hasOptions()):?>
             <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
@@ -142,6 +143,7 @@
         </div>
 	<?php endforeach;?>-->
     <?php echo $this->getChildHtml('upsell_products') ?>
+    <?php echo $this->getChildHtml('product_review') ?>
     <?php echo $this->getChildHtml('product_additional_data') ?>
     </div>
 </div>
