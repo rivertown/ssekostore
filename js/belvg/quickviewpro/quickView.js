@@ -155,9 +155,9 @@ Quickview.prototype = {
         }
 
         if (this.config.add_to_cart) {
-            q_productAddToCartForm = new VarienForm('product_addtocart_form_' + pro_id);
+            productAddToCartForm = new VarienForm('product_addtocart_form_' + pro_id);
             $$('body .popup .button').each(function(element) {
-                element.setAttribute('onclick', 'q_productAddToCartForm.submit(this)');
+                element.setAttribute('onclick', 'productAddToCartForm.submit(this)');
             });
             jQblvg('.wrap-qty').initQty();
         }
@@ -181,4 +181,3 @@ Quickview.prototype = {
     }
     
 }
-
