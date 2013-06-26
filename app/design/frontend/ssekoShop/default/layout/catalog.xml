@@ -210,7 +210,7 @@ Product view
                 <action method="addReviewSummaryTemplate"><type>short</type><template>review/helper/summary_short.phtml</template></action>
                 <action method="addReviewSummaryTemplate"><type>...</type><template>...</template></action>
                 -->
-                <block type="catalog/product_view_media" name="product.info.media" as="media" template="catalog/product/view/media.phtml"/>
+                <block type="catalog/product_view_media" name="product.info.media" as="media-pdp" template="catalog/product/view/media-pdp.phtml"/>
                 <block type="quickviewpro/share" name="product.share" as="product_share" template="belvg/quickviewpro/product/share.phtml"/>
                 <block type="core/text_list" name="alert.urls" as="alert_urls" translate="label">
                     <label>Alert Urls</label>
@@ -286,8 +286,6 @@ Product view
                     </block>
                 <block type="catalog/product_view" name="product.info.options.wrapper.bottom" as="product_options_wrapper_bottom" template="catalog/product/view/options/wrapper/bottom.phtml" translate="label">
                     <label>Bottom Block Options Wrapper</label>
-                    <action method="insert"><block>product.tierprices</block></action>
-                    <block type="catalog/product_view" name="product.clone_prices" as="prices" template="catalog/product/view/price_clone.phtml"/>
                     <action method="append"><block>product.info.addtocart</block></action>
                     <action method="append"><block>product.info.addto</block></action>
                 </block>

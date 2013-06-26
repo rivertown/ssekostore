@@ -1,0 +1,41 @@
+<?php
+/**
+ * Magento responsive theme
+ *
+ * @category    design
+ * @package     bootstrapped_default
+ * @copyright   Copyright (c) 2012 Magenthon (http://magenthon.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ * @author      Vedran Subotic <vedran@magenthon.com>
+ */
+
+/**
+ * Product media data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ */
+?>
+
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+?>
+<?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
+	<div id="img-grp-wrap">
+	    <div class="img-wrap">
+	    	<?php foreach ($this->getGalleryImages() as $_image): ?>
+	    		<img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize(600); ?>" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>" />
+	    	<?php endforeach;?>
+	    </div>   
+	
+	    <div class="next-button"></div>
+	    <div class="previous-button"></div>
+	</div>	
+<?php else: ?>
+	<p class="product-image">
+	<?php
+	    $_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(265).'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" />';
+	    echo $_helper->productAttribute($_product, $_img, 'image');
+	?>
+	</p>
+<?php endif;?>

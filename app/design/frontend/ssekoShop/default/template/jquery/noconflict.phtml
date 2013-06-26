@@ -19,6 +19,66 @@
         $('#displayedUpdate').click(function(){
         	$('#updateShoppingCart').trigger('click');
         });
+        (function($){
+	        $.fn.imgSlider = function( options ){
+	
+	            o = $.extend({
+	                next: '.next-button',
+	                prev: '.previous-button'
+	            }, options);
+	            
+				$( o.prev ).hide();
+	            $( o.next ).hide();
+	            var thisCallback = this;
+	
+	            $( this ).find( 'img' ).each(function(){
+	
+	                $( this ).hide();
+	            });
+	            $( this ).find( 'img' ).first().addClass( 'active' ).show();	            
+	            var nextImg = $( thisCallback ).find( '.active' ).next();
+	            if(nextImg.length != 0)
+	            {
+	            	$(o.next).show();
+	            }	            
+	
+	            // binding event next
+	            $( o.next ).bind( 'click' ,function(){
+	
+	                nextImg = $( thisCallback ).find( '.active' ).next();
+	                if ( nextImg.length == 0 ) {
+	
+	                    return false;
+	                }
+	                $( o.prev ).show();
+	                $( thisCallback ).find( 'img' ).removeClass( 'active' ).hide();
+	                nextImg.addClass( 'active' ).show();
+	                if ( nextImg.next().length == 0 ) {
+	
+	                    $( this ).hide();
+	                }
+	            });
+	            // binding event prev
+	            $( o.prev ).bind( 'click' ,function(){
+	
+	                var prevImg = $( thisCallback ).find( '.active' ).prev();
+	                if ( prevImg.length == 0 ) {
+	
+	                    return false;
+	                }
+	                $( o.next ).show();
+	                $( thisCallback ).find( 'img' ).removeClass( 'active' ).hide();
+	                prevImg.addClass( 'active' ).show();
+	                if ( prevImg.prev().length == 0 ) {
+	
+	                    $( this ).hide();
+	                }
+	            });
+	        }
+	    })(jQuery);
+	    $(document).ready(function() {
+		    $('.img-wrap').imgSlider();
+		});
     });
     // Code that uses other library's $ can follow here.
 </script>

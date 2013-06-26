@@ -34,7 +34,7 @@
 				<div class="row-fluid">
 					<div class="span5">
 				        <div class="product-img-box">
-				            <?php echo $this->getChildHtml('media') ?>
+				            <?php echo $this->getChildHtml('media-pdp') ?>
 				        </div>
 				        <div class="quickviewpro_share">
                             <?php echo $this->getChildHtml('product_share') ?>
@@ -82,6 +82,7 @@
 	                <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
 	            <?php endif;?>	
 	    	</div>
+	    </div>
         <div class="clearer"></div>
         <?php if ($_product->isSaleable() && $this->hasOptions()):?>
             <?php echo $this->getChildChildHtml('container2', '', true, true) ?>

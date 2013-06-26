@@ -166,7 +166,6 @@ Product.Config.prototype = {
 
     fillSelect: function(element){
         var attributeId = element.id.replace(/[a-z]*/, '');
-        console.log(attributeId);
         var options = this.getAttributeOptions(attributeId);
         this.clearSelect(element);
         element.options[0] = new Option('Select '+element.config.label,'');
