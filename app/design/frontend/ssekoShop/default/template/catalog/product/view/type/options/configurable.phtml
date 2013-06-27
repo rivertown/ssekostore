@@ -29,5 +29,13 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
     </fieldset>
     <script type="text/javascript">
         var spConfig = new Product.Config(<?php echo $this->getJsonConfig() ?>);
+        //select dropdown based on base color selected
+        jQuery('.base-block li').click(function(){
+			var dropdown = jQuery('#attribute' + jQuery('.base-block').attr('id'));
+			dropdown.val(jQuery(this).attr('id'));
+			//element must be the prototype object to pass to configureElement
+            var element=$('attribute' + jQuery('.base-block').attr('id'));
+			spConfig.configureElement(element);
+		});
     </script>
 <?php endif;?>
