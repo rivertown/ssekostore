@@ -35,8 +35,23 @@
 					<div class="span5">
 				        <div class="product-img-box">
 				            <?php echo $this->getChildHtml('media-pdp') ?>
-				        </div>
-				        <div class="quickviewpro_share">
+				        </div>				        
+                        <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+                        	<?php $_attributes = $_product->getTypeInstance(true)->getConfigurableAttributesAsArray($_product);?>
+                        	<?php if(count($_attributes)):?>
+                        		<?php foreach($_attributes as $_attribute): ?>
+                        			<?php if($_attribute['attribute_code'] == 'base_color'):?>
+										<ul id="base-block">
+											<li>Base Color</li>
+											<?php foreach($_attribute['values'] as $_color):?>
+												<li style="width:20px;background-color:<?php echo $_color['label']?>"></li>
+											<?php endforeach;?>
+										</ul>
+                        			<?php endif;?>
+                        		<?php endforeach;?>
+                        	<?php endif;?>
+                        <?php endif;?>
+                        <div class="quickviewpro_share">
                             <?php echo $this->getChildHtml('product_share') ?>
                         </div>
 			        </div>
@@ -86,12 +101,13 @@
         <div class="clearer"></div>
         <?php if ($_product->isSaleable() && $this->hasOptions()):?>
             <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
-        <?php endif;?>
+        <?php endif;?>        
     </form>
     <script type="text/javascript">
     //<![CDATA[
         var productAddToCartForm = new VarienForm('product_addtocart_form');
         productAddToCartForm.submit = function(button, url) {
+        	console.log(this);
             if (this.validator.validate()) {
                 var form = this.form;
                 var oldUrl = form.action;
@@ -133,7 +149,11 @@
     //]]>
     </script>
     </div>
-
+	<div id="extra-links">
+		<a id="returns" href="#">Free Shipping & Returns</a>
+		<a href="#">Live Chat</a>
+		<a id="shipping" href="#">Shipping Rates</a>
+	</div>
     <div class="product-collateral">
 	<!--<?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html):?>
         <div class="box-collateral <?php echo "box-{$alias}"?>">
@@ -147,4 +167,13 @@
     <?php echo $this->getChildHtml('product_review') ?>
     <?php echo $this->getChildHtml('product_additional_data') ?>
     </div>
+</div>
+<div id="pdp-hider" class="quickviewpro-hider" style="display:none;background-color: rgb(136, 136, 136); height: 1381px;"></div>
+<div id="returns-overlay" style="display:none" class="quickviewpro-popup">
+	<a class="close-popap" href="javascript:void(0);"></a>
+	<?php echo $this->getChildHtml('returns_exchanges');?>
+</div>
+<div id="shipping-overlay" style="display:none" class="quickviewpro-popup">
+	<a class="close-popap" href="javascript:void(0);"></a>
+	<?php echo $this->getChildHtml('shipping');?>
 </div>

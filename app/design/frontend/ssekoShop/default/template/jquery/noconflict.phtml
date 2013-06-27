@@ -79,6 +79,49 @@
 	    $(document).ready(function() {
 		    $('.img-wrap').imgSlider();
 		});
+		
+		$('#returns').click(function(event){
+			event.preventDefault();
+			open_overlay('returns-overlay', 'pdp-hider');
+		});
+		$('#shipping').click(function(event){
+			event.preventDefault();
+			open_overlay('shipping-overlay', 'pdp-hider');
+		});
+		$('.close-popap').click(function(event){
+			event.preventDefault();
+			close_overlay();
+		});
+		$('.quickviewpro-hider').click(function(event){
+			event.preventDefault();
+			close_overlay();
+		});
+		function open_overlay(overlayId, hiderId)
+		{
+			var heightBody = document.getElementsByTagName('body')[0].clientHeight;
+			$('#' + hiderId).css('height', heightBody + 'px');
+            $('#' + hiderId).show();
+            var scrollPos = null;
+            if (document.documentElement && document.documentElement.scrollTop) { // Explorer 6 Strict
+        		scrollPos = {scrollTop:document.documentElement.scrollTop,scrollLeft:document.documentElement.scrollLeft};
+	    	} else if (document.body) {// all other Explorers
+	       	 	scrollPos = {scrollTop:document.body.scrollTop,scrollLeft:document.body.scrollLeft};
+    		}
+            var topPos    = parseInt(0.1 * document.documentElement.clientHeight + scrollPos['scrollTop']);
+	
+	        $('#' + overlayId).css('top', topPos + 'px');
+	        if (window.outerWidth < parseInt($('#' + overlayId).css('width'))) {
+	            $('#' + overlayId).css({'left': '0px', 'margin': '0 0 0 20px'});
+	        } else {
+	            $('#' + overlayId).css({'left': '', 'margin': ''});
+	        }
+	        $('#' + overlayId).show();			
+		}
+		function close_overlay()
+		{
+			$('.quickviewpro-hider').hide();
+        	$('.quickviewpro-popup').hide();
+		}
     });
     // Code that uses other library's $ can follow here.
 </script>
