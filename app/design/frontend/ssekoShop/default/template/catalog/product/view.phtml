@@ -35,16 +35,21 @@
 					<div class="span5">
 				        <div class="product-img-box">
 				            <?php echo $this->getChildHtml('media-pdp') ?>
-				        </div>				        
+				        </div>	
+				        <?php if($_product['product_video']):?>
+					        <div class="video-play">
+					        	<a id="play-video" href="#">Play Video <img src="<?php echo $this->getSkinUrl('img/ico-video-play.png')?>"/></a>
+					        </div>
+				        <?php endif;?>			        
                         <?php if ($_product->isSaleable() && $this->hasOptions()):?>
                         	<?php $_attributes = $_product->getTypeInstance(true)->getConfigurableAttributesAsArray($_product);?>
                         	<?php if(count($_attributes)):?>
                         		<?php foreach($_attributes as $_attribute): ?>
-                        			<?php if($_attribute['attribute_code'] == 'base_color'):?>
-										<ul id="base-block">
+                        			<?php if($_attribute['attribute_code'] == 'base_color'): ?>
+										<ul id="<?php echo $_attribute['attribute_id']?>" class="base-block">
 											<li>Base Color</li>
 											<?php foreach($_attribute['values'] as $_color):?>
-												<li style="width:20px;background-color:<?php echo $_color['label']?>"></li>
+												<li class="<?php echo $_color['label']?>" id="<?php echo $_color['value_index']?>" style="width:20px;background-color:<?php echo $_color['label']?>"></li>
 											<?php endforeach;?>
 										</ul>
                         			<?php endif;?>
@@ -176,4 +181,13 @@
 <div id="shipping-overlay" style="display:none" class="quickviewpro-popup">
 	<a class="close-popap" href="javascript:void(0);"></a>
 	<?php echo $this->getChildHtml('shipping');?>
+</div>
+<div id="video-overlay" style="display:none" class="quickviewpro-popup">
+	<a class="close-popap" id="close-video" href="javascript:void(0);"></a>
+	<div class="popup-header"><?php echo $_product->getName();?></div>
+	<div id="video-main" class="main-popup">
+		<div id="video-embed">
+			<?php echo $_product['product_video'];?>
+		</div>
+	</div>	
 </div>

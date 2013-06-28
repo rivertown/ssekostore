@@ -88,8 +88,19 @@
 			event.preventDefault();
 			open_overlay('shipping-overlay', 'pdp-hider');
 		});
+		$('#play-video').click(function(event){
+			event.preventDefault();
+			open_overlay('video-overlay', 'pdp-hider');
+		});
 		$('.close-popap').click(function(event){
 			event.preventDefault();
+			if($(this).attr('id') == 'close-video')
+			{
+				var embedDiv = $('#video-embed').clone();
+				console.log(embedDiv);
+				$('#video-embed').remove();
+				$('#video-main').append(embedDiv);
+			}
 			close_overlay();
 		});
 		$('.quickviewpro-hider').click(function(event){
