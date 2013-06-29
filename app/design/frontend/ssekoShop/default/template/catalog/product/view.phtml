@@ -29,10 +29,8 @@
             <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
             <input type="hidden" name="related_product" id="related-products-field" value="" />
         </div>                        
-        <div class="row-fluid">
-			<div class="span12">
-				<div class="row-fluid">
-					<div class="span7">
+        <div class="row">
+					<div class="span5">
 				        <div class="product-img-box">
 				            <?php echo $this->getChildHtml('media-pdp') ?>
 				        </div>	
@@ -60,7 +58,7 @@
                             <?php echo $this->getChildHtml('product_share') ?>
                         </div>
 			        </div>
-			        <div class="product-shop span5">
+			        <div class="product-shop span4">
 			        	<?php 
 				    		$now = date("Y-m-d");
 							$newsFrom= substr($_product->getData('news_from_date'),0,10);
@@ -77,13 +75,9 @@
 			
 						<?php echo $this->getChildHtml('info_tabs') ?>									            			          
 			        </div>
-				</div>
-			</div>
 	    </div>
 	    <div class="clearer"></div>
-	    <div class="row-fluid">
-	    	<div class="span12">
-	    		<div class="row-fluid">
+	    <div class="row">
 	    		<?php if (!$this->hasOptions()):?>
 	                <div class="add-to-box">
 	                    <?php if($_product->isSaleable()): ?>
@@ -105,9 +99,7 @@
 	            <?php endif;?>	
         <?php if ($_product->isSaleable() && $this->hasOptions()):?>
             <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
-        <?php endif;?>   
-        </div>
-        </div>
+        <?php endif;?> 
 	    </div>     
     </form>
     <script type="text/javascript">
