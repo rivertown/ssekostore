@@ -37,7 +37,7 @@
                 <?php foreach ($_items as $_review):?>
                 <div>
                     <h6>
-                        <div><?php echo $this->htmlEscape($_review->getTitle()) ?> <?php echo $this->__('by <span>%s</span>', $this->htmlEscape($_review->getNickname())) ?></div>
+                        <div><?php echo $this->htmlEscape($_review->getTitle()) ?> <?php echo $this->__('<span>by %s</span>', $this->htmlEscape($_review->getNickname())) ?></div>
                     </h6>
                     <?php $_votes = $_review->getRatingVotes(); ?>
                     <?php if (count($_votes)): ?>
@@ -48,7 +48,7 @@
 	            		</div>
 	            		<?php endforeach; ?>                    
                     <?php endif; ?>
-                    <div class="row-fluid">
+                    <div class="review-content">
                     	<p><?php echo nl2br($this->htmlEscape($_review->getDetail())) ?></p>                                               
                     </div>
                 </div>

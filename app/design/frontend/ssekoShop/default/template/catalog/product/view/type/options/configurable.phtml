@@ -20,7 +20,7 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
         <label class="required"><em>*</em><?php echo $_attribute->getLabel() ?></label>
         <div<?php if ($_attribute->decoratedIsLast){?> class="last"<?php }?>>
             <div class="controls">
-                <select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="span2 required-entry super-attribute-select">
+                <select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="style-<?php echo $_attribute->getLabel() ?> required-entry super-attribute-select">
                     <option><?php echo $this->__('Select '.$_attribute->getLabel()) ?></option>
                   </select>
               </div>

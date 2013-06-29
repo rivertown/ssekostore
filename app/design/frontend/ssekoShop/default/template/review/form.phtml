@@ -11,12 +11,12 @@
 ?>
 <div class="form-add" id="review-form">
     <h2><?php echo $this->__('Write Your Review') ?> <span id="required">*REQUIRED</span></h2>
+    <h4><?php echo $this->__('How would you rate this product?') ?> <em class="required">*</em></h4>
     <?php if ($this->getAllowWriteReviewFlag()): ?>
     <form action="<?php echo $this->getAction() ?>" method="post" id="review-form" class="form">
         <fieldset>
             <?php echo $this->getChildHtml('form_fields_before')?>            
             <?php if( $this->getRatings() && $this->getRatings()->getSize()): ?>
-                <h4><?php echo $this->__('How would you rate this product?') ?> <em class="required">*</em></h4>
                 <span id="input-message-box"></span>
                 <table class="table" id="product-review-table">
                     <col />
@@ -49,21 +49,28 @@
                 <input type="hidden" name="validate_rating" class="validate-rating" value="" />
                 <script type="text/javascript">decorateTable('product-review-table')</script>
             <?php endif; ?>
-                <label for="nickname_field" class="required"><em>*</em><?php echo $this->__('Nickname') ?></label>
-                <div class="controls">
+            <div class="row">
+                <label for="nickname_field" class="required span2"><?php echo $this->__('Nickname') ?><em>*</em></label>
+                <div class="controls span3">
                     <input type="text" name="nickname" id="nickname_field" class="input-text required-entry" value="<?php echo $this->htmlEscape($data->getNickname()) ?>" />
                 </div>
-                <label for="summary_field" class="required"><em>*</em><?php echo $this->__('Summary of Your Review') ?></label>
-                <div class="controls">
+			</div>
+			<div class="row">
+                <label for="summary_field" class="required span2"><?php echo $this->__('Review Title') ?><em>*</em></label>
+                <div class="controls span3">
                     <input type="text" name="title" id="summary_field" class="input-text required-entry" value="<?php echo $this->htmlEscape($data->getTitle()) ?>" />
                 </div>
-                <label for="review_field" class="required"><em>*</em><?php echo $this->__('Review') ?></label>
-                <div class="controls">
-                    <textarea name="detail" id="review_field" cols="5" rows="3" class="required-entry"><?php echo $this->htmlEscape($data->getDetail()) ?></textarea>
+			</div>
+			<div class="row">
+                <label for="review_field" class="required span2"><?php echo $this->__('Your Review') ?><em>*</em></label>
+                <div class="controls span4">
+                    <textarea name="detail" id="review_field" cols="5" rows="5" class="required-entry"><?php echo $this->htmlEscape($data->getDetail()) ?></textarea>
                 </div>
+			</div>
             </fieldset>
-            <button type="submit" title="<?php echo $this->__('Submit') ?>" class="btn btn-primary btn-large"><span><span><?php echo $this->__('Submit Review') ?></span></span></button>
-
+            <div class="row">
+            	<button type="submit" title="<?php echo $this->__('Submit') ?>" class="btn btn-primary btn-small span1 offset2"><span><span><?php echo $this->__('Submit') ?></span></span></button>
+            </div>
     </form>
     <script type="text/javascript">
     //<![CDATA[

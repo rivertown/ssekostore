@@ -9,9 +9,14 @@
  * @author      Vedran Subotic <vedran@magenthon.com>
  */
 ?>
-<div class="product-options" id="product-options-wrapper">
+<div class="product-options span7" id="product-options-wrapper">
     <?php echo $this->getChildHtml('', true, true);?>
     <!--<?php if ($this->hasRequiredOptions()):?>
         <p class="help-block"><?php echo $this->__('* Required Fields') ?></p>
     <?php endif;?>-->
+    <div id="extra-links">
+		<a id="returns" href="#">Free Shipping & Returns</a>
+		<a href="#">Live Chat</a>
+		<a id="shipping" href="#">Shipping Rates</a>
+	</div>
 </div>

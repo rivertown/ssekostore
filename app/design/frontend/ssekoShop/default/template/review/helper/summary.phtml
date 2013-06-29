@@ -33,5 +33,5 @@
         <?php endif;?>        
     </div>
 <?php endif;// ($this->getDisplayIfEmpty()): ?>
-    <p class="no-rating"><?php if ($this->getReviewsCount()): ?><a href="#customer-reviews"><?php echo $this->getReviewsCount()?> <?php if($this->getReviewsCount()==1): ?>REVIEW<?php else:?> REVIEWS <?php endif; ?>| </a><?php endif;?><a href="#review-form"><?php echo $this->__('WRITE A REVIEW') ?></a></p>
+    <p class="no-rating"><?php if ($this->getReviewsCount()): ?><a href="#customer-reviews"><?php echo $this->getReviewsCount()?> <?php if($this->getReviewsCount()==1): ?>REVIEW<?php else:?> REVIEWS<?php endif; ?><span class="divider-links">|</span></a><?php endif;?><a href="#review-form"><?php echo $this->__('WRITE A REVIEW') ?></a></p>
 <!--<?php //endif; ?>-->
