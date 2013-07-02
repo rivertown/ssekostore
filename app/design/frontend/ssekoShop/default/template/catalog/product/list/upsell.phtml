@@ -27,11 +27,11 @@
 	endforeach;?>
 <div class="box-collateral box-up-sell">	
 	<?php foreach($all_products as $key => $category_product):?>
-		<?php if($key == "Sandal Straps"):$key = "Straps";endif;?>
-		<h2><?php echo $this->__('Add Recommended '.$key) ?></h2>
+		<?php if($key == "Sandal Straps"):$display_key = "Straps";else:$display_key = $key;endif;?>
+		<h2><?php echo $this->__('Add Recommended '.$display_key) ?></h2>
 			<?php $this->resetItemsIterator(); ?>    		
 			<div class="row">  		
-    			<?php for($_j=0;$_j<6;$_j++): ?>
+    			<?php for($_j=0;$_j<count($all_products[$key]);$_j++): ?>
     				<?php if(!empty($category_product[$_j])): ?>
 	            		<div class="span3">	
 	            			<?php $_link=$category_product[$_j];?>	
