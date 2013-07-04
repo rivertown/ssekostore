@@ -155,9 +155,48 @@ Quickview.prototype = {
         }
 
         if (this.config.add_to_cart) {
-            productAddToCartForm = new VarienForm('product_addtocart_form_' + pro_id);
-            $$('body .popup .button').each(function(element) {
-                element.setAttribute('onclick', 'productAddToCartForm.submit(this)');
+            productAddToCartForm = new VarienForm('product_addtocart_form_' + pro_id);            
+            $$('body .popup .btn').each(function(element) {
+                productAddToCartForm.submit = function(button, url) {
+                	console.log('here');
+		            if (this.validator.validate()) {
+		                var form = this.form;
+		                var oldUrl = form.action;
+		
+		                if (url) {
+		                   form.action = url;
+		                }
+		                var e = null;
+		                
+		                if(!url){
+		                    url = jQuery('#product_addtocart_form_' + pro_id).attr('action');
+		                }
+		                url = url.replace("checkout/cart","ajax/index");
+		                var data = jQuery('#product_addtocart_form_' + pro_id).serialize();
+		                data += '&isAjax=1';                  
+		                jQuery('#ajax_loader').show();
+		                jQuery.ajax({
+		                      url: url,
+		                      dataType: 'json',
+		                      type : 'post',
+		                      data: data,
+		                      success: function(data){
+		                      	if(jQuery('.top-nav-right #top-nav li')){
+	                            	var search = jQuery('.top-nav-right #top-nav li:last').clone();
+	                            	jQuery('.top-nav-right #top-nav li').remove();
+	                                jQuery('.top-nav-right #top-nav').append(data.toplink);
+	                                jQuery('.top-nav-right #top-nav').append(search);
+	                            }
+		                      	jQuery('.quickviewpro-hider').hide();
+        						jQuery('.quickviewpro-popup').hide();
+		                      }
+		                });
+		
+		                if (button && button != 'undefined') {
+		                    button.disabled = true;
+		                }
+		            }
+		        }.bind(productAddToCartForm);
             });
             jQblvg('.wrap-qty').initQty();
         }
