@@ -101,32 +101,7 @@
             });
 		}
     });    
-    function open_overlay(overlayId, hiderId)
-	{
-		var heightBody = document.getElementsByTagName('body')[0].clientHeight;
-		jQuery('#' + hiderId).css('height', heightBody + 'px');
-        jQuery('#' + hiderId).show();
-        var scrollPos = null;
-        if (document.documentElement && document.documentElement.scrollTop) { // Explorer 6 Strict
-    		scrollPos = {scrollTop:document.documentElement.scrollTop,scrollLeft:document.documentElement.scrollLeft};
-    	} else if (document.body) {// all other Explorers
-       	 	scrollPos = {scrollTop:document.body.scrollTop,scrollLeft:document.body.scrollLeft};
-		}
-        var topPos    = parseInt(0.1 * document.documentElement.clientHeight + scrollPos['scrollTop']);
-
-        jQuery('#' + overlayId).css('top', topPos + 'px');
-        if (window.outerWidth < parseInt(jQuery('#' + overlayId).css('width'))) {
-            jQuery('#' + overlayId).css({'left': '0px', 'margin': '0 0 0 20px'});
-        } else {
-            jQuery('#' + overlayId).css({'left': '', 'margin': ''});
-        }
-        jQuery('#' + overlayId).show();			
-	}
-	function close_overlay()
-	{
-		$('.quickviewpro-hider').hide();
-    	$('.quickviewpro-popup').hide();
-	}    
+       
     //]]>
     </script>
 <?php endif ?>
