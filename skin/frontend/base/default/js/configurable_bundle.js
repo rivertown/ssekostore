@@ -390,12 +390,12 @@ Product.Bundle.prototype = {
                     var hide_element = i.attribute_id == _size_id ? ' style="display:none"' : '';
 		    		var required_entry = required == true ? 'required-entry ' : '';
 
-                    var myT = new Template('<label id="label-#{product_id}_#{attribute_id}" '+hide_element+'><i>#{label}</i></label><select rel="conf-#{product_id}" name="super_attribute[' + cnfPrId + '][#{attribute_id}]" id="#{product_id}_#{attribute_id}" class="'+required_entry+'super-attribute-select style-base"><option>Select #{label}</option></select>');
+                    var myT = new Template('<label id="label-#{product_id}_#{attribute_id}" '+hide_element+'><i>#{label}</i></label><select rel="conf-#{product_id}" name="super_attribute[' + cnfPrId + '][#{attribute_id}]" id="#{product_id}_#{attribute_id}" class="'+required_entry+'super-attribute-select style-#{label}"><option>Select #{label}</option></select>');
                     html += myT.evaluate(i);
                     }
                 );
                 selection.next().insert({
-                          after: '<div class="bconf-cont" id="config-container' + parts[3] + '">' + html +'</div>'
+                          after: '<div class="controls" id="config-container' + parts[3] + '">' + html +'</div>'
                         });
                 bconfInstances.set(cnfGId, new Product.BConfig(confOpts));
             }
