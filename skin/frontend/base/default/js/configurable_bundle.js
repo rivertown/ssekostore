@@ -383,7 +383,6 @@ Product.Bundle.prototype = {
 
             if(typeof confOpts != "undefined"){
                 var atI = this.config.options[parts[2]].selections[parts[3]].confattributes[cnfGId].items;
-                console.log(confOpts);
                 var conf = this.config.options[parts[2]].selections[parts[3]].confattributes[cnfGId];
                 var html = '';
                 atI.each(function(i,j){

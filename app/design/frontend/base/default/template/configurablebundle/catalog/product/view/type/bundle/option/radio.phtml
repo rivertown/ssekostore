@@ -7,25 +7,23 @@ $_showSingle = (count($_selections) == 1 && $_option->getRequired());
 
 $totalItems = count($_selections);
 ?>
-<dt><label class="left"><?php echo $this->htmlEscape($_option->getTitle()) ?><?php if ($_option->getRequired()) echo '<span class="required">&nbsp;*</span>' ?></label>
-    <span class="qty-holder">
-        <?php if ($_default): ?>
-        <?php $_defaultQty = $_default->getSelectionQty()*1 ?>
-        <?php $_canChangeQty = $_default->getSelectionCanChangeQty() ?>
+<label class="left"><?php echo $this->htmlEscape($_option->getTitle()) ?><?php if ($_option->getRequired()) echo '<span class="required">&nbsp;*</span>' ?></label>
+<span class="qty-holder">
+    <?php if ($_default): ?>
+    <?php $_defaultQty = $_default->getSelectionQty()*1 ?>
+    <?php $_canChangeQty = $_default->getSelectionCanChangeQty() ?>
+    <?php else: ?>
+    <?php if (!$_showSingle): ?>
+        <?php $_defaultQty = '0' ?>
+        <?php $_canChangeQty = false ?>
         <?php else: ?>
-        <?php if (!$_showSingle): ?>
-            <?php $_defaultQty = '0' ?>
-            <?php $_canChangeQty = false ?>
-            <?php else: ?>
-            <?php $_defaultQty = $_selections[0]->getSelectionQty()*1 ?>
-            <?php $_canChangeQty = $_selections[0]->getSelectionCanChangeQty() ?>
-            <?php endif; ?>
+        <?php $_defaultQty = $_selections[0]->getSelectionQty()*1 ?>
+        <?php $_canChangeQty = $_selections[0]->getSelectionCanChangeQty() ?>
         <?php endif; ?>
-        <?php /*<label for="bundle-option-<?php echo $_option->getId() ?>-qty-input"><?php echo $this->__('Qty:') ?>&nbsp;</label>*/ ?><input onblur="bundle.changeOptionQty(this, event)" <?php echo $_canChangeQty?'':'disabled="disabled"' ?> id="bundle-option-<?php echo $_option->getId() ?>-qty-input" class="input-text qty<?php echo $_canChangeQty?'':' qty-disabled' ?>" type="hidden" name="bundle_option_qty[<?php echo $_option->getId() ?>]" value="<?php echo $_defaultQty ?>" />
-    </span>
-</dt>
-<dd<?php if ($_option->decoratedIsLast){?> class="last"<?php }?>>
-    <ul class="options-list">
+    <?php endif; ?>
+    <input onblur="bundle.changeOptionQty(this, event)" <?php echo $_canChangeQty?'':'disabled="disabled"' ?> id="bundle-option-<?php echo $_option->getId() ?>-qty-input" class="input-text qty<?php echo $_canChangeQty?'':' qty-disabled' ?>" type="hidden" name="bundle_option_qty[<?php echo $_option->getId() ?>]" value="<?php echo $_defaultQty ?>" />
+</span>
+<div<?php if ($_option->decoratedIsLast){?> class="last"<?php }?>>
         <?php $bundledProds = Array(); ?>
         <?php $simpleProds = array(); ?>
         <?php $simpleProdIds = array(); ?>
@@ -66,23 +64,17 @@ $totalItems = count($_selections);
                     $firstChildProduct = $p;
                 }
             }
-            ?>
-
-            <li>                
-                <div class="options">
-                    <input style="display:none;" onclick="bundle.changeSelection(this)" class="radio<?php echo $_option->getRequired()?' validate-one-required-by-name':'' ?>" id="bundle-option-<?php echo $_option->getId() ?>-<?php echo $_selection->getSelectionId() ?>" type="radio" name="bundle_option[<?php echo $_option->getId() ?>]"<?php echo ($_selection->getIsDefault() && $_selection->isSaleable())?' checked="checked" ':'' ?><?php echo !$_selection->isSaleable()?' disabled="disabled" ':'' ?> value="<?php echo $_selection->getSelectionId() ?>" />
-                    <span class="label"><label for="bundle-option-<?php echo $_option->getId() ?>-<?php echo $_selection->getSelectionId() ?>"><?php echo $this->getSelectionTitlePrice($_selection) ?></label></span>
-                    <?php if($_option->getRequired()): ?>
-                    <?php echo $this->setValidationContainer('bundle-option-'.$_option->getId().'-'.$_selection->getSelectionId(), 'bundle-option-'.$_option->getId().'-container'); ?>
-                    <?php endif; ?>
-                    <div id="sizeButtons-<?php echo $p->getId() ?>"></div>
-                </div>
-            </li>
-            <p><?php echo $_selection->getName(); ?><br /><?php echo $_selection->getSku(); ?><br /><?php echo $p->getDescription(); ?></p>
+            ?>             
+            <div class="options">
+                <input style="display:none;" onclick="bundle.changeSelection(this)" class="radio<?php echo $_option->getRequired()?' validate-one-required-by-name':'' ?>" id="bundle-option-<?php echo $_option->getId() ?>-<?php echo $_selection->getSelectionId() ?>" type="radio" name="bundle_option[<?php echo $_option->getId() ?>]"<?php echo ($_selection->getIsDefault() && $_selection->isSaleable())?' checked="checked" ':'' ?><?php echo !$_selection->isSaleable()?' disabled="disabled" ':'' ?> value="<?php echo $_selection->getSelectionId() ?>" />
+                <label for="bundle-option-<?php echo $_option->getId() ?>-<?php echo $_selection->getSelectionId() ?>"><?php echo $this->getSelectionTitlePrice($_selection) ?></label>
+                <?php if($_option->getRequired()): ?>
+                <?php echo $this->setValidationContainer('bundle-option-'.$_option->getId().'-'.$_selection->getSelectionId(), 'bundle-option-'.$_option->getId().'-container'); ?>
+                <?php endif; ?>
+                <div id="sizeButtons-<?php echo $p->getId() ?>"></div>
+            </div>           
             <?php endforeach; ?>
-        <?php     $addeditems = Array ();
-        //pr($confItems);
-        //$bundledProds = array_merge($bundledProds,$simpleProds);
+        <!--<?php     $addeditems = Array ();
         if (is_null(Mage::registry('current_producta'))) {
             $addeditems = $bundledProds;
             Mage::register('current_producta', $bundledProds);
@@ -95,8 +87,8 @@ $totalItems = count($_selections);
             }
             Mage::register('current_producta',$addeditems);
         }
-        ?>
-        <dl class="moreOptions">
+        ?>-->
+        <!--<dl class="moreOptions">
             <?php $_addeditems = array_merge($addeditems,$simpleProds); $i = 0; ?>
             <?php foreach($_addeditems as $_opt): $i++; //pr(get_class($_opt).' '.$_opt->getId()); ?>
             <?php list( $parentId ) = Mage::getModel('catalog/product_type_configurable')
@@ -134,13 +126,12 @@ $totalItems = count($_selections);
 
                 <?php endforeach; ?>
             <?php endforeach; ?>
-        </dl>
-    </ul>
+        </dl>-->
     <span id="bundle-option-<?php echo $_option->getId() ?>-container"></span>
-</dd>
+</div>
 <script type="text/javascript">
     Event.observe(window, 'load', function(){
-        $$('input.radio').each(function(el){
+        jQuery('input.radio').each(function(el){
             if(typeof(bundle) == 'undefined') {
                 bundle = __bundle;
             }
@@ -153,14 +144,3 @@ $totalItems = count($_selections);
         });
     });
 </script>
-
-<?php
-// $pr = Mage::getModel('catalog/product')->load(34);
-// $opts = $pr->getOptions();
-// if(count($opts)) {
-// foreach($opts as $opt) {
-// pr($opt->getData());
-// }
-// }
-// die;
-?>

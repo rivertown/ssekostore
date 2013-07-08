@@ -176,8 +176,6 @@ foreach ($prodopt as $opt) {
                 }
             });
             try {
-				// opt_val = "_"+opt_val;
-				// alert(opt_val);
 				if(opt_price != -1) {
 					if('undefined' != typeof(opt_price) && opt_val && custom_options.indexOf(opt_id) == -1) {
 						parent_id = "_"+parent_id;
@@ -187,12 +185,6 @@ foreach ($prodopt as $opt) {
 							custom_opt_sum[parent_id] = 0;
 							
 						custom_opt_sum[parent_id] = custom_opt_sum[parent_id] + opt_price;
-						
-						// console.log(custom_opt_sum);
-						// console.log(parent_id);
-						// console.log(opt_price);
-						// console.log(custom_opt_sum[parent_id]);
-						// console.log(custom_opt_sum);
 					}
 
 					if('undefined' != typeof(opt_price) && !opt_val && custom_options.indexOf(opt_id) != -1) {
@@ -205,24 +197,12 @@ foreach ($prodopt as $opt) {
 						
 						if(custom_opt_sum[parent_id] > 0)
 							custom_opt_sum[parent_id] = custom_opt_sum[parent_id] - opt_price;
-							
-						// console.log(custom_opt_sum);
-						// console.log(parent_id);
-						// console.log(opt_price);
-						// console.log(custom_opt_sum[parent_id]);
 					}
 				} else {
 					opt_val = "_"+opt_val;
 					if(custom_opt_sum[opt_val] > 0 && custom_option_prices > 0) {
-						console.log('---------------------');
-						console.log(custom_option_prices);
-						
 						custom_option_prices = custom_option_prices - custom_opt_sum[opt_val];
 						custom_opt_sum[opt_val] = 0;
-						
-						console.log(opt_val);
-						console.log(custom_opt_sum[opt_val]);
-						console.log(custom_option_prices);
 					}
 				}
 					
@@ -253,7 +233,5 @@ foreach ($prodopt as $opt) {
 <?php
 $once = false;
 }?>
-
-<?php //endif; ?>
 <?php Mage::unregister('current_producta');?>
 <?php } ?>
