@@ -7,7 +7,23 @@ $_showSingle = (count($_selections) == 1 && $_option->getRequired());
 
 $totalItems = count($_selections);
 ?>
-<fieldset>
+<label class="left"><?php echo $this->htmlEscape($_option->getTitle()) ?><?php if ($_option->getRequired()) echo '<span class="required">&nbsp;*</span>' ?></label>
+<span class="qty-holder">
+    <?php if ($_default): ?>
+    <?php $_defaultQty = $_default->getSelectionQty()*1 ?>
+    <?php $_canChangeQty = $_default->getSelectionCanChangeQty() ?>
+    <?php else: ?>
+    <?php if (!$_showSingle): ?>
+        <?php $_defaultQty = '0' ?>
+        <?php $_canChangeQty = false ?>
+        <?php else: ?>
+        <?php $_defaultQty = $_selections[0]->getSelectionQty()*1 ?>
+        <?php $_canChangeQty = $_selections[0]->getSelectionCanChangeQty() ?>
+        <?php endif; ?>
+    <?php endif; ?>
+    <input onblur="bundle.changeOptionQty(this, event)" <?php echo $_canChangeQty?'':'disabled="disabled"' ?> id="bundle-option-<?php echo $_option->getId() ?>-qty-input" class="input-text qty<?php echo $_canChangeQty?'':' qty-disabled' ?>" type="hidden" name="bundle_option_qty[<?php echo $_option->getId() ?>]" value="<?php echo $_defaultQty ?>" />
+</span>
+<div<?php if ($_option->decoratedIsLast){?> class="last"<?php }?>>
     <?php $bundledProds = Array(); ?>
     <?php $simpleProds = array(); ?>
     <?php $simpleProdIds = array(); ?>
@@ -49,7 +65,7 @@ $totalItems = count($_selections);
             }
         }
         ?>             
-        <div>
+        <div class="options">
             <input style="display:none;" onclick="bundle.changeSelection(this)" class="radio<?php echo $_option->getRequired()?' validate-one-required-by-name':'' ?>" id="bundle-option-<?php echo $_option->getId() ?>-<?php echo $_selection->getSelectionId() ?>" type="radio" name="bundle_option[<?php echo $_option->getId() ?>]"<?php echo ($_selection->getIsDefault() && $_selection->isSaleable())?' checked="checked" ':'' ?><?php echo !$_selection->isSaleable()?' disabled="disabled" ':'' ?> value="<?php echo $_selection->getSelectionId() ?>" />
             <label for="bundle-option-<?php echo $_option->getId() ?>-<?php echo $_selection->getSelectionId() ?>"><?php echo $this->getSelectionTitlePrice($_selection) ?></label>
             <?php if($_option->getRequired()): ?>
@@ -59,7 +75,7 @@ $totalItems = count($_selections);
         </div>           
         <?php endforeach; ?>
     <span id="bundle-option-<?php echo $_option->getId() ?>-container"></span>
-</fieldset>
+</div>
 <script type="text/javascript">
     Event.observe(window, 'load', function(){
         $$('input.radio').each(function(el){
