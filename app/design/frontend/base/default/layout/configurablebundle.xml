@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<PRODUCT_TYPE_bundle>
+		<reference name="head">
+			<action method="removeItem">
+				<type>skin_js</type>
+				<name>js/bundle.js</name>
+			</action>
+			<action method="addItem">
+				<type>skin_js</type>
+				<name>js/configurable_bundle.js</name>
+			</action>
+		</reference>
+			<reference name="product.info">
+				<action method="setTemplate">
+					<template>configurablebundle/catalog/product/view.phtml</template>
+				</action>
+			</reference>
+			<reference name="product.info.options">
+				<action method="setTemplate">
+					<template>configurablebundle/catalog/product/view/options.phtml</template>
+				</action>
+			</reference>
+	</PRODUCT_TYPE_bundle>
+</layout>

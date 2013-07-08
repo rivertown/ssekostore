@@ -1,0 +1,167 @@
+<?php
+$_option = $this->getOption();
+$_selections = $_option->getSelections();
+//pr(get_class($_option));
+$_default = $_option->getDefaultSelection();
+$_showSingle = (count($_selections) == 1 && $_option->getRequired());
+
+$totalItems = count($_selections);
+?>
+<dt><label class="left"><?php echo $this->htmlEscape($_option->getTitle()) ?><?php if ($_option->getRequired()) echo '<span class="required">&nbsp;*</span>' ?></label>
+    <span class="qty-holder">
+        <?php if ($_default): ?>
+        <?php $_defaultQty = $_default->getSelectionQty()*1 ?>
+        <?php $_canChangeQty = $_default->getSelectionCanChangeQty() ?>
+        <?php else: ?>
+        <?php if (!$_showSingle): ?>
+            <?php $_defaultQty = '0' ?>
+            <?php $_canChangeQty = false ?>
+            <?php else: ?>
+            <?php $_defaultQty = $_selections[0]->getSelectionQty()*1 ?>
+            <?php $_canChangeQty = $_selections[0]->getSelectionCanChangeQty() ?>
+            <?php endif; ?>
+        <?php endif; ?>
+        <?php /*<label for="bundle-option-<?php echo $_option->getId() ?>-qty-input"><?php echo $this->__('Qty:') ?>&nbsp;</label>*/ ?><input onblur="bundle.changeOptionQty(this, event)" <?php echo $_canChangeQty?'':'disabled="disabled"' ?> id="bundle-option-<?php echo $_option->getId() ?>-qty-input" class="input-text qty<?php echo $_canChangeQty?'':' qty-disabled' ?>" type="hidden" name="bundle_option_qty[<?php echo $_option->getId() ?>]" value="<?php echo $_defaultQty ?>" />
+    </span>
+</dt>
+<dd<?php if ($_option->decoratedIsLast){?> class="last"<?php }?>>
+    <ul class="options-list">
+        <?php $bundledProds = Array(); ?>
+        <?php $simpleProds = array(); ?>
+        <?php $simpleProdIds = array(); ?>
+        <?php $confItems = array(); ?>
+        <?php $confItemIds = array(); ?>
+        <?php $confItemOptions = array(); ?>
+        <?php
+
+        $removeSimpleProd = false;
+        foreach($_selections as $_selection){
+            $p = Mage::getModel('catalog/product')->load($_selection->getProductId());
+            $_selection->setData('product', $p);
+            $type = $p->getTypeId(); #Get Type like configurable or simple.
+            if($totalItems > 1 && $type == 'configurable'){
+                $removeSimpleProd = true;
+            }
+        }
+
+        foreach($_selections as $_selection): $p = $_selection->getData('product');
+            ?>
+            <?php
+            $type = $p->getTypeId(); #Get Type like configurable or simple.
+            if($removeSimpleProd && $type != 'configurable') {
+                $simpleProds[] = $p;
+                $simpleProdIds[] = $p->getId();
+                continue;
+            }
+
+            $customOptions = $p->getProductOptionsCollection();
+            if ($customOptions->getItems()) {
+                $bundledProds[] = $p;
+            }
+            $firstChildProduct = $p;
+            if($p->getTypeId() == "configurable") {
+		$configurableProduct = $p;
+                $firstChildProduct = current($p->getTypeInstance()->getUsedProducts());
+                if(empty($firstChildProduct)) {
+                    $firstChildProduct = $p;
+                }
+            }
+            ?>
+
+            <li>
+                <div class="image" style="clear: both;"><?php echo '<img src="'.$this->helper('catalog/image')->init($configurableProduct, 'image')->resize(100).'" alt="" />'; ?></div>
+                <div class="options">
+                    <input style="display:none;" onclick="bundle.changeSelection(this)" class="radio<?php echo $_option->getRequired()?' validate-one-required-by-name':'' ?>" id="bundle-option-<?php echo $_option->getId() ?>-<?php echo $_selection->getSelectionId() ?>" type="radio" name="bundle_option[<?php echo $_option->getId() ?>]"<?php echo ($_selection->getIsDefault() && $_selection->isSaleable())?' checked="checked" ':'' ?><?php echo !$_selection->isSaleable()?' disabled="disabled" ':'' ?> value="<?php echo $_selection->getSelectionId() ?>" />
+                    <span class="label"><label for="bundle-option-<?php echo $_option->getId() ?>-<?php echo $_selection->getSelectionId() ?>"><?php echo $this->getSelectionTitlePrice($_selection) ?></label></span>
+                    <?php if($_option->getRequired()): ?>
+                    <?php echo $this->setValidationContainer('bundle-option-'.$_option->getId().'-'.$_selection->getSelectionId(), 'bundle-option-'.$_option->getId().'-container'); ?>
+                    <?php endif; ?>
+                    <div id="sizeButtons-<?php echo $p->getId() ?>"></div>
+                </div>
+            </li>
+            <p><?php echo $_selection->getName(); ?><br /><?php echo $_selection->getSku(); ?><br /><?php echo $p->getDescription(); ?></p>
+            <?php endforeach; ?>
+        <?php     $addeditems = Array ();
+        //pr($confItems);
+        //$bundledProds = array_merge($bundledProds,$simpleProds);
+        if (is_null(Mage::registry('current_producta'))) {
+            $addeditems = $bundledProds;
+            Mage::register('current_producta', $bundledProds);
+        }else {
+
+            $addeditems = Mage::registry('current_producta');
+            Mage::unregister('current_producta');
+            foreach ($bundledProds as $prods) {
+                $addeditems[] = $prods;
+            }
+            Mage::register('current_producta',$addeditems);
+        }
+        ?>
+        <dl class="moreOptions">
+            <?php $_addeditems = array_merge($addeditems,$simpleProds); $i = 0; ?>
+            <?php foreach($_addeditems as $_opt): $i++; //pr(get_class($_opt).' '.$_opt->getId()); ?>
+            <?php list( $parentId ) = Mage::getModel('catalog/product_type_configurable')
+                ->getParentIdsByChild( $_opt->getId() );
+            ?>
+
+            <input type="hidden" id="<?php echo $parentId.'-'.$_opt->getSize().'-'.$_opt->getColor() ?>" value="<?php echo $_opt->getId() ?>" />
+
+            <?php $_itemOptions = Mage::helper('core')->decorateArray($_opt->getOptions()); ?>
+            <?php foreach($_itemOptions as $_itemOption): ?>
+                <?php
+                $isVisible = in_array($_itemOption->getProductId(),$simpleProdIds) ? false : true;
+                $confObj = Mage::getBlockSingleton('Wizkunde_ConfigurableBundle_Block_Catalog_Product_View_Options');
+                $confObj->addOptionRenderer(
+                    'text',
+                    'catalog/product_view_options_type_text',
+                    'catalog/product/view/options/type/text.phtml'
+                )
+                    ->addOptionRenderer(
+                    'date',
+                    'catalog/product_view_options_type_date',
+                    'catalog/product/view/options/type/date.phtml'
+                )
+                    ->addOptionRenderer(
+                    'file',
+                    'catalog/product_view_options_type_file',
+                    'catalog/product/view/options/type/file.phtml'
+                )
+                    ->addOptionRenderer(
+                    'select',
+                    'catalog/product_view_options_type_select',
+                    'catalog/product/view/options/type/select.phtml'
+                );
+                echo $confObj->getOptionHtml($_itemOption, $_itemOption->getProductId(), $isVisible) ?>
+
+                <?php endforeach; ?>
+            <?php endforeach; ?>
+        </dl>
+    </ul>
+    <span id="bundle-option-<?php echo $_option->getId() ?>-container"></span>
+</dd>
+<script type="text/javascript">
+    Event.observe(window, 'load', function(){
+        $$('input.radio').each(function(el){
+            if(typeof(bundle) == 'undefined') {
+                bundle = __bundle;
+            }
+
+            if(typeof(bundle) != 'undefined') {
+                bundle.changeSelection(el);
+                el.writeAttribute('checked', 'checked');
+                el.next().setStyle({marginLeft:0});
+            }
+        });
+    });
+</script>
+
+<?php
+// $pr = Mage::getModel('catalog/product')->load(34);
+// $opts = $pr->getOptions();
+// if(count($opts)) {
+// foreach($opts as $opt) {
+// pr($opt->getData());
+// }
+// }
+// die;
+?>

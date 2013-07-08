@@ -1,0 +1,277 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2009 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+<?php
+    $_helper = $this->helper('catalog/output');
+    $_product = $this->getProduct();
+
+    $last_url = Mage::getSingleton('core/session')->getLastUrl();
+    $coming_from_search = strpos($last_url, 'catalogsearch/result');
+
+    $_storeRootCategoryId = Mage::app()->getStore()->getRootCategoryId();
+    $_category_collection = Mage::getModel('catalog/category')->getCollection()
+            ->addAttributeToFilter('parent_id',$_storeRootCategoryId)
+            ->addAttributeToFilter('level',2)
+            ->addAttributeToSelect('name')
+            ->addAttributeToSelect('url_path')
+            ->addAttributeToSort('position', 'ASC')
+            ->setPageSize(1);
+
+    $_category = $_category_collection->getFirstItem();
+
+    Mage::unregister('current_producta');
+?>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div class="product-view">
+    <div class="product-essential">
+    <form action="<?php echo $this->getAddToCartUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+        <div class="no-display">
+            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+            <input type="hidden" name="related_product" id="related-products-field" value="" />
+        </div>
+
+        <div class="row">
+            <div class="span5">
+		        <div class="product-img-box">
+		            <?php echo $this->getChildHtml('media-pdp') ?>
+		        </div>	
+		        <?php if($_product['product_video']):?>
+			        <div class="video-play">
+			        	<a id="play-video" href="#">Play Video <img src="<?php echo $this->getSkinUrl('img/ico-video-play.png')?>"/></a>
+			        </div>
+		        <?php endif;?>			        
+              
+                <div class="quickviewpro_share">
+                    <?php echo $this->getChildHtml('product_share') ?>
+                </div>
+	        </div>
+	        <div class="product-shop span4">
+	        	<?php 
+		    		$now = date("Y-m-d");
+					$newsFrom= substr($_product->getData('news_from_date'),0,10);
+					$newsTo=  substr($_product->getData('news_to_date'),0,10);
+		    	?>
+	        	<div class="product-name">
+	                <h2 class="productName"><?php if ($now>=$newsFrom && $now<=$newsTo):?><span id="newProduct">NEW! </span><?php endif;?><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+	            </div>
+				
+				<?php echo $this->getPriceHtml($_product) ?>
+	            <?php echo $this->getChildHtml('extrahint') ?>
+	            <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
+	            <?php echo $this->getChildHtml('alert_urls') ?>					            
+	
+				<?php echo $this->getChildHtml('info_tabs') ?>									            			          
+	        </div>
+            <?php echo $this->getChildHtml('product_type_data') ?>
+
+
+        </div>
+		<div class="clearer"></div>
+	    <div class="row" id="product-add">
+	    	<!--<?php echo $this->getChildHtml('product_type_data') ?>-->
+    		<?php if (!$this->hasOptions()):?>
+                <div class="add-to-box">
+                    <?php if($_product->isSaleable()): ?>
+                        <?php echo $this->getChildHtml('addtocart') ?>
+                    <?php endif; ?>
+                    <?php echo $this->getChildHtml('addto') ?>
+                </div>
+                <?php echo $this->getChildHtml('extra_buttons') ?>
+            <?php elseif (!$_product->isSaleable()):?>
+                <div class="add-to-box">
+                    <?php echo $this->getChildHtml('addto') ?>
+                </div>
+            <?php endif; ?>													
+
+            <?php echo $this->getChildHtml('other');?>
+
+            <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+                <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+            <?php endif;?>	
+		    <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+		        <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+		    <?php endif;?> 
+	    </div>  
+    </form>
+    <script type="text/javascript">
+    //<![CDATA[
+		var productAddToCartForm = new VarienForm('product_addtocart_form');                
+        productAddToCartForm.submit = function(button, url) {
+            if (this.validator.validate()) {
+                var form = this.form;
+                var oldUrl = form.action;
+
+                if (url) {
+                   form.action = url;
+                }
+                var e = null;
+                
+                if(!url){
+                    url = jQuery('#product_addtocart_form').attr('action');
+                }
+                url = url.replace("checkout/cart","ajax/index");
+                var data = jQuery('#product_addtocart_form').serialize();
+                data += '&isAjax=1';                  
+                jQuery('#ajax_loader').show();
+                jQuery.ajax({
+                      url: url,
+                      dataType: 'json',
+                      type : 'post',
+                      data: data,
+                      success: function(data){
+                      	console.log(data);
+                            jQuery('#ajax_loader').hide();
+							jQuery('.btn-primary').removeAttr("disabled");
+                            if(jQuery('.top-nav-right #top-nav li')){
+                            	var search = jQuery('.top-nav-right #top-nav li:last').clone();
+                            	jQuery('.top-nav-right #top-nav li').remove();
+                                jQuery('.top-nav-right #top-nav').append(data.toplink);
+                                jQuery('.top-nav-right #top-nav').append(search);
+                            }
+                            open_overlay('cart-overlay', 'pdp-hider');
+                            jQuery('#product-info').append('<div class="row"><div class="span2" id="cart-image"><img height="75px" width="75px" src="' + data.product_image + '"/></div>' + 
+                            	'<div class="span2"><div>' + data.product_name + '</div><div>$' + data.price + '</div><div>Qty: ' + data.qty + '</div><div><a href="/shop/index.php/checkout/cart/">Change</a><a href="' + data.remove_url + '">Remove</a></div>')
+                            jQuery('#cart-count').text(data.count);
+                      }
+                });
+
+                if (button && button != 'undefined') {
+                    button.disabled = true;
+                }
+            }
+        }.bind(productAddToCartForm);
+
+        productAddToCartForm.submitLight = function(button, url){
+            if(this.validator) {
+                var nv = Validation.methods;
+                delete Validation.methods['required-entry'];
+                delete Validation.methods['validate-one-required'];
+                delete Validation.methods['validate-one-required-by-name'];
+                if (this.validator.validate()) {
+                    if (url) {
+                        this.form.action = url;
+                    }
+                    this.form.submit();
+                }
+                Object.extend(Validation.methods, nv);
+            }
+        }.bind(productAddToCartForm);
+        function open_overlay(overlayId, hiderId)
+		{
+			var heightBody = document.getElementsByTagName('body')[0].clientHeight;
+			jQuery('#' + hiderId).css('height', heightBody + 'px');
+            jQuery('#' + hiderId).show();
+            var scrollPos = null;
+            if (document.documentElement && document.documentElement.scrollTop) { // Explorer 6 Strict
+        		scrollPos = {scrollTop:document.documentElement.scrollTop,scrollLeft:document.documentElement.scrollLeft};
+	    	} else if (document.body) {// all other Explorers
+	       	 	scrollPos = {scrollTop:document.body.scrollTop,scrollLeft:document.body.scrollLeft};
+    		}
+            var topPos    = parseInt(0.1 * document.documentElement.clientHeight + scrollPos['scrollTop']);
+	
+	        jQuery('#' + overlayId).css('top', topPos + 'px');
+	        if (window.outerWidth < parseInt(jQuery('#' + overlayId).css('width'))) {
+	            jQuery('#' + overlayId).css({'left': '0px', 'margin': '0 0 0 20px'});
+	        } else {
+	            jQuery('#' + overlayId).css({'left': '', 'margin': ''});
+	        }
+	        jQuery('#' + overlayId).show();			
+		}
+		function close_overlay()
+		{
+			$('.quickviewpro-hider').hide();
+        	$('.quickviewpro-popup').hide();
+		}
+    //]]>
+    </script>
+    </div>
+
+    <div class="product-collateral">
+        
+        <?php echo $this->getChildHtml('upsell_products') ?>
+        
+        <?php echo $this->getChildHtml('product_additional_data') ?>
+    </div>
+</div>
+<div id="pdp-hider" class="quickviewpro-hider" style="display:none;background-color: rgb(136, 136, 136); height: 1381px;"></div>
+<div id="returns-overlay" style="display:none" class="quickviewpro-popup">
+	<a class="close-popap" href="javascript:void(0);"></a>
+	<div class="custom-overlay overlay-returns">
+		<?php echo $this->getChildHtml('returns_exchanges');?>
+	</div>
+</div>
+<div id="shipping-overlay" style="display:none" class="quickviewpro-popup">
+	<a class="close-popap" href="javascript:void(0);"></a>
+	<div class="custom-overlay overlay-shipping">
+		<?php echo $this->getChildHtml('shipping');?>
+	</div>
+</div>
+<div id="video-overlay" style="display:none" class="quickviewpro-popup">
+	<a class="close-popap" id="close-video" href="javascript:void(0);"></a>
+	<div class="popup-header"><?php echo $_product->getName();?></div>
+	<div id="video-main" class="main-popup custom-overlay">
+		<div id="video-embed">
+			<?php echo $_product['product_video'];?>
+		</div>
+	</div>	
+</div>
+<div id="cart-overlay" style="display:none;width:675px;" class="quickviewpro-popup">
+	<a class="close-popap" href="javascript:void(0);"></a>
+	<div class="popup-header">Cart {<span id="cart-count"></span>}</div>
+	<div class="main-popup custom-overlay overlay-cart">
+		<div class="row">
+			<div class="span4">
+				<p>Item added to your cart!</p>
+			</div>
+			<div id="product-info" class="span4">
+			</div>
+		</div>
+		<div class="row">
+			<div class="span4">
+				<div><a href="#">Shop Featured Straps</a></div>
+				<div><a href="#">Shop Featured Accessories</a></div>
+			</div>
+			<div class="span4">
+				<div class="span2" style="margin-top: 12px;">
+					<button type="button" title="<?php echo $this->__('Checkout') ?>" class="btn btn-proceed-checkout btn-lrg btn-primary" onclick="window.location='/shop/index.php/checkout/onepage'"><span><span><?php echo $this->__('Checkout') ?></span></span></button>
+				</div>
+				<div class="span2" style="margin-top: 12px;">					
+					<button type="button" title="<?php echo $this->__('Keep Shopping') ?>" class="btn" onclick="setLocation('/shop/index.php/')"><span><span><?php echo $this->__('Keep Shopping') ?></span></span></button>
+				</div>
+			</div>
+		</div>
+	</div>	
+</div>
