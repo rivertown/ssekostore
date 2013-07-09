@@ -84,9 +84,13 @@ $totalItems = count($_selections);
             }
 
             if(typeof(bundle) != 'undefined') {
-                bundle.changeSelection(el);
-                el.writeAttribute('checked', 'checked');
-                el.next().setStyle({marginLeft:0});
+                var name = el.name;
+		    	if(name.substring(0, 7) != 'ratings')
+		    	{
+	                bundle.changeSelection(el);
+	                el.writeAttribute('checked', 'checked');
+	                el.next().setStyle({marginLeft:0});
+	           	}
             }
         });
     });

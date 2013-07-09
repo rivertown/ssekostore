@@ -346,69 +346,69 @@ Product.Bundle.prototype = {
     	if(name.substring(0, 7) != 'ratings')
     	{
         	parts = selection.id.split('-');
-        }        
-		var required = $(selection).hasClassName('validate-one-required-by-name');
-
-        // $$('.bconf-cont').invoke('remove');
-        if (this.config['options'][parts[2]].isMulti) {
-            selected = new Array();
-            if (selection.tagName == 'SELECT') {
-                for (var i = 0; i < selection.options.length; i++) {
-                    if (selection.options[i].selected && selection.options[i].value != '') {
-                        selected.push(selection.options[i].value);
-                    }
-                }
-            } else if (selection.tagName == 'INPUT') {
-
-                selector = parts[0]+'-'+parts[1]+'-'+parts[2];
-                selections = $$('.'+selector);
-                for (var i = 0; i < selections.length; i++) {
-                    if (selections[i].checked && selections[i].value != '') {
-                        selected.push(selections[i].value);
-                    }
-                }
-            }
-            this.config.selected[parts[2]] = selected;
-        } else {
-
-            try{
-                var cnfPrId = this.config.options[parts[2]].selections[parts[3]].confProductId;
-                var cnfGId = cnfPrId + '_' + parts[3];
-                var confOpts = this.config.options[parts[2]].selections[parts[3]].configurableOptions[cnfGId];
-            }catch(er){/*console.error(er);*/}
-
-            if($('config-container' + parts[3])){
-                $('config-container' + parts[3]).remove();
-            }
-
-            if(typeof confOpts != "undefined"){
-                var atI = this.config.options[parts[2]].selections[parts[3]].confattributes[cnfGId].items;
-                var conf = this.config.options[parts[2]].selections[parts[3]].confattributes[cnfGId];
-                var html = '';
-                atI.each(function(i,j){
-                    //console.log("size id:" + _size_id);
-                    var hide_element = i.attribute_id == _size_id ? ' style="display:none"' : '';
-		    		var required_entry = required == true ? 'required-entry ' : '';
-
-                    var myT = new Template('<label id="label-#{product_id}_#{attribute_id}" '+hide_element+'><i>#{label}</i></label><select rel="conf-#{product_id}" name="super_attribute[' + cnfPrId + '][#{attribute_id}]" id="#{product_id}_#{attribute_id}" class="'+required_entry+'super-attribute-select style-#{label}"><option>Select #{label}</option></select>');
-                    html += myT.evaluate(i);
-                    }
-                );
-                selection.next().insert({
-                          after: '<div class="controls" id="config-container' + parts[3] + '">' + html +'</div>'
-                        });
-                bconfInstances.set(cnfGId, new Product.BConfig(confOpts));
-            }
-
-            if (selection.value != '') {
-                this.config.selected[parts[2]] = new Array(selection.value);
-            } else {
-                this.config.selected[parts[2]] = new Array();
-            }
-            this.populateQty(parts[2], selection.value);
-        }
-        this.reloadPrice();
-
+               
+			var required = $(selection).hasClassName('validate-one-required-by-name');
+	
+	        // $$('.bconf-cont').invoke('remove');
+	        if (this.config['options'][parts[2]].isMulti) {
+	            selected = new Array();
+	            if (selection.tagName == 'SELECT') {
+	                for (var i = 0; i < selection.options.length; i++) {
+	                    if (selection.options[i].selected && selection.options[i].value != '') {
+	                        selected.push(selection.options[i].value);
+	                    }
+	                }
+	            } else if (selection.tagName == 'INPUT') {
+	
+	                selector = parts[0]+'-'+parts[1]+'-'+parts[2];
+	                selections = $$('.'+selector);
+	                for (var i = 0; i < selections.length; i++) {
+	                    if (selections[i].checked && selections[i].value != '') {
+	                        selected.push(selections[i].value);
+	                    }
+	                }
+	            }
+	            this.config.selected[parts[2]] = selected;
+	        } else {
+	
+	            try{
+	                var cnfPrId = this.config.options[parts[2]].selections[parts[3]].confProductId;
+	                var cnfGId = cnfPrId + '_' + parts[3];
+	                var confOpts = this.config.options[parts[2]].selections[parts[3]].configurableOptions[cnfGId];
+	            }catch(er){/*console.error(er);*/}
+	
+	            if($('config-container' + parts[3])){
+	                $('config-container' + parts[3]).remove();
+	            }
+	
+	            if(typeof confOpts != "undefined"){
+	                var atI = this.config.options[parts[2]].selections[parts[3]].confattributes[cnfGId].items;
+	                var conf = this.config.options[parts[2]].selections[parts[3]].confattributes[cnfGId];
+	                var html = '';
+	                atI.each(function(i,j){
+	                    //console.log("size id:" + _size_id);
+	                    var hide_element = i.attribute_id == _size_id ? ' style="display:none"' : '';
+			    		var required_entry = required == true ? 'required-entry ' : '';
+	
+	                    var myT = new Template('<label id="label-#{product_id}_#{attribute_id}" '+hide_element+'><i>#{label}</i></label><select rel="conf-#{product_id}" name="super_attribute[' + cnfPrId + '][#{attribute_id}]" id="#{product_id}_#{attribute_id}" class="'+required_entry+'super-attribute-select style-#{label}"><option>Select #{label}</option></select>');
+	                    html += myT.evaluate(i);
+	                    }
+	                );
+	                selection.next().insert({
+	                          after: '<div class="controls" id="config-container' + parts[3] + '">' + html +'</div>'
+	                        });
+	                bconfInstances.set(cnfGId, new Product.BConfig(confOpts));
+	            }
+	
+	            if (selection.value != '') {
+	                this.config.selected[parts[2]] = new Array(selection.value);
+	            } else {
+	                this.config.selected[parts[2]] = new Array();
+	            }
+	            this.populateQty(parts[2], selection.value);
+	        }
+	        this.reloadPrice();
+		}
     },
 
     reloadPrice: function() {
