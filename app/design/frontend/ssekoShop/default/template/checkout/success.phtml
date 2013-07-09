@@ -8,19 +8,39 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  * @author      Vedran Subotic <vedran@magenthon.com>
  */
+// First, let's load some order details  
+$order_id = Mage::getSingleton('checkout/session')->getLastRealOrderId(); 
+$order_details = Mage::getModel('sales/order')->loadByIncrementId($order_id);
+// Get shipping method
+$shipping_method = $order_details->_data["shipping_description"];
+// Get ship-to address information
+$shipping_address_data = $order_details->getShippingAddress();
+// Get payment information
+$payment_method = $order_details->getPayment()->getMethodInstance()->getTitle();
+// Get billing address information
+$billing_address_data   = $order_details->getBillingAddress();
+
 ?>
-<div class="page-title">
-    <h1><?php echo $this->__('Your order has been received') ?></h1>
+<ol class="progtrckr" data-progtrckr-steps="4">
+	    <li id="progress1" class="progtrckr-not"><p>Shopping Cart</p><span class="circle"></span></li><!--
+	 --><li id="progress2" class="progtrckr-not"><p>Billing & Shipping</p><span class="circle"></span></li><!--
+	 --><li id="progress3" class="progtrckr-not"><p>Confirm Order</p><span class="circle"></span></li><!--
+	 --><li id="progress4" class="progtrckr-active" style="margin-right:0;"><p>Checkout Complete</p><span class="circle"></span></li>
+	 <span class="line"></span>
+	</ol>
+<div class="page-title" style="display:inline-block">
+    <h1><?php echo $this->__('Order Complete') ?></h1>
+</div>
+<div class="buttons-set" style="display:inline-block; margin-left:50px;">
+    <button type="button" class="btn btn-large" title="<?php echo $this->__('Keep Shopping') ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
 </div>
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
-<div class="hero-unit">
-<h2 class="sub-title"><?php echo $this->__('Thank you for your purchase!') ?></h2>
 
 <?php if ($this->getOrderId()):?>
 <?php if ($this->getCanViewOrder()) :?>
-    <p><?php echo $this->__('Your order # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getViewOrderUrl()), $this->escapeHtml($this->getOrderId()))) ?></p>
+    <p><b><?php echo $this->__('Thanks for your order! Your Sseko order number is #%s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getViewOrderUrl()), $this->escapeHtml($this->getOrderId()))) ?></b></p>
 <?php  else :?>
-    <p><?php echo $this->__('Your order # is: %s.', $this->escapeHtml($this->getOrderId())) ?></p>
+    <p><b><?php echo $this->__('Thanks for your order! Your Sseko order number is #%s.', $this->escapeHtml($this->getOrderId())) ?></b></p>
 <?php endif;?>
     <p><?php echo $this->__('You will receive an order confirmation email with details of your order and a link to track its progress.') ?></p>
 <?php if ($this->getCanViewOrder() && $this->getCanPrintOrder()) :?>
@@ -44,8 +64,128 @@
 <?php endforeach;?>
 </ul>
 <?php endif;?>
-
-<div class="buttons-set">
-    <button type="button" class="btn btn-large" title="<?php echo $this->__('Continue Shopping') ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+<div class="cart-row" style="margin-top:50px;">
+	<div class="row">
+		<div class="span5">
+			<h6>Product</h6>
+		</div>
+		<div class="span3">
+			<h6>Quantity</h6>
+		</div>
+		<div class="span2">
+			<h6>Price</h6>
+		</div>
+		<div class="span2">
+			<h6>Total</h6>
+		</div>
+	</div>
 </div>
+<div class="cart-row confirm-row">
+<?php
+/*** Product Listing ***/
+// Iterate through each product listing the name, the quantity ordered, and the item price
+foreach ($order_details->getAllItems() as $item) { ?>
+<div class="row" style="<?php if (!$item->getParentItemId()): ?>margin-bottom:10px; margin-top:10px;<?php endif;?>">
+	<div class="span5">
+		<?php if (!$item->getParentItemId()): ?>
+			<p><b><?php echo $item->getName(); ?></b></p>
+		<?php else: ?>
+			<p style="margin-left:20px;"><?php echo $item->getName(); ?> x <?php echo round($item->getQtyOrdered(), 0); ?></p>
+		<?php endif; ?>
+		<p style="display:none"><?php echo $item->getSku(); ?></p>
+	</div>
+	<div class="span3">
+		<?php if (!$item->getParentItemId()): ?>
+			<p><?php echo round($item->getQtyOrdered(), 0); ?></p>
+		<?php endif; ?>
+	</div>
+	<div class="span2">
+		<?php if (!$item->getParentItemId()): ?>
+			<p><?php echo Mage::helper("core")->currency($item->getPrice() * $item->getQtyOrdered()); ?></p>
+		<?php endif; ?>
+	</div>
+	<div class="span2">
+		<?php if (!$item->getParentItemId()): ?>
+			<p<?php echo Mage::helper("core")->currency($item->getPrice()); ?></p>
+		<?php endif; ?>
+	</div>
+</div>
+<?php } ?>
+</div>
+<?php
+// Get the product id from the item (useful later for loading product attribute information)
+$product_id = $item->getData('product_id');
+/*** Billing amounts ***/
+// These leverage the Magento core helper to format the numbers to currency 
+?>
+<div class="cart-row totals-row">
+	<div class="row 1">
+		<div class="span2 offset8">
+			<h6>Subtotal</h6>
+		</div>
+		<div class="span2">
+			<h6><?php echo Mage::helper("core")->currency($order_details->subtotal); ?></h6>
+		</div>
+	</div>
+	<div class="row 2">
+		<div class="span2 offset8">
+			<h6>Shipping</h6>
+		</div>
+		<div class="span2">
+			<h6><?php echo Mage::helper("core")->currency($order_details->shipping_amount); ?></h6>
+		</div>
+	</div>
+	<div class="row 2">
+		<div class="span2 offset8">
+			<h6>Tax</h6>
+		</div>
+		<div class="span2">
+			<h6><?php echo Mage::helper("core")->currency($order_details->tax_amount); ?></h6>
+		</div>
+	</div>
+	<div class="row 3">
+		<div class="span2 offset8">
+			<h6>Total</h6>
+		</div>
+		<div class="span2">
+			<h6><?php echo Mage::helper("core")->currency($order_details->grand_total); ?></h6>
+			<p style="display:none;"><?php echo Mage::helper("core")->currency($order_details->discount_amount); ?></p>
+		</div>
+	</div>
+</div>
+<div class="row additional-confirm" style="padding:40px 0;">
+	<div class="span3">
+		<h2>Billing Info</h2>
+		<?php 
+		// Output the ship-to address information
+		echo "<h6>" . $shipping_address_data['firstname'];
+		echo " " . $shipping_address_data['lastname'];
+		echo "</h6><h6>" . $shipping_address_data['street'];
+		echo "</h6><h6>" . $shipping_address_data['city'];
+		echo ", " . $shipping_address_data['region'];
+		echo " " . $shipping_address_data['postcode'];
+		echo "</h6><h6>" . $shipping_address_data['country_id'];
+		echo "</h6><h6>" . $shipping_address_data['email'];
+		echo "</h6><h6>" . $shipping_address_data['telephone']. "</h6>";?>
+	</div>
+	<div class="span3">
+		<h2>Shipping Info</h2>
+		<?php 
+		// Output the billing address information
+		echo "<h6>" . $billing_address_data['firstname'];
+		echo " " . $billing_address_data['lastname'];
+		echo "</h6><h6>" . $billing_address_data['street'];
+		echo "</h6><h6>" . $billing_address_data['city'];
+		echo ", " . $billing_address_data['region'];
+		echo " " . $billing_address_data['postcode'];
+		echo "</h6><h6>" . $billing_address_data['country_id']; 
+		echo "</h6><h6>" . $billing_address_data['email'];
+		echo "</h6><h6>" . $billing_address_data['telephone']. "</h6>"; ?>
+	</div>
+	<div class="span6" style="margin-top:10px;">
+		<?php
+		// Loads the CMS static block directly
+		// Note: the identifier for the cms block in this example is success_faq - adjust to suite your cms
+		echo $this->getLayout()->createBlock('cms/block')->setBlockId('confirm_page')->toHtml(); ?>
+	</div>
 </div>

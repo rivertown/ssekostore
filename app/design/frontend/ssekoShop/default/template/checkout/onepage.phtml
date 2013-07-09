@@ -9,9 +9,13 @@
  * @author      Vedran Subotic <vedran@magenthon.com>
  */
 ?>
-<div class="page-title">
-    <h1><?php echo $this->__('Checkout') ?></h1>
-</div>
+<ol class="progtrckr" data-progtrckr-steps="4">
+	    <li id="progress1" class="progtrckr-active"><p>Shopping Cart</p><span class="circle"></span></li><!--
+	 --><li id="progress2" class="progtrckr-not"><p>Billing & Shipping</p><span class="circle"></span></li><!--
+	 --><li id="progress3" class="progtrckr-not"><p>Confirm Order</p><span class="circle"></span></li><!--
+	 --><li id="progress4" class="progtrckr-not" style="margin-right:0;"><p>Checkout Complete</p><span class="circle"></span></li>
+	 <span class="line"></span>
+	</ol>
 <script type="text/javascript" src="<?php echo $this->getJsUrl('varien/accordion.js') ?>"></script>
 <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/opcheckout.js') ?>"></script>
 <script type="text/javascript">countryRegions = <?php echo $this->helper('directory')->getRegionJson() ?></script>
@@ -19,9 +23,9 @@
 <?php $i=0; foreach($this->getSteps() as $_stepId => $_stepInfo): ?>
 <?php if (!$this->getChild($_stepId) || !$this->getChild($_stepId)->isShow()): continue; endif; $i++ ?>
     <div id="opc-<?php echo $_stepId ?>" class="section<?php echo !empty($_stepInfo['allow'])?' allow':'' ?><?php echo !empty($_stepInfo['complete'])?' saved':'' ?>">
-        <div class="well">
+        <div class="checkout-options">
             <div class="step-title">
-                <h2><a class="pull-right" href="#"><?php echo $this->__('Edit') ?></a><?php echo $_stepInfo['label'] ?></h2>
+				<h1><a class="pull-right btn" href="#"><?php echo $this->__('Edit') ?></a><?php echo $_stepInfo['label'] ?></h1>
             </div>
             <div id="checkout-step-<?php echo $_stepId ?>" class="step a-item" style="display:none;">
                 <?php echo $this->getChildHtml($_stepId) ?>

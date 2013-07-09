@@ -48,28 +48,28 @@ For checkout/onepage/shipping.phtml:
         </div>
     </div>
 <?php endif; ?>
-    <div class="field name-firstname">
+    <div class="field name-firstname row">
         <label for="<?php echo $this->getFieldId('firstname')?>" class="required span3"><em>*</em><?php echo $this->getStoreLabel('firstname') ?></label>
         <div class="input-box span3">
             <input type="text" id="<?php echo $this->getFieldId('firstname')?>" name="<?php echo $this->getFieldName('firstname')?>" value="<?php echo $this->htmlEscape($this->getObject()->getFirstname()) ?>" title="<?php echo $this->getStoreLabel('firstname') ?>" class="input-text" <?php echo $this->getFieldParams() ?> />
         </div>
     </div>
 <?php if ($this->showMiddlename()): ?>
-    <div class="field name-middlename">
+    <div class="field name-middlename row">
         <label class="span2" for="<?php echo $this->getFieldId('middlename')?>"><?php echo $this->getStoreLabel('middlename') ?></label>
         <div class="input-box span3">
             <input type="text" id="<?php echo $this->getFieldId('middlename')?>" name="<?php echo $this->getFieldName('middlename')?>" value="<?php echo $this->htmlEscape($this->getObject()->getMiddlename()) ?>" title="<?php echo $this->getStoreLabel('middlename') ?>" class="input-text" <?php echo $this->getFieldParams() ?> />
         </div>
     </div>
 <?php endif; ?>
-    <div class="field name-lastname">
+    <div class="field name-lastname row">
         <label for="<?php echo $this->getFieldId('lastname')?>" class="span3"><em>*</em><?php echo $this->getStoreLabel('lastname') ?></label>
         <div class="input-box span3">
             <input type="text" id="<?php echo $this->getFieldId('lastname')?>" name="<?php echo $this->getFieldName('lastname')?>" value="<?php echo $this->htmlEscape($this->getObject()->getLastname()) ?>" title="<?php echo $this->getStoreLabel('lastname') ?>" class="input-text" <?php echo $this->getFieldParams() ?> />
         </div>
     </div>
 <?php if ($this->showSuffix()): ?>
-    <div class="field name-suffix">
+    <div class="field name-suffix row">
         <label class="span3" for="<?php echo $this->getFieldId('suffix')?>"<?php if ($this->isSuffixRequired()) echo ' class="required"' ?>><?php if ($this->isSuffixRequired()) echo '<em>*</em>' ?><?php echo $this->getStoreLabel('suffix') ?></label>
         <div class="input-box span3">
         <?php if ($this->getSuffixOptions()===false): ?>

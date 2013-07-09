@@ -25,8 +25,8 @@
     foreach ($methods as $_method):
         $_code = $_method->getCode();
 ?>
-    <div class="controls">
-        <label class="radio" for="p_method_<?php echo $_code ?>">
+    <div class="controls span12">
+        <label class="radio span3" for="p_method_<?php echo $_code ?>">
     <?php if(!$oneMethod): ?>
         <input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" title="<?php echo $this->htmlEscape($_method->getTitle()) ?>" onclick="payment.switchMethod('<?php echo $_code ?>')"<?php if($this->getSelectedMethodCode()==$_code): ?> checked="checked"<?php endif; ?> class="radio" />
     <?php else: ?>
