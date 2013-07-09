@@ -45,8 +45,9 @@
             <action method="addJs"   ifconfig="quickviewpro/media/fancybox"><script>belvg/jquery/jquery.mousewheel-3.0.6.pack.js</script></action>
         </reference>
         <reference name="head">
-            <action method="addJs"   ifconfig="quickviewpro/settings/enabled"><script>varien/product.js</script></action>
-            <action method="addItem" ifconfig="quickviewpro/settings/enabled"><type>skin_js</type><name>js/bundle.js</name></action>
+            <action method="addJs"   ifconfig="quickviewpro/settings/enabled"><script>varien/product.js</script></action>            
+            <action method="removeItem"><type>skin_js</type><name>js/bundle.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/configurable_bundle.js</name></action>
 
             <action method="addJs"   ifconfig="quickviewpro/settings/enabled"><script>belvg/prototype_loader.js</script></action>
             <action method="addJs"   ifconfig="quickviewpro/settings/enabled"><script>belvg/tabs.js</script></action>
@@ -256,6 +257,16 @@
     Additional block dependant on product type
     -->
     <PRODUCT_TYPE_bundle module="quickview-popup">
+    	<reference name="head">
+			<action method="removeItem">
+				<type>skin_js</type>
+				<name>js/bundle.js</name>
+			</action>
+			<action method="addItem">
+				<type>skin_js</type>
+				<name>js/configurable_bundle.js</name>
+			</action>
+		</reference>
         <reference name="quickview-popup">
             <block type="bundle/catalog_product_view_type_bundle" name="product.info.bundle" as="product_type_data" template="belvg/quickviewpro/product/options/type/bundle.phtml">
                 <action method="addPriceBlockType"><type>bundle</type><block>bundle/catalog_product_price</block><template>bundle/catalog/product/price.phtml</template></action>

@@ -152,7 +152,6 @@
                       type : 'post',
                       data: data,
                       success: function(data){
-                      	console.log(data);
                             jQuery('#ajax_loader').hide();
 							jQuery('.btn-primary').removeAttr("disabled");
                             if(jQuery('.top-nav-right #top-nav li')){
@@ -222,7 +221,7 @@
     <div class="product-collateral">
         
         <?php echo $this->getChildHtml('upsell_products') ?>
-        
+        <?php echo $this->getChildHtml('product_review') ?>
         <?php echo $this->getChildHtml('product_additional_data') ?>
     </div>
 </div>
