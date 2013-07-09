@@ -31,6 +31,48 @@
 <script type="text/javascript">
 //<![CDATA[
     var bundle = new Product.Bundle(<?php echo $this->getJsonConfig() ?>);
+    var bundleArray = [bundle.config.options];       
+    var length = [bundleArray[0]].length;
+    var baseConf = '';
+    for( var i = 0, length; i < length; i++ ) {
+        jQuery.each(bundleArray[i], function(index,value){
+            jQuery.each(value.selections, function(index,value){
+                if(value.configurableOptions)
+                {
+                    jQuery.each(value.configurableOptions, function(index,value){
+                        baseConf = value;
+                        jQuery.each(value.attributes, function(index,value){                            
+                            if(value.code == 'base_color')
+                            {
+                                jQuery('#base-color').append('<ul id="'+ value.id +'" class="base-block"><li>Base Color</li></ul>');
+                                jQuery.each(value.options,function(index,value){
+                                    jQuery('.base-block').append('<li class="'+ value.label +'" id="'+ value.id +'" style="width:25px;height:25px;background-color:'+ value.label +'"></li>')
+                                });                             
+                                return false;
+                            }
+                        });
+                    });
+                }
+            });         
+        });   
+    }
+    /*jQuery('.base-block li').click(function(){
+        var options = $$('select.style-Base option');
+        var len = options.length;
+        for (var i = 0; i < len; i++) {
+            if(options[i].value == $(this).id)
+            {
+                options[i].selected = true;
+            }
+        }
+        var element = $$('210_961');
+        //var dropdown = jQuery('.style-Base option');
+        //dropdown.val(jQuery(this).attr('id'));
+        //element must be the prototype object to pass to configureElement
+        //var id = jQuery('.style-Base').attr('id');
+        //var element=$(id);  
+        bconfInstances.set('210_13', new Product.BConfig(baseConf)).fillSelect(element.nextSetting);        
+    });*/
 //]]>
 </script>
 <?php endif; ?>

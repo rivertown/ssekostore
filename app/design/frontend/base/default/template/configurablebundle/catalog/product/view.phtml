@@ -65,44 +65,45 @@
 
         <div class="row">
             <div class="span5">
-		        <div class="product-img-box">
-		            <?php echo $this->getChildHtml('media-pdp') ?>
-		        </div>	
-		        <?php if($_product['product_video']):?>
-			        <div class="video-play">
-			        	<a id="play-video" href="#">Play Video <img src="<?php echo $this->getSkinUrl('img/ico-video-play.png')?>"/></a>
-			        </div>
-		        <?php endif;?>			        
-              
+                <div class="product-img-box">
+                    <?php echo $this->getChildHtml('media-pdp') ?>
+                </div>  
+                <?php if($_product['product_video']):?>
+                    <div class="video-play">
+                        <a id="play-video" href="#">Play Video <img src="<?php echo $this->getSkinUrl('img/ico-video-play.png')?>"/></a>
+                    </div>
+                <?php endif;?>  
+                <div id="base-color"> 
+                </div>                      
                 <div class="quickviewpro_share">
                     <?php echo $this->getChildHtml('product_share') ?>
                 </div>
-	        </div>
-	        <div class="product-shop span4">
-	        	<?php 
-		    		$now = date("Y-m-d");
-					$newsFrom= substr($_product->getData('news_from_date'),0,10);
-					$newsTo=  substr($_product->getData('news_to_date'),0,10);
-		    	?>
-	        	<div class="product-name">
-	                <h2 class="productName"><?php if ($now>=$newsFrom && $now<=$newsTo):?><span id="newProduct">NEW! </span><?php endif;?><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
-	            </div>
-				
-				<?php echo $this->getPriceHtml($_product) ?>
-	            <?php echo $this->getChildHtml('extrahint') ?>
-	            <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
-	            <?php echo $this->getChildHtml('alert_urls') ?>					            
-	
-				<?php echo $this->getChildHtml('info_tabs') ?>									            			          
-	        </div>
+            </div>
+            <div class="product-shop span4">
+                <?php 
+                    $now = date("Y-m-d");
+                    $newsFrom= substr($_product->getData('news_from_date'),0,10);
+                    $newsTo=  substr($_product->getData('news_to_date'),0,10);
+                ?>
+                <div class="product-name">
+                    <h2 class="productName"><?php if ($now>=$newsFrom && $now<=$newsTo):?><span id="newProduct">NEW! </span><?php endif;?><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+                </div>
+                
+                <?php echo $this->getPriceHtml($_product) ?>
+                <?php echo $this->getChildHtml('extrahint') ?>
+                <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
+                <?php echo $this->getChildHtml('alert_urls') ?>                             
+    
+                <?php echo $this->getChildHtml('info_tabs') ?>                                                                    
+            </div>
             <?php echo $this->getChildHtml('product_type_data') ?>
 
 
         </div>
-		<div class="clearer"></div>
-	    <div class="row" id="product-add">
-	    	<!--<?php echo $this->getChildHtml('product_type_data') ?>-->
-    		<?php if (!$this->hasOptions()):?>
+        <div class="clearer"></div>
+        <div class="row" id="product-add">
+            <!--<?php echo $this->getChildHtml('product_type_data') ?>-->
+            <?php if (!$this->hasOptions()):?>
                 <div class="add-to-box">
                     <?php if($_product->isSaleable()): ?>
                         <?php echo $this->getChildHtml('addtocart') ?>
@@ -114,21 +115,21 @@
                 <div class="add-to-box">
                     <?php echo $this->getChildHtml('addto') ?>
                 </div>
-            <?php endif; ?>													
+            <?php endif; ?>                                                 
 
             <?php echo $this->getChildHtml('other');?>
 
             <?php if ($_product->isSaleable() && $this->hasOptions()):?>
                 <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
-            <?php endif;?>	
-		    <?php if ($_product->isSaleable() && $this->hasOptions()):?>
-		        <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
-		    <?php endif;?> 
-	    </div>  
+            <?php endif;?>  
+            <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+                <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+            <?php endif;?> 
+        </div>  
     </form>
     <script type="text/javascript">
     //<![CDATA[
-		var productAddToCartForm = new VarienForm('product_addtocart_form');                
+        var productAddToCartForm = new VarienForm('product_addtocart_form');                
         productAddToCartForm.submit = function(button, url) {
             if (this.validator.validate()) {
                 var form = this.form;
@@ -153,16 +154,16 @@
                       data: data,
                       success: function(data){
                             jQuery('#ajax_loader').hide();
-							jQuery('.btn-primary').removeAttr("disabled");
+                            jQuery('.btn-primary').removeAttr("disabled");
                             if(jQuery('.top-nav-right #top-nav li')){
-                            	var search = jQuery('.top-nav-right #top-nav li:last').clone();
-                            	jQuery('.top-nav-right #top-nav li').remove();
+                                var search = jQuery('.top-nav-right #top-nav li:last').clone();
+                                jQuery('.top-nav-right #top-nav li').remove();
                                 jQuery('.top-nav-right #top-nav').append(data.toplink);
                                 jQuery('.top-nav-right #top-nav').append(search);
                             }
                             open_overlay('cart-overlay', 'pdp-hider');
                             jQuery('#product-info').append('<div class="row"><div class="span2" id="cart-image"><img height="75px" width="75px" src="' + data.product_image + '"/></div>' + 
-                            	'<div class="span2"><div>' + data.product_name + '</div><div>$' + data.price + '</div><div>Qty: ' + data.qty + '</div><div><a href="/shop/index.php/checkout/cart/">Change</a><a href="' + data.remove_url + '">Remove</a></div>')
+                                '<div class="span2"><div>' + data.product_name + '</div><div>$' + data.price + '</div><div>Qty: ' + data.qty + '</div><div><a href="/shop/index.php/checkout/cart/">Change</a><a href="' + data.remove_url + '">Remove</a></div>')
                             jQuery('#cart-count').text(data.count);
                       }
                 });
@@ -189,31 +190,31 @@
             }
         }.bind(productAddToCartForm);
         function open_overlay(overlayId, hiderId)
-		{
-			var heightBody = document.getElementsByTagName('body')[0].clientHeight;
-			jQuery('#' + hiderId).css('height', heightBody + 'px');
+        {
+            var heightBody = document.getElementsByTagName('body')[0].clientHeight;
+            jQuery('#' + hiderId).css('height', heightBody + 'px');
             jQuery('#' + hiderId).show();
             var scrollPos = null;
             if (document.documentElement && document.documentElement.scrollTop) { // Explorer 6 Strict
-        		scrollPos = {scrollTop:document.documentElement.scrollTop,scrollLeft:document.documentElement.scrollLeft};
-	    	} else if (document.body) {// all other Explorers
-	       	 	scrollPos = {scrollTop:document.body.scrollTop,scrollLeft:document.body.scrollLeft};
-    		}
+                scrollPos = {scrollTop:document.documentElement.scrollTop,scrollLeft:document.documentElement.scrollLeft};
+            } else if (document.body) {// all other Explorers
+                scrollPos = {scrollTop:document.body.scrollTop,scrollLeft:document.body.scrollLeft};
+            }
             var topPos    = parseInt(0.1 * document.documentElement.clientHeight + scrollPos['scrollTop']);
-	
-	        jQuery('#' + overlayId).css('top', topPos + 'px');
-	        if (window.outerWidth < parseInt(jQuery('#' + overlayId).css('width'))) {
-	            jQuery('#' + overlayId).css({'left': '0px', 'margin': '0 0 0 20px'});
-	        } else {
-	            jQuery('#' + overlayId).css({'left': '', 'margin': ''});
-	        }
-	        jQuery('#' + overlayId).show();			
-		}
-		function close_overlay()
-		{
-			$('.quickviewpro-hider').hide();
-        	$('.quickviewpro-popup').hide();
-		}
+    
+            jQuery('#' + overlayId).css('top', topPos + 'px');
+            if (window.outerWidth < parseInt(jQuery('#' + overlayId).css('width'))) {
+                jQuery('#' + overlayId).css({'left': '0px', 'margin': '0 0 0 20px'});
+            } else {
+                jQuery('#' + overlayId).css({'left': '', 'margin': ''});
+            }
+            jQuery('#' + overlayId).show();         
+        }
+        function close_overlay()
+        {
+            $('.quickviewpro-hider').hide();
+            $('.quickviewpro-popup').hide();
+        }
     //]]>
     </script>
     </div>
@@ -227,50 +228,50 @@
 </div>
 <div id="pdp-hider" class="quickviewpro-hider" style="display:none;background-color: rgb(136, 136, 136); height: 1381px;"></div>
 <div id="returns-overlay" style="display:none" class="quickviewpro-popup">
-	<a class="close-popap" href="javascript:void(0);"></a>
-	<div class="custom-overlay overlay-returns">
-		<?php echo $this->getChildHtml('returns_exchanges');?>
-	</div>
+    <a class="close-popap" href="javascript:void(0);"></a>
+    <div class="custom-overlay overlay-returns">
+        <?php echo $this->getChildHtml('returns_exchanges');?>
+    </div>
 </div>
 <div id="shipping-overlay" style="display:none" class="quickviewpro-popup">
-	<a class="close-popap" href="javascript:void(0);"></a>
-	<div class="custom-overlay overlay-shipping">
-		<?php echo $this->getChildHtml('shipping');?>
-	</div>
+    <a class="close-popap" href="javascript:void(0);"></a>
+    <div class="custom-overlay overlay-shipping">
+        <?php echo $this->getChildHtml('shipping');?>
+    </div>
 </div>
 <div id="video-overlay" style="display:none" class="quickviewpro-popup">
-	<a class="close-popap" id="close-video" href="javascript:void(0);"></a>
-	<div class="popup-header"><?php echo $_product->getName();?></div>
-	<div id="video-main" class="main-popup custom-overlay">
-		<div id="video-embed">
-			<?php echo $_product['product_video'];?>
-		</div>
-	</div>	
+    <a class="close-popap" id="close-video" href="javascript:void(0);"></a>
+    <div class="popup-header"><?php echo $_product->getName();?></div>
+    <div id="video-main" class="main-popup custom-overlay">
+        <div id="video-embed">
+            <?php echo $_product['product_video'];?>
+        </div>
+    </div>  
 </div>
 <div id="cart-overlay" style="display:none;width:675px;" class="quickviewpro-popup">
-	<a class="close-popap" href="javascript:void(0);"></a>
-	<div class="popup-header">Cart {<span id="cart-count"></span>}</div>
-	<div class="main-popup custom-overlay overlay-cart">
-		<div class="row">
-			<div class="span4">
-				<p>Item added to your cart!</p>
-			</div>
-			<div id="product-info" class="span4">
-			</div>
-		</div>
-		<div class="row">
-			<div class="span4">
-				<div><a href="#">Shop Featured Straps</a></div>
-				<div><a href="#">Shop Featured Accessories</a></div>
-			</div>
-			<div class="span4">
-				<div class="span2" style="margin-top: 12px;">
-					<button type="button" title="<?php echo $this->__('Checkout') ?>" class="btn btn-proceed-checkout btn-lrg btn-primary" onclick="window.location='/shop/index.php/checkout/onepage'"><span><span><?php echo $this->__('Checkout') ?></span></span></button>
-				</div>
-				<div class="span2" style="margin-top: 12px;">					
-					<button type="button" title="<?php echo $this->__('Keep Shopping') ?>" class="btn" onclick="setLocation('/shop/index.php/')"><span><span><?php echo $this->__('Keep Shopping') ?></span></span></button>
-				</div>
-			</div>
-		</div>
-	</div>	
+    <a class="close-popap" href="javascript:void(0);"></a>
+    <div class="popup-header">Cart {<span id="cart-count"></span>}</div>
+    <div class="main-popup custom-overlay overlay-cart">
+        <div class="row">
+            <div class="span4">
+                <p>Item added to your cart!</p>
+            </div>
+            <div id="product-info" class="span4">
+            </div>
+        </div>
+        <div class="row">
+            <div class="span4">
+                <div><a href="#">Shop Featured Straps</a></div>
+                <div><a href="#">Shop Featured Accessories</a></div>
+            </div>
+            <div class="span4">
+                <div class="span2" style="margin-top: 12px;">
+                    <button type="button" title="<?php echo $this->__('Checkout') ?>" class="btn btn-proceed-checkout btn-lrg btn-primary" onclick="window.location='/shop/index.php/checkout/onepage'"><span><span><?php echo $this->__('Checkout') ?></span></span></button>
+                </div>
+                <div class="span2" style="margin-top: 12px;">                   
+                    <button type="button" title="<?php echo $this->__('Keep Shopping') ?>" class="btn" onclick="setLocation('/shop/index.php/')"><span><span><?php echo $this->__('Keep Shopping') ?></span></span></button>
+                </div>
+            </div>
+        </div>
+    </div>  
 </div>
