@@ -15,7 +15,7 @@
  * @var $test Mage_Customer_Block_Address_Book
  */
 ?>
-<div class="page-title title-buttons well">
+<div class="page-title title-buttons">
     <button type="button" title="<?php echo $this->__('Add New Address') ?>" class="btn pull-right" onclick="window.location='<?php echo $this->getAddAddressUrl() ?>';"><span><span><?php echo $this->__('Add New Address') ?></span></span></button>
     <h1><?php echo $this->__('Address Book') ?></h1>
 
@@ -25,7 +25,7 @@
         <?php if($_pAddsses = Mage::getSingleton('customer/session')->getCustomer()->getDefaultBilling()): ?>
             <div class="span3">
                 <h3><?php echo $this->__('Default Billing Address') ?></h3>
-                <address class="well">
+                <address>
                     <?php echo $this->getAddressHtml(Mage::getSingleton('customer/session')->getCustomer()->getAddressById($_pAddsses)) ?>
                 </address>
                 <p><a href="<?php echo $this->getAddressEditUrl(Mage::getSingleton('customer/session')->getCustomer()->getAddressById($_pAddsses)) ?>"><?php echo $this->__('Change Billing Address') ?></a></p>
@@ -40,7 +40,7 @@
         <?php if($_pAddsses = Mage::getSingleton('customer/session')->getCustomer()->getDefaultShipping()): ?>
             <div class="span3">
                 <h3><?php echo $this->__('Default Shipping Address') ?></h3>
-                <address class="well">
+                <address>
                     <?php echo $this->getAddressHtml(Mage::getSingleton('customer/session')->getCustomer()->getAddressById($_pAddsses)) ?>
                 </address>
                 <p><a href="<?php echo $this->getAddressEditUrl(Mage::getSingleton('customer/session')->getCustomer()->getAddressById($_pAddsses)) ?>"><?php echo $this->__('Change Shipping Address') ?></a></p>
@@ -55,7 +55,7 @@
         <h3><?php echo $this->__('Additional Address Entries') ?></h3>
         <?php if($_pAddsses = $this->getAdditionalAddresses()): ?>
             <?php foreach($_pAddsses as $_address): ?>
-                <address class="well">
+                <address>
                     <?php echo $this->getAddressHtml($_address) ?>
                 </address>
                 <p><a href="<?php echo $this->getUrl('customer/address/edit', array('id'=>$_address->getId())) ?>"><?php echo $this->__('Edit Address') ?></a> <span class="separator">|</span> <a href="#" class="link-remove" onclick="return deleteAddress('<?php echo $_address->getId() ?>');"><?php echo $this->__('Delete Address') ?></a></p>
@@ -64,12 +64,6 @@
                 <p><?php echo $this->__('You have no additional address entries in your address book.') ?></p>
         <?php endif ?>
     </div>
-</div>
-<div class="form-actions">
-    <p class="back-link">
-        <span class="icon-backward"></span>
-        <a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>"><?php echo $this->__('Back') ?></a>
-    </p>
 </div>
 <script type="text/javascript">
 //<![CDATA[

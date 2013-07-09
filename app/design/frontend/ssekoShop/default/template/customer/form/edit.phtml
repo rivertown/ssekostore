@@ -21,12 +21,12 @@
     	<div class="row">
     		<div class="fields">
                 <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getCustomer())->toHtml() ?>
-                <div class="control-group">
-	                <label for="email" class="control-label span3"><em>*</em><?php echo $this->__('Email Address') ?></label>
-	                <div class="controls span3">
+                <div class="field email row">
+			        <label for="email" class="control-label span3"><em>*</em><?php echo $this->__('Email Address') ?></label>
+	                <div class="input-box span3">
 	                    <input type="text" name="email" id="email" value="<?php echo $this->htmlEscape($this->getCustomer()->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>" class="input-text required-entry validate-email" />
 	                </div>
-	            </div>
+			    </div>
 	            <?php $_dob = $this->getLayout()->createBlock('customer/widget_dob') ?>
 		        <?php if ($_dob->isEnabled()): ?>
 		            <div class="controls"><?php echo $_dob->setDate($this->getCustomer()->getDob())->toHtml() ?></div>
@@ -39,39 +39,43 @@
 		        <?php if ($_gender->isEnabled()): ?>
 		            <div class="controls"><?php echo $_gender->setGender($this->getCustomer()->getGender())->toHtml() ?></div>
 		        <?php endif ?>
-		        <div class="control-group">
-	                <label for="change_password" class="checkbox span3"><?php echo $this->__('Change Password') ?></label>
-					<div class="controls span3">
+		        <div class="field email row">
+			        <label for="change_password" class="checkbox span3"><?php echo $this->__('Change Password') ?></label>
+					<div class="input-box span3">
 						<input type="checkbox" name="change_password" id="change_password" value="1" onclick="setPasswordForm(this.checked)" title="<?php echo $this->__('Change Password') ?>"<?php if($this->getCustomer()->getChangePassword()==1): ?> checked="checked"<?php endif; ?> class="checkbox" />
             		</div>
-            	</div>
+			    </div>
             </div>
     	</div>
     </fieldset>
-    <fieldset class="span6 offset1" id="password-box" style="display:none;">
-        <h3><?php echo $this->__('Change Password') ?></h3>
-			<div class="row">
-				<label for="current_password" class="required span3"><em>*</em><?php echo $this->__('Current Password') ?></label>
-                <div class="controls span3">
-                    <input type="password" title="<?php echo $this->__('Current Password') ?>" class="input-text" name="current_password" id="current_password" />
-                </div>
-                <div class="control-group">
-                    <label for="password" class="required span3"><em>*</em><?php echo $this->__('New Password') ?></label>
-                    <div class="controls span3">
-                        <input type="password" title="<?php echo $this->__('New Password') ?>" class="input-text validate-password" name="password" id="password" />
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label for="confirmation" class="required span3"><em>*</em><?php echo $this->__('Confirm New Password') ?></label>
-                    <div class="controls span3">
-                        <input type="password" title="<?php echo $this->__('Confirm New Password') ?>" class="input-text validate-cpassword" name="confirmation" id="confirmation" />
-                    </div>
-                </div>
-			</div>      
-    </fieldset>
-    <div class="span3 offset4">
-        <button type="submit" title="<?php echo $this->__('Save') ?>" class="button btn btn-primary btn-lrg"><span><span><?php echo $this->__('Save') ?></span></span></button>
-    </div>
+    <div class="field email row">
+	    <fieldset class="span6 offset1" id="password-box" style="display:none; margin-top:20px; margin-bottom:30px;">
+	        <h3><?php echo $this->__('Change Password') ?></h3>
+				<div class="row">
+					<label for="current_password" class="required span3"><em>*</em><?php echo $this->__('Current Password') ?></label>
+	                <div class="controls span3">
+	                    <input type="password" title="<?php echo $this->__('Current Password') ?>" class="input-text" name="current_password" id="current_password" />
+	                </div>
+	                <div class="control-group">
+	                    <label for="password" class="required span3"><em>*</em><?php echo $this->__('New Password') ?></label>
+	                    <div class="controls span3">
+	                        <input type="password" title="<?php echo $this->__('New Password') ?>" class="input-text validate-password" name="password" id="password" />
+	                    </div>
+	                </div>
+	                <div class="control-group">
+	                    <label for="confirmation" class="required span3"><em>*</em><?php echo $this->__('Confirm New Password') ?></label>
+	                    <div class="controls span3">
+	                        <input type="password" title="<?php echo $this->__('Confirm New Password') ?>" class="input-text validate-cpassword" name="confirmation" id="confirmation" />
+	                    </div>
+	                </div>
+				</div>      
+	    </fieldset>
+	</div>
+    <div class="field email row">
+	    <div class="span3 offset4">
+	        <button type="submit" title="<?php echo $this->__('Save') ?>" class="button btn btn-primary btn-lrg"><span><span><?php echo $this->__('Save') ?></span></span></button>
+	    </div>
+	</div>
 </div>
 </form>
 <script type="text/javascript">
@@ -79,13 +83,13 @@
     var dataForm = new VarienForm('form-validate', true);
     function setPasswordForm(arg){
         if(arg){
-            $('#password-box').show();
+            $('password-box').show();
             $('current_password').addClassName('required-entry');
             $('password').addClassName('required-entry');
             $('confirmation').addClassName('required-entry');
 
         }else{
-            $('#password-box').hide();
+            $('password-box').hide();
             $('current_password').removeClassName('required-entry');
             $('password').removeClassName('required-entry');
             $('confirmation').removeClassName('required-entry');

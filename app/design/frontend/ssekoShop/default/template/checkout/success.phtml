@@ -101,12 +101,12 @@ foreach ($order_details->getAllItems() as $item) { ?>
 	</div>
 	<div class="span2">
 		<?php if (!$item->getParentItemId()): ?>
-			<p><?php echo Mage::helper("core")->currency($item->getPrice() * $item->getQtyOrdered()); ?></p>
+			<p><?php echo Mage::helper("core")->currency($item->getPrice()); ?></p>
 		<?php endif; ?>
 	</div>
 	<div class="span2">
 		<?php if (!$item->getParentItemId()): ?>
-			<p<?php echo Mage::helper("core")->currency($item->getPrice()); ?></p>
+			<p><?php echo Mage::helper("core")->currency($item->getPrice() * $item->getQtyOrdered()); ?></p>
 		<?php endif; ?>
 	</div>
 </div>

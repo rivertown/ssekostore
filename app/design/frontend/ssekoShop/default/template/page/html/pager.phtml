@@ -36,7 +36,6 @@
 
     <?php if($this->getShowPerPage()): ?>
     <div class="input-prepend">
-        <span class="add-on"><?php echo $this->__('Show') ?></span>
         <select class="span2" onchange="setLocation(this.value)">
         <?php foreach ($this->getAvailableLimit() as  $_key=>$_limit): ?>
             <option value="<?php echo $this->getLimitUrl($_key) ?>"<?php if($this->isLimitCurrent($_key)): ?> selected="selected"<?php endif ?>>
