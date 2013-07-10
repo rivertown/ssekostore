@@ -13,7 +13,7 @@
     <h2 class="span12" style="margin-bottom:30px;"><?php echo $this->__('Add your shipping address') ?><span>*Required Fields</span></h2>
     <fieldset>
     <?php if ($this->customerHasAddresses()): ?>
-           <div class="control-group">
+           <div class="control-group span12">
                <?php echo $this->getAddressesHtmlSelect('shipping') ?>
            </div>
     <?php endif ?>
@@ -93,18 +93,20 @@
                             </div>
                         </div>-->
                 <?php if ($this->isCustomerLoggedIn() && $this->customerHasAddresses()):?>
-                    <label class="checkbox" for="shipping:save_in_address_book">
-                        <input type="checkbox" name="shipping[save_in_address_book]" value="1" title="<?php echo $this->__('Save in address book') ?>" id="shipping:save_in_address_book" onchange="shipping.setSameAsBilling(false);"<?php if ($this->getAddress()->getSaveInAddressBook()):?> checked="checked"<?php endif;?> class="checkbox" />
-                        <?php echo $this->__('Save in address book') ?>
-                    </label>
+					<div class="row" style="margin-top:20px;">
+						<div class="span3 offset3">
+							<input type="checkbox" name="shipping[save_in_address_book]" value="1" title="<?php echo $this->__('Save in address book') ?>" id="shipping:save_in_address_book" onchange="shipping.setSameAsBilling(false);"<?php if ($this->getAddress()->getSaveInAddressBook()):?> checked="checked"<?php endif;?> class="checkbox" /> 
+                			<label class="checkbox billing-options" for="shipping:save_in_address_book"><?php echo $this->__('Save in address book') ?></label>
+                		</div>
+                	</div>
                 <?php else:?>
                     <div class="no-display"><input type="hidden" name="shipping[save_in_address_book]" value="1" /></div>
                 <?php endif;?>
             </fieldset>
         </div>
-        <div class="span4 offset6">
-            <label class="checkbox span3 billing-options" for="shipping:same_as_billing"><?php echo $this->__('Use Billing Address') ?></label>
-            <input type="checkbox" name="shipping[same_as_billing]" id="shipping:same_as_billing" value="1"<?php if($this->getAddress()->getSameAsBilling()): ?> checked="checked"<?php endif; ?> title="<?php echo $this->__('Use Billing Address') ?>" onclick="shipping.setSameAsBilling(this.checked)" class="checkbox" />
+        <div class="span3 offset9" style="margin-top:20px;">
+        	<input type="checkbox" name="shipping[same_as_billing]" id="shipping:same_as_billing" value="1"<?php if($this->getAddress()->getSameAsBilling()): ?> checked="checked"<?php endif; ?> title="<?php echo $this->__('Use Billing Address') ?>" onclick="shipping.setSameAsBilling(this.checked)" class="checkbox" />
+            <label class="checkbox billing-options" for="shipping:same_as_billing"><?php echo $this->__('Use Billing Address') ?></label>
         </div>
     </fieldset>
 	<div class="span3 offset9" style="margin-top:30px;" id="shipping-buttons-container">

@@ -19,7 +19,7 @@
 ?>
 <div class="col2-set row">
     <?php echo $this->getChildHtml('login_before')?>
-    <div class="span5 offset1">   
+    <div class="span5">   
     	<h2><?php echo $this->__('Returning Customers') ?></h2>
         <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
         <form id="login-form" action="<?php echo $this->getPostAction() ?>" method="post" class="form-vertical">
@@ -59,13 +59,13 @@
         <?php if( $this->getQuote()->isAllowedGuestCheckout() ): ?>
             <ul class="form-list">
             	<li class="span3">
-	            	<label class="radio" style="margin-right:15px" for="login:register"><?php echo $this->__('Register') ?></label>
-					<input type="radio" name="checkout_method" id="login:register" value="register"<?php if($this->getQuote()->getCheckoutMethod()==Mage_Checkout_Model_Type_Onepage::METHOD_REGISTER || !$this->getQuote()->isAllowedGuestCheckout()): ?> checked="checked"<?php endif ?> class="radio" />
+            		<input type="radio" name="checkout_method" id="login:register" value="register"<?php if($this->getQuote()->getCheckoutMethod()==Mage_Checkout_Model_Type_Onepage::METHOD_REGISTER || !$this->getQuote()->isAllowedGuestCheckout()): ?> checked="checked"<?php endif ?> class="radio" />
+	            	<label class="radio" for="login:register"><?php echo $this->__('Register') ?></label>
                 </li>
                 <?php if( $this->getQuote()->isAllowedGuestCheckout() ): ?>
                 	<li class="span3">
-	                    <label class="radio" style="margin-right:15px" for="login:guest"><?php echo $this->__('Checkout as Guest') ?></label>
-						<input type="radio" name="checkout_method" id="login:guest" value="guest"<?php if($this->getQuote()->getCheckoutMethod()==Mage_Checkout_Model_Type_Onepage::METHOD_GUEST): ?> checked="checked"<?php endif; ?> class="radio" />    
+                		<input type="radio" name="checkout_method" id="login:guest" value="guest"<?php if($this->getQuote()->getCheckoutMethod()==Mage_Checkout_Model_Type_Onepage::METHOD_GUEST): ?> checked="checked"<?php endif; ?> class="radio" /> 
+	                    <label class="radio" for="login:guest"><?php echo $this->__('Checkout as Guest') ?></label>   
                 	</li>
                 <?php endif; ?>        
             </ul>

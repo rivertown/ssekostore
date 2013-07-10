@@ -16,32 +16,43 @@
  * @see Mage_Checkout_Block_Cart_Totals
  * @var $this Mage_Checkout_Block_Cart_Totals
  */
+ $cart = Mage::getModel('checkout/cart')->getQuote();
+$shippingMethod = $cart->getShippingAddress();
 ?>
 <?php if ($this->canApplyMsrp()): ?>
     <div class="cart-msrp-totals"><?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?></div>
 <?php else: ?>
-<div class="row price-box">
+<div class="row 1">
 	<div class="span2">
 		<h6>Subtotal</h6>
 	</div>
 	<div class="span2">
-		<?php echo $this->renderTotals(); ?>
+		<p><?php echo Mage::helper("core")->currency($cart['subtotal']); ?></p>
 	</div>
 </div>
-<div class="row price-box">
+<div class="row 2">
 	<div class="span2">
 		<h6>Shipping</h6>
 	</div>
 	<div class="span2">
-		<div class="price">$0.00</div>
+		<p><?php echo Mage::helper('core')->currency($shippingMethod['shipping_amount'],true,false); ?></p>
 	</div>
 </div>
-<div class="row price-box" style="margin-bottom:30px;">
+<div class="row 2">
 	<div class="span2">
-		<h6>Estimated Total</h6>
+		<h6>Tax</h6>
 	</div>
 	<div class="span2">
-		<?php echo $this->renderTotals('footer'); ?>
+		<p><?php echo Mage::helper("core")->currency($cart['tax_amount']); ?></p>
+	</div>
+</div>
+<div class="row 3" style="margin-bottom:30px;">
+	<div class="span2">
+		<h6>Total</h6>
+	</div>
+	<div class="span2">
+		<p><?php echo Mage::helper("core")->currency($cart['grand_total']); ?></p>
+		<p style="display:none;">Discount Amount: <?php echo Mage::helper("core")->currency($cart['subtotal'] - $cart['subtotal_with_discount']); ?> Code: <?php echo $cart['coupon_code']; ?></p>
 	</div>
 </div>
 <button id="displayedUpdate" type="submit" title="<?php echo $this->__('Update Shopping Cart') ?>" class="btn btn-lrg shrink-wrap"><span><span><?php echo $this->__('Update Shopping Cart') ?></span></span></button>
