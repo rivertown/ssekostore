@@ -58,7 +58,7 @@ $totalItems = count($_selections);
         }
         $firstChildProduct = $p;
         if($p->getTypeId() == "configurable") {
-			$configurableProduct = $p;
+            $configurableProduct = $p;
             $firstChildProduct = current($p->getTypeInstance()->getUsedProducts());
             if(empty($firstChildProduct)) {
                 $firstChildProduct = $p;
@@ -77,7 +77,7 @@ $totalItems = count($_selections);
     <span id="bundle-option-<?php echo $_option->getId() ?>-container"></span>
 </div>
 <script type="text/javascript">
-    Event.observe(window, 'load', function(){
+    jQuery(document).ready(function() {
         $$('input.radio').each(function(el){
             if(typeof(bundle) == 'undefined') {
                 bundle = __bundle;
@@ -85,12 +85,12 @@ $totalItems = count($_selections);
 
             if(typeof(bundle) != 'undefined') {
                 var name = el.name;
-		    	if(name.substring(0, 7) != 'ratings')
-		    	{
-	                bundle.changeSelection(el);
-	                el.writeAttribute('checked', 'checked');
-	                el.next().setStyle({marginLeft:0});
-	           	}
+                if(name.substring(0, 7) != 'ratings')
+                {
+                    bundle.changeSelection(el);
+                    el.writeAttribute('checked', 'checked');
+                    el.next().setStyle({marginLeft:0});
+                }
             }
         });
     });
