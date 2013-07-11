@@ -52,9 +52,9 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
 		        		<a href="<?php echo $this->getDeleteUrl()?>" title="<?php echo $this->__('Remove')?>" class="btn btn-remove"><?php echo $this->__('Remove')?></a>
 					<?php if ($this->helper('wishlist')->isAllowInCart()) : ?>
 				        <?php if ($isVisibleProduct): ?>
-				        	<input type="checkbox" value="1" name="cart[<?php echo $_item->getId() ?>][wishlist]" title="<?php echo $this->__('Move to Wishlist') ?>" class="checkbox" />
+				        	<!--input type="checkbox" value="1" name="cart[<?php echo $_item->getId() ?>][wishlist]" title="<?php echo $this->__('Move to Wishlist') ?>" class="checkbox" /-->
 				        <?php endif ?>
-				    <?php endif ?>
+				   <?php endif ?>
 				</div>
 			</div>
 		</div>

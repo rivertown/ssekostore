@@ -10,98 +10,105 @@
  */
 ?>
 <?php if(count($this->getItemCollection()->getItems())): ?>
-<?php $_items = $this->getItemCollection()->getItems();
-	$all_products = array();
-	foreach($_items as $_item):
-		$cats = $_item->getCategoryIds();
-		foreach ($cats as $category_id):
-		    $_cat = Mage::getModel('catalog/category')->load($category_id);
-			if($_cat->getLevel() == 2):
-				if(!isset($all_products[$_cat->getName()]))
-			    {
-			         $all_products[$_cat->getName()] = array();
-			    }		
-			    $all_products[$_cat->getName()][] = $_item;
-			endif;
-		endforeach;
-	endforeach;?>
-<div class="box-collateral box-up-sell">		
-	<?php foreach($all_products as $key => $category_product):?>
-		<?php if($key == "Sandal Straps"):$display_key = "Straps";else:$display_key = $key;endif;?>
-		<h2><?php echo $this->__('Add Recommended '.$display_key) ?></h2>
+	<?php $_items = $this->getItemCollection()->getItems();
+		$all_products = array();
+		foreach($_items as $_item):
+			$cats = $_item->getCategoryIds();
+			foreach ($cats as $category_id):
+			    $_cat = Mage::getModel('catalog/category')->load($category_id);
+				if($_cat->getLevel() == 2):
+					if(!isset($all_products[$_cat->getName()]))
+				    {
+				         $all_products[$_cat->getName()] = array();
+				    }		
+				    $all_products[$_cat->getName()][] = $_item;
+				endif;
+			endforeach;
+		endforeach;?>
+	<div class="box-collateral box-up-sell">		
+		<?php foreach($all_products as $key => $category_product):?>
+			<?php if($key == "Sandal Straps"):$display_key = "Straps";else:$display_key = $key;endif;?>
+			<h2><?php echo $this->__('Add Recommended '.$display_key) ?></h2>
 			<?php $this->resetItemsIterator(); ?>    		
 			<div class="row">  		
-    			<?php for($_j=0;$_j<count($all_products[$key]);$_j++): ?>
-    				<?php if(!empty($category_product[$_j])): ?>
-	            		<div class="span3">	
-	            			<?php $_link=$category_product[$_j];?>	
-	            			<form action="<?php echo $this->getSubmitUrl($_link) ?>" method="post" id="upsell_addtocart_form_<?php echo $_link->getId() ?>"<?php if($_link->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?> class="form">
-	            				<div class="no-display">
-						            <input type="hidden" name="product" value="<?php echo $_link->getId() ?>" />
-						            <input type="hidden" name="related_product" id="related-products-field" value="" />
-						        </div> 
-		            			<a href="<?php echo $_link->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_link->getName()) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_link, 'small_image')->resize(125) ?>" width="125" height="125" alt="<?php echo $this->htmlEscape($_link->getName()) ?>" /></a>
-				                <h3 class="product-name"><a href="<?php echo $_link->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_link->getName()) ?>"><?php echo $this->htmlEscape($_link->getName()) ?></a></h3>
-				                <?php echo $this->getPriceHtml($_link, true, '-upsell') ?>
-				                <div class="add-to-box">
-				                	<?php //$_product = $this->getProduct(); ?>
-									<?php $buttonTitle = $this->__('Add to Cart'); ?>
-									<?php if($_link->isSaleable()): ?>
-									    <div class="form-inline">
-									        <?php if(!$_link->isGrouped()): ?>
-									        <label for="qty"><strong><?php echo $this->__('Quantity') ?></strong></label>
-									        <input type="text" name="qty" id="qty_<?php echo $_link->getId() ?>" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="span1 input-text qty" />
-									        <?php endif; ?>
-									        <button type="button" title="<?php echo $buttonTitle ?>" class="btn btn-primary" id="<?php echo $_link->getId() ?>"><span><span><?php echo $buttonTitle ?></span></span></button>        
-											<span id='upsell_ajax_loader_<?php echo $_link->getId() ?>' style='display:none'><img src='<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif')?>'/></span>
-									        <?php echo $this->getChildHtml('', true, true) ?>
-									    </div>
-									<?php endif; ?>
-								</form>
-			                </div>	            					      
-	            		</div>
-            		<?php endif; ?>
-            	<?php endfor;?>
-            </div>
-	<?php endforeach;?>
-</div>	
-</form>
-<script type="text/javascript">
-    //<![CDATA[
-    jQuery('.btn-primary').click(function(){
-    	var id = jQuery(this).attr('id');
-    	console.log(jQuery('#qty_' + id).val());
-    	if(jQuery('#qty_' + id).val() != '0')
-    	{
-    		var form = jQuery('#upsell_addtocart_form_' + id);
-    		var oldUrl = form.attr('action'); 
-    		var url = oldUrl.replace("checkout/cart","ajax/index");
-    		var data = form.serialize();
-    		data += '&isAjax=1';
-    		jQuery('#upsell_ajax_loader_' + id).show();
-    		jQuery.ajax({
-                  url: url,
-                  dataType: 'json',
-                  type : 'post',
-                  data: data,
-                  success: function(data){
-                        jQuery('#upsell_ajax_loader_' + id).hide();
-						jQuery('.btn-primary').removeAttr("disabled");
-                        if(jQuery('.top-nav-right #top-nav li')){
-                        	var search = jQuery('.top-nav-right #top-nav li:last').clone();
-                        	jQuery('.top-nav-right #top-nav li').remove();
-                            jQuery('.top-nav-right #top-nav').append(data.toplink);
-                            jQuery('.top-nav-right #top-nav').append(search);
-                        }
-                        open_overlay('cart-overlay', 'pdp-hider');
-                        jQuery('#product-info').append('<div class="row"><div class="span2" id="cart-image"><img height="75px" width="75px" src="' + data.product_image + '"/></div>' + 
-                        	'<div class="span2"><div>' + data.product_name + '</div><div>$' + data.price + '</div><div>Qty: ' + data.qty + '</div><div><a href="/shop/index.php/checkout/cart/">Change</a><a href="' + data.remove_url + '">Remove</a></div>')
-                        jQuery('#cart-count').text(data.count);
-              	}
-            });
-		}
-    });    
-       
-    //]]>
-    </script>
+	    		<?php for($_j=0;$_j<count($all_products[$key]);$_j++): ?>
+					<?php if(!empty($category_product[$_j])): ?>
+						<div class="span3">	
+							<?php $_link=$category_product[$_j];?>	
+							<form action="<?php echo $this->getSubmitUrl($_link) ?>" method="post" id="upsell_addtocart_form_<?php echo $_link->getId() ?>"<?php if($_link->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?> class="form">
+		            			<div class="no-display">
+									<input type="hidden" name="product" value="<?php echo $_link->getId() ?>" />
+									<input type="hidden" name="related_product" id="related-products-field" value="" />
+								</div> 
+								<a href="<?php echo $_link->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_link->getName()) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_link, 'small_image')->resize(125) ?>" width="125" height="125" alt="<?php echo $this->htmlEscape($_link->getName()) ?>" /></a>
+								<div class="row bottom-rows">
+									<div class="span3 title-box">
+										<h3 class="product-name"><a href="<?php echo $_link->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_link->getName()) ?>"><?php echo $this->htmlEscape($_link->getName()) ?></a></h3>
+										<?php echo $this->getPriceHtml($_link, true, '-upsell') ?>
+									</div>
+								</div>
+								<div class="row bottom-rows">
+									<div class="span3">
+										<div class="add-to-box">
+											<?php //$_product = $this->getProduct(); ?>
+											<?php $buttonTitle = $this->__('Add to Cart'); ?>
+											<?php if($_link->isSaleable()): ?>
+												<div class="form-inline">
+													<?php if(!$_link->isGrouped()): ?>
+												        <label for="qty"><strong><?php echo $this->__('Quantity') ?></strong></label>
+												        <input type="text" name="qty" id="qty_<?php echo $_link->getId() ?>" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="span1 input-text qty" />
+													<?php endif; ?>
+													<button type="button" title="<?php echo $buttonTitle ?>" class="btn btn-primary" id="<?php echo $_link->getId() ?>"><span><span><?php echo $buttonTitle ?></span></span></button>        
+													<span id='upsell_ajax_loader_<?php echo $_link->getId() ?>' style='display:none'><img src='<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif')?>'/></span>
+													<?php echo $this->getChildHtml('', true, true) ?>
+												</div>
+											<?php endif; ?>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					<?php endif; ?>
+	            <?php endfor;?>
+			</div>
+		<?php endforeach;?>
+	</div>
+	<script type="text/javascript">
+	    //<![CDATA[
+	    jQuery('.btn-primary').click(function(){
+	    	var id = jQuery(this).attr('id');
+	    	console.log(jQuery('#qty_' + id).val());
+	    	if(jQuery('#qty_' + id).val() != '0')
+	    	{
+	    		var form = jQuery('#upsell_addtocart_form_' + id);
+	    		var oldUrl = form.attr('action'); 
+	    		var url = oldUrl.replace("checkout/cart","ajax/index");
+	    		var data = form.serialize();
+	    		data += '&isAjax=1';
+	    		jQuery('#upsell_ajax_loader_' + id).show();
+	    		jQuery.ajax({
+	                  url: url,
+	                  dataType: 'json',
+	                  type : 'post',
+	                  data: data,
+	                  success: function(data){
+	                        jQuery('#upsell_ajax_loader_' + id).hide();
+							jQuery('.btn-primary').removeAttr("disabled");
+	                        if(jQuery('.top-nav-right #top-nav li')){
+	                        	var search = jQuery('.top-nav-right #top-nav li:last').clone();
+	                        	jQuery('.top-nav-right #top-nav li').remove();
+	                            jQuery('.top-nav-right #top-nav').append(data.toplink);
+	                            jQuery('.top-nav-right #top-nav').append(search);
+	                        }
+	                        open_overlay('cart-overlay', 'pdp-hider');
+	                        jQuery('#product-info').append('<div class="row"><div class="span2" id="cart-image"><img height="75px" width="75px" src="' + data.product_image + '"/></div>' + 
+	                        	'<div class="span2"><div>' + data.product_name + '</div><div>$' + data.price + '</div><div>Qty: ' + data.qty + '</div><div><a href="/shop/index.php/checkout/cart/">Change</a><a href="' + data.remove_url + '">Remove</a></div>')
+	                        jQuery('#cart-count').text(data.count);
+	              	}
+	            });
+			}
+	    });    
+	       
+	    //]]>
+	</script>
 <?php endif ?>
