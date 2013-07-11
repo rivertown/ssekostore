@@ -130,6 +130,10 @@
 		}
 		function close_overlay()
 		{
+			if($('#product-info').length > 0)
+			{
+				$('#product-info').empty();
+			}
 			$('.quickviewpro-hider').hide();
         	$('.quickviewpro-popup').hide();
 		}
@@ -145,7 +149,7 @@
 			$('#progress3').addClass( 'progtrckr-active');
 			$('#progress3').removeClass( 'progtrckr-not');
 		});
-		if (($('#order-complete').length == 0) && ($('#shopping-cart-page').length == 0)){
+		if ($('#order-complete').length == 0){
 			if ($('#opc-login').length == 0){
 				$('.progtrckr li').removeClass( 'progtrckr-active');
 				$('.progtrckr li').addClass( 'progtrckr-not');
