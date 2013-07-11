@@ -332,7 +332,7 @@ class Mage_Catalog_Block_Product_List_Toolbar extends Mage_Core_Block_Template
         }
 
         $orders = $this->getAvailableOrders();
-        $defaultOrder = 'entity_id';
+        $defaultOrder = 'position';
 
         if (!isset($orders[$defaultOrder])) {
             $keys = array_keys($orders);
@@ -424,7 +424,7 @@ class Mage_Catalog_Block_Product_List_Toolbar extends Mage_Core_Block_Template
     public function getAvailableOrders()
     {
         //return $this->_availableOrder;
-        $t = array('entity_id' => 'New', 'price' => 'Price', 'ordered_qty' => 'Most Popular');
+        $t = array('position' => 'position', 'entity_id' => 'New', 'price' => 'Price', 'ordered_qty' => 'Most Popular');
 		return $t;
     }
 
