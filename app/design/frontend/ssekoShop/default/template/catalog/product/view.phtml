@@ -53,18 +53,19 @@
                 <div class="product-name">
                     <h2 class="productName"><?php if ($now>=$newsFrom && $now<=$newsTo):?><span id="newProduct">NEW! </span><?php endif;?><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
                 </div>
-                
-                <?php echo $this->getPriceHtml($_product) ?>
-                <?php echo $this->getChildHtml('extrahint') ?>
-                <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
-                <?php echo $this->getChildHtml('alert_urls') ?>                             
-    
-                <?php echo $this->getChildHtml('info_tabs') ?>                                                                    
+                <?php if($_product->getTypeID()=='giftcards'):echo $this->getChildHtml('product_type_data'); else:?>
+	                <?php echo $this->getPriceHtml($_product) ?>
+	                <?php echo $this->getChildHtml('extrahint') ?>
+	                <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
+	                <?php echo $this->getChildHtml('alert_urls') ?>                             
+	    
+	                <?php echo $this->getChildHtml('info_tabs');
+	          	endif; ?>                                                                    
             </div>
         </div>
         <div class="clearer"></div>
-        <div class="row" id="product-add">
-            <!--<?php echo $this->getChildHtml('product_type_data') ?>-->
+        <div class="row" id="product-add">  
+        	<?php if($_product->getTypeID()!='giftcards'):?>          
             <div>&nbsp;</div>
             <div class="product-options span5">
                 <div id="extra-links">
@@ -73,6 +74,7 @@
                     <a id="shipping" href="#">Shipping Rates</a>
                 </div>
             </div>
+            <?php endif;?>
             <div class="product-options-bottom span4">
                 <?php if (!$this->hasOptions()):?>
                     <div class="add-to-box">
@@ -186,19 +188,21 @@
     //]]>
     </script>
     </div>
-    <div class="product-collateral">
-    <!--<?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html):?>
-        <div class="box-collateral <?php echo "box-{$alias}"?>">
-            <?php if ($title = $this->getChildData($alias, 'title')):?>
-            <h2><?php echo $this->escapeHtml($title); ?></h2>
-            <?php endif;?>
-            <?php echo $html; ?>
-        </div>
-    <?php endforeach;?>-->
-    <?php echo $this->getChildHtml('upsell_products') ?>
-    <?php echo $this->getChildHtml('product_review') ?>
-    <?php echo $this->getChildHtml('product_additional_data') ?>
-    </div>
+    <?php if($_product->getTypeID()!='giftcards'):?>
+	    <div class="product-collateral">
+	    <!--<?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html):?>
+	        <div class="box-collateral <?php echo "box-{$alias}"?>">
+	            <?php if ($title = $this->getChildData($alias, 'title')):?>
+	            <h2><?php echo $this->escapeHtml($title); ?></h2>
+	            <?php endif;?>
+	            <?php echo $html; ?>
+	        </div>
+	    <?php endforeach;?>-->
+	    <?php echo $this->getChildHtml('upsell_products') ?>
+	    <?php echo $this->getChildHtml('product_review') ?>
+	    <?php echo $this->getChildHtml('product_additional_data') ?>
+	    </div>	
+	<?php endif;?>
 </div>
 <div id="pdp-hider" class="quickviewpro-hider" style="display:none;background-color: rgb(136, 136, 136); height: 1381px;"></div>
 <div id="returns-overlay" style="display:none" class="quickviewpro-popup">

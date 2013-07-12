@@ -1,0 +1,35 @@
+<?php if($this->getCustomerId()):?>
+<div class="clear"></div>
+<div class="entry-edit box-left" style="float:inherit;display:block;margin-top: 5px;">
+    <div class="entry-edit-head">
+        <h4 class="icon-head"><?php echo $this->__('Customer Gift Cards') ?></h4>
+    </div>
+
+    <fieldset class="np">
+        <div class="content">
+                <table border="0" cellpadding="1" cellspacing="1">
+                    <tr>
+                        <td>
+                        <div class="input-box">
+                            <input type="checkbox" <?php echo Mage::getSingleton('giftcards/session')->getActive() ? 'checked="checked"' : '' ?>  onclick="toggleCardsUsing('<?php echo $this->getUrl('giftcards/adminhtml_giftcards/giftcardActive') ?>');" class="checkbox" id="giftcard_use" name="giftcard_use" value="1">
+                            <label for="giftcard_use">Use Gift Card balance.</label>
+                        </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><?php echo $this->__('Customer Gift Card balance') ?>:</td>
+                        <td><div id="customer_balance"><?php echo Mage::helper('core')->currency($this->getCurrentBalance());?></div> </td>
+                    </tr>
+                    <tr>
+                        <td><?php echo $this->__('Enter the Gift Card code') ?>:</td>
+                        <td><input class="input-text" id="giftcard_code" name="giftcard_code" value="" /></td>
+                        <td><button style="margin-left: 30%" type="button" title="<?php echo $this->__('Redeem') ?>" class="button" onclick="updateBalance('<?php echo $this->getUrl('giftcards/adminhtml_giftcards/apply') ?>',<?php echo $this->getCustomerId()?>)" value="<?php echo $this->__('Redeem') ?>"><span><span><?php echo $this->__('Redeem') ?></span></span></button></td>
+                    </tr>
+                </table>
+
+        </div>
+    </fieldset>
+
+</div>
+
+<?php endif ?>

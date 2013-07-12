@@ -82,6 +82,7 @@
             <div class="span5">
 				<?php if (!$this->getIsVirtual()): echo $this->getChildHtml('shipping'); endif; ?>
 				<?php echo $this->getChildHtml('coupon') ?>
+				<?php echo $this->getChildHtml('giftcards') ?>
             </div>
             <div class="span4 offset3 show-buttons">
                 <?php echo $this->getChildHtml('totals'); ?>
