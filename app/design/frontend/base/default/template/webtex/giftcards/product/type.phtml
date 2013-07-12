@@ -24,15 +24,15 @@ $_to = Mage::getStoreConfig('giftcards/default/max_card_value') ? Mage::getStore
         <?php if ($this->getPriceStatus() == 1) : ?>
         <div class="row">
             <label for="card-amount" class="span2 required"><?php echo $this->__('Amount') ?><em>*</em>:</label>
-            <div class="span3">
-            	<input style="width:100px;" type="text" id="card-amount" name="card_amount" class="input-text required-entry validate-float-range float-range-<?php echo $_from;?>-<?php echo $_to;?>"/>&nbsp;(<?php echo $_currency->format($_from) ?> - <?php echo $_currency->format($_to) ?>)
+            <div class="span2">
+            	<input type="text" id="card-amount" name="card_amount" class="input-text required-entry validate-float-range float-range-<?php echo $_from;?>-<?php echo $_to;?>"/>&nbsp;(<?php echo $_currency->format($_from) ?> - <?php echo $_currency->format($_to) ?>)
             </div>	
         </div>
         <?php elseif($this->getPriceStatus() == 2) : ?>
        	<div class="row">
 	        <label for="card-amount" class="span2 required"><?php echo $this->__('Select amount') ?><em>*</em>:</label>
-	        <div class="span3">
-		        <select id="card-amount" name="card_amount" class="validate-select" style="width:207px;">
+	        <div class="span2">
+		        <select id="card-amount" name="card_amount" class="validate-select">
 		            <?php foreach($this->aAdditionalPrices as $additionalPrice) : ?>
 		            <option value="<?php echo $additionalPrice;?>"><?php echo $_currency->format($additionalPrice);?></option>
 		            <?php endforeach; ?>
@@ -44,27 +44,27 @@ $_to = Mage::getStoreConfig('giftcards/default/max_card_value') ? Mage::getStore
         <?php endif; ?>
         <div class="row">
             <label class="span2" for="mail-from"><?php echo $this->__('From Name') ?>:</label>
-            <div class="span3">
-            	<input style="width:200px;" type="text" id="mail-from" name="mail_from" class="input-text"/>
+            <div class="span2">
+            	<input type="text" id="mail-from" name="mail_from" class="input-text"/>
             </div>
         </div>
         <div class="row">
             <label class="span2" for="mail-to"><?php echo $this->__('To Name') ?>:</label>
-            <div class="span3">
-            	<input style="width:200px;" type="text" id="mail-to" name="mail_to" class="input-text"/>
+            <div class="span2">
+            	<input type="text" id="mail-to" name="mail_to" class="input-text"/>
             </div>	
         </div>
         <?php if ($this->getCardType() == 'email'): ?>
             <div class="row">
                 <label for="mail-to-email" class="span2 required"><?php echo $this->__('To E-mail') ?><em>*</em>:</label>
-				<div class="span3">
-                	<input style="width:200px;" type="text" id="mail-to-email" name="mail_to_email" class="input-text required-entry validate-email"/>
+				<div class="span2">
+                	<input type="text" id="mail-to-email" name="mail_to_email" class="input-text required-entry validate-email"/>
               	</div>
             </div>
         <?php endif; ?>
         <div class="row">
             <label class="span2" for="mail-message"><?php echo $this->__('Message') ?>:</label>
-            <div class="span3">
+            <div class="span2">
             	<textarea id="mail-message" name="mail_message"></textarea>
             </div>	
         </div>
@@ -92,8 +92,11 @@ $_to = Mage::getStoreConfig('giftcards/default/max_card_value') ? Mage::getStore
         <?php endif; ?>
         <?php if($this->getCardType() == 'email'): ?>
         <!--Preview-->
-        <br/>
-        <a href="#" onclick="preview();"> <?php echo $this->__('Preview my gift card'); ?>. </a>
+        <div class="row">
+        	<div class="span2 offset2">
+        		<a href="#" onclick="preview();"><?php echo $this->__('Preview my gift card'); ?></a>
+        	</div>
+        </div>
         <script type="text/javascript">
             function preview() {
                 var product = <?php echo $_product->getId() ?>;
@@ -119,6 +122,10 @@ $_to = Mage::getStoreConfig('giftcards/default/max_card_value') ? Mage::getStore
                 }
                 return price;
             }
+            jQuery(document).ready(function($) {
+			  // Code using $ as usual goes here.
+			  jQuery('#product-add .product-options-bottom').addClass('offset5');
+			});
         </script>
         <!--end preview-->
         <?php endif; ?>
