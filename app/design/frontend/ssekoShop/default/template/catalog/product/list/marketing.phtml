@@ -28,12 +28,12 @@
     <div class="container">
 		<div class="row">
 			<?php if($_marketingTitle = $this->getCurrentCategory()->getMarketingTitle()): ?>
-			    <h1><?php echo $_helper->categoryAttribute($_category, $_marketingTitle, 'marketing_title') ?></h1>
+			    <h1 class="span12"><?php echo $_helper->categoryAttribute($_category, $_marketingTitle, 'marketing_title') ?></h1>
 			<?php endif; ?>
 			<?php if($_marketingImage = $this->getCurrentCategory()->getThumbnail()):?>
 	        	<div class='span2'><img height="150px" width="150px" src='<?php echo Mage::getBaseUrl('media').'catalog/category/'.$_marketingImage;?>'/></div>
 	        <?php endif;?>
-	        <div class="span10"><?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?></div>	        
+	        <div class="span10" id="sub-footer-description-content"><?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?></div>	        
     	</div>
     </div>
 </div>
