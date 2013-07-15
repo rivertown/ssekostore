@@ -1,28 +1,24 @@
 <div class="page-title">
-    <h1><?php echo $this->__('My Gift Cards') ?></h1>
+    <h1><?php echo $this->__('My Gift Certificates') ?></h1>
 </div>
 <form name="giftcardForm" action="<?php echo $this->getUrl('customer/giftcards/balance') ?>" method="post">
-    <table border="0" cellpadding="1" cellspacing="1">
-        <tr>
-            <td><?php echo $this->__('Check Gift Card Balance') ?>:</td>
-
-        </tr>
-        <tr>
-            <td><?php echo $this->__('Enter the Gift Card code') ?>:</td>
-            <td><input class="input-text" id="giftcard_code" name="giftcard_code" value=""/></td>
-        </tr>
-        <?php if(($aResult = $this->getCurrentBalance()) !== false): ?>
-            <tr>
-                <td>&nbsp;</td>
-                <td><?php echo 'Gift Card: "'.$aResult['card_code'].'" '.Mage::helper('core')->currency($aResult['card_balance']); ?></td>
-            </tr>
-        <?php endif;?>
-        <tr>
-            <td colspan="2" align="center">
-                <button type="button" title="<?php echo $this->__('Check') ?>" class="button"
-                        onclick="document.forms['giftcardForm'].submit()" value="<?php echo $this->__('Redeem') ?>">
-                    <span><span><?php echo $this->__('Check') ?></span></span></button>
-            </td>
-        </tr>
-    </table>
+	<div class="row">
+		<h2 class="span12" style="margin-bottom:20px;"><?php echo $this->__('Check Gift Certificate Balance') ?></h2>
+		<label class="span3"><?php echo $this->__('Enter the Gift Certificate') ?>:</label>
+		<div class="span3">
+			<input type="text" class="input-text" id="giftcard_code" name="giftcard_code" value=""/>
+		</div>
+	</div>
+	<div class="row">
+		<?php if(($aResult = $this->getCurrentBalance()) !== false): ?>
+			<div class="alert alert-success span6" style="margin-top:20px;">
+				<?php echo 'Gift Card: "'.$aResult['card_code'].'" '.Mage::helper('core')->currency($aResult['card_balance']); ?>
+			</div>
+		<?php endif;?>
+	</div>
+	<div class="row">
+		<div class="span3" style="margin-top:20px;">
+			<button type="button" title="<?php echo $this->__('Check') ?>" class="button btn btn-lrg btn-primary" onclick="document.forms['giftcardForm'].submit()" value="<?php echo $this->__('Redeem') ?>"><?php echo $this->__('Check') ?></button>
+		</div>
+	</div>
 </form>

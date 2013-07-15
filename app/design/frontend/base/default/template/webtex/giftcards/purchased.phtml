@@ -25,55 +25,61 @@
  */
 ?>
 <?php $_cards = $this->getCards(); ?>
-<div style="margin-top: 30px;">
-    <h1><?php echo $this->__('Purchased Gift Cards') ?></h1>
+<div style="margin-top: 50px; margin-bottom:30px;">
+    <h2><?php echo $this->__('Purchased Gift Cards') ?></h2>
 </div>
 <?php echo $this->getPagerHtml(); ?>
 <?php if($_cards->getSize()): ?>
-<table class="data-table" id="my-orders-table">
-    <col width="1" />
-    <col width="1" />
-    <col width="1" />
-    <col width="1" />
-    <col width="1" />
-    <thead>
-    <tr>
-        <!--<th><?php /*echo $this->__('Card #') */?></th>-->
-        <th><?php echo $this->__('Card Code') ?></th>
-        <!--<th><?php /*echo $this->__('Card Balance') */?></th>-->
-        <th><?php echo $this->__('Order #') ?></th>
-        <th><?php echo $this->__('Card Status') ?></th>
-    </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($_cards as $_card): ?>
-    <tr>
-        <!--<td><?php /*echo $_card->getCardId() */?></td>-->
-        <td><?php echo $_card->getCardCode() ?></td>
-        <!--<td><?php /*echo $_card->getCardBalance() */?></td>-->
-        <td><a target="_blank" href="<?php echo Mage::getUrl('sales/order/view', array('order_id' => $_card->getOrderId())) ?>"><?php echo $_card->getOrderIncrementId()?></a></td>
-        <td>
-            <?php
-                switch($_card->getCardStatus()){
-                    case 0:
-                        echo "Inactive";
-                        break;
-                    case 1:
-                        echo "Active";
-                        break;
-                    case 2:
-                        echo "Used";
-                        break;
-                }
-            ?>
-        </td>
-
-    </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
-<script type="text/javascript">decorateTable('my-orders-table');</script>
-<?php echo $this->getPagerHtml(); ?>
+	<div class="cart-row" style="margin-top:30px;">
+		<div class="row">
+			<div class="span2">
+				<h6><?php echo $this->__('Order #') ?></h6>
+			</div>
+			<div class="span3">
+				<h6><?php echo $this->__('Card Code') ?></h6>
+			</div>
+			<div class="span2">
+				<h6><?php echo $this->__('Card Balance') ?></h6>
+			</div>
+			<div class="span2">
+				<h6><?php echo $this->__('Card Status') ?></h6>
+			</div>
+		</div>
+	</div>
+	<div class="cart-row" style="margin-bottom:40px;" >
+		<?php foreach ($_cards as $_card): ?>
+			<div class="row">
+				<div class="span2">
+					<p><a href="<?php echo Mage::getUrl('sales/order/view', array('order_id' => $_card->getOrderId())) ?>"><?php echo $_card->getOrderIncrementId()?></a></p>
+				</div>
+				<div class="span3" id="<?php echo $_card->getCardId() ?>">
+					<p><?php echo $_card->getCardCode() ?></p>
+				</div>
+				<div class="span2">
+					<p><?php echo $_card->getCardBalance() ?></p>
+				</div>
+				<div class="span2">
+					<p>
+						<?php
+			                switch($_card->getCardStatus()){
+			                    case 0:
+			                        echo "Inactive";
+			                        break;
+			                    case 1:
+			                        echo "Active";
+			                        break;
+			                    case 2:
+			                        echo "Used";
+			                        break;
+			                }
+			            ?>
+		            </p>
+				</div>
+			</div>
+		<?php endforeach; ?>
+	</div>
+		<script type="text/javascript">decorateTable('my-orders-table');</script>
+		<?php echo $this->getPagerHtml(); ?>
 <?php else: ?>
-<p><?php echo $this->__('You have placed no orders.'); ?></p>
+	<h2><?php echo $this->__('You have placed no orders.'); ?></h2>
 <?php endif ?>
