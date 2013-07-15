@@ -88,7 +88,6 @@ class Mage_Catalog_Block_Product_List_Marketing extends Mage_Core_Block_Template
         if (!$this->hasData('current_category')) {
             $this->setData('current_category', Mage::registry('current_category'));
         }
-		error_log('cat '.$this->getData('current_category'));
         return $this->getData('current_category');
     }
 
