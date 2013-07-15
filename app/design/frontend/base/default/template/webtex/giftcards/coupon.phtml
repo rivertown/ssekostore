@@ -8,9 +8,7 @@
     	<div class="controls span3">
 			<input value="" type="text" name="giftcard_code" id="giftcard_code" class="input-text">
 		</div>
-		<div class="span3 offset2" style="margin-top:10px; margin-bottom:20px;">
-			<button class="btn btn-lrg" type="submit" title="<?php echo $this->__('Add') ?>" onclick="giftCardForm.submit(true)" value="<?php echo $this->__('Add') ?>"><?php echo $this->__('Add') ?></button>
-		</div>
+		<button type="submit" title="<?php echo $this->__('Add') ?>" onclick="giftCardForm.submit(true)"></button>
 	    <?php $currencySymbol = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol(); $temp = 0; ?>
 	    <div class="span5">
 	    	<?php if($oGiftCardSession->getActive())
