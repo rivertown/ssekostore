@@ -1,0 +1,40 @@
+<?php
+/**
+ * Magento responsive theme
+ *
+ * @category    design
+ * @package     bootstrapped_default
+ * @copyright   Copyright (c) 2012 Magenthon (http://magenthon.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ * @author      Vedran Subotic <vedran@magenthon.com>
+ */
+?>
+<?php
+/**
+ * Category view template
+ *
+ * @see Mage_Catalog_Block_Category_View
+ */
+/* @var $this Mage_Catalog_Block_Category_View */
+?>
+<?php
+    $_helper    = $this->helper('catalog/output');
+    $_category  = $this->getCurrentCategory();
+?>
+
+<?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
+<div class="row" id="sub-footer-description" style="margin-bottom:45px;">
+    <div class="row-tick" style="margin-bottom:20px;"></div>
+    <div class="container">
+		<div class="row">
+			<?php if($_marketingTitle = $this->getCurrentCategory()->getMarketingTitle()): ?>
+			    <h1><?php echo $_helper->categoryAttribute($_category, $_marketingTitle, 'marketing_title') ?></h1>
+			<?php endif; ?>
+			<?php if($_marketingImage = $this->getCurrentCategory()->getThumbnail()):?>
+	        	<div class='span2'><img height="150px" width="150px" src='<?php echo Mage::getBaseUrl('media').'catalog/category/'.$_marketingImage;?>'/></div>
+	        <?php endif;?>
+	        <div class="span10"><?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?></div>	        
+    	</div>
+    </div>
+</div>
+<?php endif; ?>

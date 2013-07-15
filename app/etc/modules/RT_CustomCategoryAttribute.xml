@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <RT_CustomCategoryAttribute>
+            <active>true</active>
+            <codePool>community</codePool>
+        </RT_CustomCategoryAttribute>
+    </modules>
+</config>
