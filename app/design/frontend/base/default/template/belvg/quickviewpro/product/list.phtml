@@ -81,8 +81,12 @@
 				$x = (($currentPage - 1) * $perPage) + 1;
 				$y = (($currentPage - 1) * $perPage) + $totalProductsOnPage;
 				
-				$category_object = Mage::getModel('catalog/category')->load( Mage::getModel('catalog/layer')->getCurrentCategory()->getId() ); // If you don't already have one
-				$total = Mage::getModel('catalog/layer')->setCurrentCategory( $category_object )->getProductCollection()->getSize();
+				if(Mage::registry('current_category')):				
+					$category_object = Mage::getModel('catalog/category')->load( Mage::getModel('catalog/layer')->getCurrentCategory()->getId() ); // If you don't already have one
+					$total = Mage::getModel('catalog/layer')->setCurrentCategory( $category_object )->getProductCollection()->getSize();
+				else:
+					$total = Mage::getModel('catalogsearch/layer')->getProductCollection()->getSize();
+				endif;
 			?>
 			<p>VIEWING <?php echo $x?>-<?php echo $y;?> OF <?php echo $total?></p>
 		</div>
