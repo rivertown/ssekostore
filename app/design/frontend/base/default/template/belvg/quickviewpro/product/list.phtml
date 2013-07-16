@@ -57,8 +57,9 @@
 				$_categoryId = $_category->getParentId();
 			}
 		?>
-	    <?php $_category = Mage::getModel('catalog/category')->load($_categoryId) ?>	    
-	    <?php $_subcategories = $_category->getChildrenCategories() ?>
+	    <?php if(Mage::registry('current_category')):
+	    $_category = Mage::getModel('catalog/category')->load($_categoryId) ?>	    
+	    <?php $_subcategories = $_category->getChildrenCategories(); ?>
 	    <?php if (count($_subcategories) > 0): ?>
 	    	<div class="btn-group sect2">
 	    		<label><?php echo $this->__('Show')?></label>
@@ -70,7 +71,7 @@
 				 <?php } ?>			
 				 </select>
 			</div>
-		<?php endif;?>	
+		<?php endif; endif;?>	
 		<div class="item-count">
 			<?php 
 				$currentPage = Mage::getBlockSingleton('page/html_pager')->getCurrentPage();
