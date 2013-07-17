@@ -51,7 +51,7 @@
 	                            <span style="display:none"><?php echo $this->getFormatedDate($item->getAddedAt()) ?></span>
 	                    </div>
 	                    <div class="span4">
-	                    	<textarea style="height:100%;" name="description[<?php echo $item->getWishlistItemId() ?>]" rows="3" cols="5" onfocus="focusComment(this)" onblur="focusComment(this)" title="<?php echo $this->__('Comment') ?>"><?php echo $this->getCommentValue($item); ?></textarea>
+	                    	<textarea style="height:100%;" name="description[<?php echo $item->getWishlistItemId() ?>]" rows="3" cols="5" onfocus="focusComment(this)" onblur="focusComment(this)" title="<?php echo $this->__('Comment') ?>"><?php echo ($this->escapeHtml($item->getDescription())) ?></textarea>
 	                    </div>
 	                    <div class="span2">
 	                        <?php if ($item->canHaveQty() && $isVisibleProduct): ?>
