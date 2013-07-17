@@ -24,11 +24,11 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<div class="page-title well">
+<div class="page-title">
     <h1><?php echo $this->__('Share Your Wishlist') ?></h1>
 </div>
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
-<form action="<?php echo $this->getSendUrl() ?>" id="form-validate" method="post" class="form well">
+<form action="<?php echo $this->getSendUrl() ?>" id="form-validate" method="post" class="form">
     <?php echo $this->getBlockHtml('formkey')?>
     <legend><?php echo $this->__('Sharing Information') ?></legend>
     <div class="row-fluid">
@@ -65,7 +65,7 @@
 
         </div>
     </div>
-    <div class="form-actions">
+    <div>
         <p class="help-block"><?php echo $this->__('* Required Fields') ?></p>
         <button type="submit" title="<?php echo $this->__('Share Wishlist') ?>" class="btn pull-right"><span><span><?php echo $this->__('Share Wishlist') ?></span></span></button>
         <p class="back-link">
