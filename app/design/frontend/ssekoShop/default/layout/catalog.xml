@@ -302,6 +302,9 @@ Product view
         		<block type="cms/block" name="product.info.tabs.shipping" as="shipping">
             		<action method="setBlockId"><block_id>shipping</block_id></action>
         		</block>
+        		<block type="cms/block" name="pdp.tout" as="tout">
+            		<action method="setBlockId"><block_id>pdp_tout</block_id></action>
+        		</block>
                 <block type="review/product_view_list" name="product.info.product_additional_data" as="reviews" template="review/product/view/list.phtml"/>
                 <action method="unsetCallChild"><child>container1</child><call>ifEquals</call><if>0</if><key>alias_in_layout</key><key>options_container</key></action>
                 <action method="unsetCallChild"><child>container2</child><call>ifEquals</call><if>0</if><key>alias_in_layout</key><key>options_container</key></action>
