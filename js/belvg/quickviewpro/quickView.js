@@ -167,6 +167,7 @@ Quickview.prototype = {
 		            			{
 		            				jQuery('#ajax_loader').hide();
 		                            jQuery('.btn-primary').removeAttr("disabled");
+		                            jQuery(this).addClass('select-highlight');
 		            				validation = false;
 		            			}
 		            		});
