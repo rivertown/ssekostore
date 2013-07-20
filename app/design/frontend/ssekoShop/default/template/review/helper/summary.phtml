@@ -25,6 +25,10 @@
  */
 ?>
 <?php if ($this->getReviewsCount()): ?>
+	<div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" style="display:none;">
+		<span itemprop="ratingValue"><?php echo $this->getRatingSummary() ?></span>/10
+		<span itemprop="reviewCount"><?php $this->getReviewsCount()?></span>
+	</div>
     <div class="ratings">
         <?php if ($this->getRatingSummary()):?>
             <div class="rating-box">

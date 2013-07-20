@@ -16,10 +16,10 @@
         <?php foreach($crumbs as $_crumbName=>$_crumbInfo): ?>
             <?php if($_crumbInfo['link']): ?>
                 <li class="<?php echo $_crumbName ?>">
-                	<a href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->htmlEscape($_crumbInfo['title']) ?>"><?php echo $this->htmlEscape($_crumbInfo['label']) ?><span>></span></a>
+                	<a itemprop="breadcrumb" href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->htmlEscape($_crumbInfo['title']) ?>"><?php echo $this->htmlEscape($_crumbInfo['label']) ?><span>></span></a>
                 </li>
             <?php elseif($_crumbInfo['last']): ?>
-                <li class="<?php echo $_crumbName ?> active"><a href="#" title="<?php echo $this->htmlEscape($_crumbInfo['title']) ?>"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></a></li>
+                <li class="<?php echo $_crumbName ?> active"><a itemprop="breadcrumb" href="#" title="<?php echo $this->htmlEscape($_crumbInfo['title']) ?>"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></a></li>
             <?php else: ?>
                 <?php echo $this->htmlEscape($_crumbInfo['label']) ?>
             <?php endif; ?>

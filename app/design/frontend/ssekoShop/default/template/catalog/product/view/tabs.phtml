@@ -52,7 +52,11 @@
     			<div class="product-tabs-content" id="product_tabs_<?php echo $_tab['alias'] ?>_contents"><?php echo $this->getChildHtml($_tab['alias']) ?></div>
 			<?php endif;?>
     		<?php else:?>
-    			<div class="product-tabs-content" id="product_tabs_<?php echo $_tab['alias'] ?>_contents"><?php echo $this->getChildHtml($_tab['alias']) ?></div>
+    			<?php if($_tab['alias'] == 'description'):?>
+    				<div itemprop="description" class="product-tabs-content" id="product_tabs_<?php echo $_tab['alias'] ?>_contents"><?php echo $this->getChildHtml($_tab['alias']) ?></div>
+    			<?php else:?>
+    				<div class="product-tabs-content" id="product_tabs_<?php echo $_tab['alias'] ?>_contents"><?php echo $this->getChildHtml($_tab['alias']) ?></div>
+    			<?php endif;?>
     		<?php endif;?>
     	<?php endif; ?>
 <?php endforeach; ?>
