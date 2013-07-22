@@ -73,8 +73,9 @@ Product.BConfig.prototype = {
     },
 
     configure: function(event){
+    	
         var element = Event.element(event);
-
+		element.removeClassName('select-highlight');
         if( this.checkEq(element) ){
             this.configureElement(element);
         }

@@ -49,7 +49,7 @@
 								</div>
 								<div class="row bottom-rows">
 									<div class="span3">
-										<div class="add-to-box">
+										<div id="upsell-add-to-cart" class="add-to-box">
 											<?php //$_product = $this->getProduct(); ?>
 											<?php $buttonTitle = $this->__('Add to Cart'); ?>
 											<?php if($_link->isSaleable()): ?>
@@ -75,7 +75,7 @@
 	</div>
 	<script type="text/javascript">
 	    //<![CDATA[
-	    jQuery('.btn-primary').click(function(){
+	    jQuery('#upsell-add-to-cart .btn-primary').click(function(){
 	    	var id = jQuery(this).attr('id');
 	    	console.log(jQuery('#qty_' + id).val());
 	    	if(jQuery('#qty_' + id).val() != '0')
