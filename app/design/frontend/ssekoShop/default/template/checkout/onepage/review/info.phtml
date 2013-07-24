@@ -41,13 +41,8 @@ $shippingMethod = $cart->getShippingAddress();
 		<div class="cart-row confirm-row">
 	        <?php foreach($this->getItems() as $item): ?>
 	            <div class="row" style="<?php if (!$item->getParentItemId()): ?>margin-bottom:10px; margin-top:10px;<?php endif;?>">
-					<div class="span5">
-						<?php if (!$item->getParentItemId()): ?>
-							<p><b><?php echo $item->getName(); ?></b></p>
-						<?php else: ?>
-							<p style="margin-left:20px;"><?php echo $item->getName(); ?> x <?php echo round($item->getQtyOrdered(), 0); ?></p>
-						<?php endif; ?>
-						<p style="display:none"><?php echo $item->getSku(); ?></p>
+					<div id="review-product-info" class="span5">
+						<?php echo $this->getItemHtml($item)?>
 					</div>
 					<div class="span3">
 						<?php if (!$item->getParentItemId()): ?>
