@@ -30,7 +30,7 @@
             <input type="hidden" name="related_product" id="related-products-field" value="" />
         </div>                        
         <div class="row">
-            <div class="span5" style="margin-bottom:35px;">
+            <div class="span5">
                 <div class="product-img-box">
                     <?php echo $this->getChildHtml('media-pdp') ?>
                 </div>  
@@ -44,14 +44,14 @@
                     <?php echo $this->getChildHtml('product_share') ?>
                 </div>
             </div>
-            <div itemscope itemtype="http://schema.org/Product" class="product-shop span4">
+            <div class="product-shop span4">
                 <?php 
                     $now = date("Y-m-d");
                     $newsFrom= substr($_product->getData('news_from_date'),0,10);
                     $newsTo=  substr($_product->getData('news_to_date'),0,10);
                 ?>
                 <div class="product-name">
-                    <h2 itemprop="name" class="productName"><?php if ($now>=$newsFrom && $now<=$newsTo):?><span id="newProduct">NEW! </span><?php endif;?><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+                    <h2 class="productName"><?php if ($now>=$newsFrom && $now<=$newsTo):?><span id="newProduct">NEW! </span><?php endif;?><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
                 </div>
                 <?php if($_product->getTypeID()=='giftcards'):echo $this->getChildHtml('product_type_data'); else:?>
 	                <?php echo $this->getPriceHtml($_product) ?>

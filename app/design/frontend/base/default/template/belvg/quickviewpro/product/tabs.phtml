@@ -39,7 +39,7 @@
         $desc[]     = $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description');
     }
     $block  = trim($this->getChildHtml('size_guide'));
-    if ($block && $_product->getData('display_guide') != 0) {
+    if ($block) {
         $title[]    = $this->__('Sandal Size Guide');
         $desc[]     = $block;
     }
@@ -69,3 +69,4 @@
         </div>
     </div>
 <?php endif ?> 
+
