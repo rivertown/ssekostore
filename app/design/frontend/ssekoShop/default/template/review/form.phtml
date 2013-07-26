@@ -9,7 +9,7 @@
  * @author      Vedran Subotic <vedran@magenthon.com>
  */
 ?>
-<div class="form-add" id="review-form">
+<div class="form-add" id="review-form-wrapper">
     <h2><?php echo $this->__('Write Your Review') ?> <span id="required">*REQUIRED</span></h2>
     <h4><?php echo $this->__('How would you rate this product?') ?></h4>
     <?php if ($this->getAllowWriteReviewFlag()): ?>
@@ -37,7 +37,7 @@
                 		</div>
                 	</div>
                 	<?php foreach ($this->getRatings() as $_rating): ?>
-	                	<div class="row">
+	                	<div id="review-inputs" class="row">
 	                		<div class="span1 star-title">
 	                			<?php echo $this->escapeHtml($_rating->getRatingCode()) ?>
 	                		</div>
@@ -79,29 +79,27 @@
         Validation.addAllThese(
         [
                ['validate-rating', '<?php echo $this->__('Please select one of each of the ratings above') ?>', function(v) {
-                    var trs = $('product-review-table').select('tr');
+                    var inputDivs = $('rating-star-form').select('div#review-inputs.row');
                     var inputs;
-                    var error = 1;
-    
-                    for( var j=0; j < trs.length; j++ ) {
-                        var tr = trs[j];
-                        if( j > 0 ) {
-                            inputs = tr.select('input');
-    
-                            for( i in inputs ) {
-                                if( inputs[i].checked == true ) {
-                                    error = 0;
-                                }
-                            }
-    
-                            if( error == 1 ) {
-                                return false;
-                            } else {
-                                error = 1;
-                            }
-                        }
-                    }
-                    return true;
+                    var error = 1; 
+	                for( var j=0; j < inputDivs.length; j++ ) {
+	                	var div = inputDivs[j];
+	                    inputs = div.select('input');
+	                    console.log(inputs);
+	
+	                    for( i in inputs ) {
+	                        if( inputs[i].checked == true ) {
+	                            error = 0;
+	                        }
+	                    }
+	
+	                    if( error == 1 ) {
+	                        return false;
+	                    } else {
+	                        error = 1;
+	                    }
+	                }
+	                return true;
                 }]
         ]
         );
