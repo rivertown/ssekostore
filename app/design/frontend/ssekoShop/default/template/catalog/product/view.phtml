@@ -239,12 +239,36 @@
             </div>
         </div>
         <div class="cart-bottom">
-            <div class="cart-btm-links">
-                <div><a href="/sandal-straps.html">Shop Featured Straps</a></div>
-                <div><a href="/sandal-accessories.html">Shop Featured Accessories</a></div>
-            </div>
-            <div class="cart-btm-btns">
-                <button type="button" title="<?php echo $this->__('Checkout') ?>" class="btn btn-proceed-checkout btn-lrg btn-primary" onclick="window.location='/shop/index.php/checkout/onepage'"><span><span><?php echo $this->__('Checkout') ?></span></span></button>                  
+            <?php $btnStyle = '';?>
+        	<?php if(count($_product->getUpSellProductCollection()->addAttributeToSort('position', Varien_Db_Select::SQL_ASC)->addStoreFilter())): ?>
+        		<?php $upsells = $_product->getUpSellProductCollection()->addAttributeToSort('position', Varien_Db_Select::SQL_ASC)->addStoreFilter();?>
+        		<div class="cart-btm-links">
+        		<?php 
+					$all_products = array();
+					foreach($upsells as $_item):
+						$cats = $_item->getCategoryIds();
+						foreach ($cats as $category_id):
+						    $_cat = Mage::getModel('catalog/category')->load($category_id);
+							if($_cat->getLevel() == 2):
+								if(!isset($all_products[$_cat->getName()]))
+							    {
+							         $all_products[$_cat->getName()] = array();
+							    }		
+							    $all_products[$_cat->getName()][] = $_item;
+							endif;
+						endforeach;
+					endforeach;?>
+					<?php foreach($all_products as $key => $category_product):?>
+						<?php $rel_key = $key;if($key == "Sandal Straps"):$display_key = "Straps";$rel_key = "Straps";else:$display_key = $key;$rel_key = $key;endif;?>
+						<?php if($key == "Sandal Accessories"):$display_key = "Accessories";else:$display_key = $key;endif;?>
+						<div><a class="featuredOverlayLinks" rel="<?php echo str_replace(' ', '_', $rel_key)?>" href="javascript:void(0);">Shop Featured <?php echo $display_key?></a></div>								
+					<?php endforeach;?>
+	            </div>
+            <?php else:?>
+            	<?php $btnStyle = 'style="float:right;margin-bottom:25px"';?>
+            <?php endif;?>	
+            <div <?php echo $btnStyle?> class="cart-btm-btns">
+                <button type="button" title="<?php echo $this->__('Checkout') ?>" class="btn btn-proceed-checkout btn-lrg btn-primary" onclick="window.location='/shop/index.php/checkout/onepage'"><span><span><?php echo $this->__('Checkout') ?></span></span></button>                
                 <button type="button" title="<?php echo $this->__('Keep Shopping') ?>" class="btn" onclick="setLocation('/shop/index.php/')"><span><span><?php echo $this->__('Keep Shopping') ?></span></span></button>
             </div>
         </div>

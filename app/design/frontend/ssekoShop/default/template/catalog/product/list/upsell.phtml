@@ -28,7 +28,7 @@
 	<div class="box-collateral box-up-sell">		
 		<?php foreach($all_products as $key => $category_product):?>
 			<?php if($key == "Sandal Straps"):$display_key = "Straps";else:$display_key = $key;endif;?>
-			<h2><?php echo $this->__('Add Recommended '.$display_key) ?></h2>
+			<h2 id="h2_<?php echo str_replace(' ', '_', $display_key);?>"><?php echo $this->__('Add Recommended '.$display_key) ?></h2>
 			<?php $this->resetItemsIterator(); ?>    		
 			<div class="row">  		
 	    		<?php for($_j=0;$_j<count($all_products[$key]);$_j++): ?>
@@ -50,7 +50,6 @@
 								<div class="row bottom-rows">
 									<div class="span3">
 										<div id="upsell-add-to-cart" class="add-to-box">
-											<?php //$_product = $this->getProduct(); ?>
 											<?php $buttonTitle = $this->__('Add to Cart'); ?>
 											<?php if($_link->isSaleable()): ?>
 												<div class="form-inline">

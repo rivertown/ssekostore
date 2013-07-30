@@ -165,6 +165,13 @@
 		{
 			$('.quickviewpro_share').css({'float':'left'});
 		}
+		$('.featuredOverlayLinks').click(function(){
+			close_overlay();
+			var rel = $(this).prop('rel');	
+			$('html, body').animate({
+            	scrollTop: $("#h2_" + rel).offset().top
+            }, 500);
+		});
     });
     // Code that uses other library's $ can follow here.
 </script>
