@@ -30,18 +30,35 @@
  * @see Mage_Catalog_Block_Product_View
  */
 ?>
+<?php $_product = Mage::registry('product'); ?>
 <ul class="tabs_title">
     <?php foreach ($this->getTabs() as $_index => $_tab): ?>
         <?php if($this->getChildHtml($_tab['alias'])): ?>
-            <li id="product_tabs_<?php echo $_tab['alias'] ?>" class="item active"><a href="#"><?php echo $_tab['title']?></a></li>
+        	<?php if($_tab['alias'] == 'size_guide'):?>
+        		<?php if($_product->getData('display_guide') != 0):?>
+            		<li id="product_tabs_<?php echo $_tab['alias'] ?>" class="item active"><a href="#"><?php echo $_tab['title']?></a></li>
+            	<?php endif;?>
+        		<?php else:?>
+        			<li id="product_tabs_<?php echo $_tab['alias'] ?>" class="item active"><a href="#"><?php echo $_tab['title']?></a></li>
+        	<?php endif;?>
         <?php endif; ?>
     <?php endforeach; ?>
 </ul>
 <div class="tabs_content">
 <?php foreach ($this->getTabs() as $_index => $_tab): ?>
     <?php if($this->getChildHtml($_tab['alias'])): ?>
-        <div class="product-tabs-content" id="product_tabs_<?php echo $_tab['alias'] ?>_contents"><?php echo $this->getChildHtml($_tab['alias']) ?></div>
-    <?php endif; ?>
+    	<?php if($_tab['alias'] == 'size_guide'):?>
+    		<?php if($_product->getData('display_guide') != 0):?>
+    			<div class="product-tabs-content" id="product_tabs_<?php echo $_tab['alias'] ?>_contents"><?php echo $this->getChildHtml($_tab['alias']) ?></div>
+			<?php endif;?>
+    	<?php else:?>
+			<?php if($_tab['alias'] == 'description'):?>
+				<div itemprop="description" class="product-tabs-content" id="product_tabs_<?php echo $_tab['alias'] ?>_contents"><?php echo $this->getChildHtml($_tab['alias']) ?></div>
+			<?php else:?>
+				<div class="product-tabs-content" id="product_tabs_<?php echo $_tab['alias'] ?>_contents"><?php echo $this->getChildHtml($_tab['alias']) ?></div>
+			<?php endif;?>
+		<?php endif;?>
+	<?php endif; ?>    
 <?php endforeach; ?>
 </div>
 <script type="text/javascript">

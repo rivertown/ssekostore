@@ -24,7 +24,7 @@
 	<div id="img-grp-wrap">
 	    <div class="img-wrap">
 	    	<?php foreach ($this->getGalleryImages() as $_image): ?>
-	    		<img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize(600); ?>" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>" />
+	    		<img itemprop="image" src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize(600); ?>" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>" />
 	    	<?php endforeach;?>
 	    </div>   
 	
