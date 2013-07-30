@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<package>
+    <name>SLandsbek_SimpleOrderExport</name>
+    <version>1.0.4</version>
+    <stability>stable</stability>
+    <license uri="http://opensource.org/licenses/mit-license.php">MIT License</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Exports complete orders to csv</summary>
+    <description>This extension makes it possible to export orders to csv files. You can select the orders you want to export in the sales orders grid and start the export process by simply selecting "Export to .csv file" from the actions dropdown (see screenshots). After exporting you can directly download the csv file to your computer. The files also gets saved in the folder "var/export" in your magento installation. 
+
+All relevant order data, order totals, shipping address, billing address and ordered items get exported. If an order contains multiple items, a new record is created for each ordered item in the csv file. 
+In detail these fields get created in the csv file:
+Order Number, Order Date, Order Status, Order Purchased From, Order Payment Method, Order Shipping Method, Order Subtotal, Order Tax, Order Shipping, Order Discount, Order Grand Total, Order Paid, Order Refunded, Order Due, Total Qty Items Ordered, Customer Name, Customer Email, Shipping Name, Shipping Company, Shipping Street, Shipping Zip, Shipping City, Shipping State, Shipping State Name, Shipping Country, Shipping Country Name, Shipping Phone Number, Billing Name, Billing Company, Billing Street, Billing Zip, Billing City, Billing State, Billing State Name, Billing Country, Billing Country Name, Billing Phone Number, Order Item Increment, Item Name, Item Status, Item SKU, Item Options, Item Original Price, Item Price, Item Qty Ordered, Item Qty Invoiced, Item Qty Shipped, Item Qty Canceled, Item Qty Refunded, Item Tax, Item Discount, Item Total.
+
+The data is UTF-8 encoded, delimited by commas (,) and enclosed by quotes (").</description>
+    <notes>Changelog 1.0.3 - 1.0.4:
+
+- Append option to export to csv to mass action select box by observing event to prevent conflicts with other extensions extending the select box
+
+Changelog 1.0.2 - 1.0.3:
+
+- Added phone number of shipping address to export
+- Added phone number of billing address to export
+
+Changelog 1.0.1 - 1.0.2:
+
+- Bugfix: Ignore shipping address if order is virtual
+- Added item increment number to export
+- Added full name of shipping address country to export
+- Added full name of billing address country to export
+- Added code of shipping address state to export
+- Added full name of shipping address state to export
+- Added code of billing address state to export
+- Added full name of billing address state to export
+- Added total qty of ordered items to export
+- Added customer name to export
+- Added customer email to export
+- Added item qty invoiced to export
+- Added item qty shipped to export
+- Added item qty canceled to export
+- Added item qty refunded to export
+- Renamed column "Item Ordered Qty" to "Item Qty Ordered"</notes>
+    <authors><author><name>S. Landsbek</name><user>auto-converted</user><email>slandsbek@gmail.com</email></author></authors>
+    <date>2010-06-25</date>
+    <time>13:44:46</time>
+    <contents><target name="magelocale"><dir name="de_AT"><file name="SLandsbek_SimpleOrderExport.csv" hash="d517decc2eee6e35466a47296961413d"/></dir><dir name="de_CH"><file name="SLandsbek_SimpleOrderExport.csv" hash="d517decc2eee6e35466a47296961413d"/></dir><dir name="de_DE"><file name="SLandsbek_SimpleOrderExport.csv" hash="d517decc2eee6e35466a47296961413d"/></dir><dir name="en_US"><file name="SLandsbek_SimpleOrderExport.csv" hash="969d973e83a2f4908819ea57804e8f75"/></dir></target><target name="mageetc"><dir name="modules"><file name="SLandsbek_SimpleOrderExport.xml" hash="05ca699ecec8a4b029b6c5467e935a70"/></dir></target><target name="magecommunity"><dir name="SLandsbek"><dir name="SimpleOrderExport"><dir name="Block"><dir name="Sales"><dir name="Order"><file name="Grid.php" hash="31b0fb15a5a78b0e4fe32407969a016e"/></dir></dir></dir><dir name="controllers"><dir name="Export"><file name="OrderController.php" hash="1f6c37af53a0b5fdb7e5ac5b7619098b"/></dir></dir><dir name="etc"><file name="config.xml" hash="b9a82a0e0d799b4933d4455ad97dabe9"/></dir><dir name="Model"><dir name="Export"><file name="Abstract.php" hash="e75a1c3da83c10d3f379d12e6f65918b"/><file name="Csv.php" hash="4acce979b45d6975a214de25b8abd53c"/></dir><file name="Observer.php" hash="c998d009cf129067f881066c2cd4cc4b"/></dir><file name="1.0.1-1.0.2.diff" hash="8a8a5550ac0d8832c2f5dea562b6a5b6"/><file name="1.0.2-1.0.3.diff" hash="8f5cc5da78f691c573f55fae6d165453"/><file name="1.0.3-1.0.4.diff" hash="434404165b1bcabf2780889e2180e5aa"/><file name="Readme.txt" hash="8d6375f6f84b66667241129bb0bb3d62"/></dir></dir></target></contents>
+    <compatible/>
+    <dependencies/>
+</package>
