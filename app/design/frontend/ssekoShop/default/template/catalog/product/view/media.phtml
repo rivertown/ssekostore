@@ -23,7 +23,7 @@
 <?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
 <div class="product-image product-image-zoom">
     <?php
-        $_img = '<img id="image" src="'.$this->helper('catalog/image')->init($_product, 'image').'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" />';
+        $_img = '<img id="image" src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(220).'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" />';
     ?>
 
 		    <div class="modal hide fade" id="myGallery_<?php echo $_product->getId()?>">
