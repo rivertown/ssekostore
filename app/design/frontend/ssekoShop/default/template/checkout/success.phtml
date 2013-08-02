@@ -89,8 +89,28 @@ foreach ($order_details->getAllItems() as $item) { ?>
 	<div class="span5">
 		<?php if (!$item->getParentItemId()): ?>
 			<p><b><?php echo $item->getName(); ?></b></p>
-		<?php else: ?>
-			<p style="margin-left:20px;"><?php echo $item->getName(); ?> x <?php echo round($item->getQtyOrdered(), 0); ?></p>
+		<?php else: 
+			if($item->getProductType() == 'configurable')
+			{
+				$productOptions = $item->getProductOptions(); 
+			    if (isset($productOptions['attributes_info'])) :
+				    foreach ($productOptions['attributes_info'] as $productOption) :
+				        if($productOption['label'] == 'Size'):
+							$sizeDisplay = 'Size '.$productOption['value'];
+						endif;
+						if($productOption['label'] == 'Base Color'):
+							$baseDisplay = $productOption['value'].' Base';
+						endif;
+					endforeach;
+			    endif;
+		?>
+			<p style="margin-left:20px;"><?php echo $baseDisplay.' - '.$sizeDisplay; ?></p>
+		<?php 
+			}	
+			else{ 
+		?>
+			<p style="margin-left:20px;"><?php echo $item->getName(); ?></p>
+		<?php } ?>
 		<?php endif; ?>
 		<p style="display:none"><?php echo $item->getSku(); ?></p>
 	</div>
