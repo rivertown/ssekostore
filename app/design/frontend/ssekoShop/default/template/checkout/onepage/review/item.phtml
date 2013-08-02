@@ -13,19 +13,39 @@
 <p class="product-name"><?php echo $this->htmlEscape($this->getProductName()) ?></p>
 <?php if ($_options = $this->getOptionList()):?>
 <dl class="item-options">
-    <?php foreach ($_options as $_option) : ?>
-    <?php $_formatedOptionValue = $this->getFormatedOptionValue($_option) ?>
-    <dt><?php echo $this->htmlEscape($_option['label']) ?></dt>
-    <dd<?php if (isset($_formatedOptionValue['full_view'])): ?> class="truncated"<?php endif; ?>><?php echo $_formatedOptionValue['value'] ?>
-        <?php if (isset($_formatedOptionValue['full_view'])): ?>
-        <div class="truncated_full_value">
-            <dl class="item-options">
-                <dt><?php echo $this->htmlEscape($_option['label']) ?></dt>
-                <dd><?php echo $_formatedOptionValue['full_view'] ?></dd>
-            </dl>
-        </div> 
-        <?php endif; ?>
-    </dd>
-    <?php endforeach; ?>
+<?php 
+$session = Mage::getSingleton('checkout/session');
+$attributes = null;
+foreach ($session->getQuote()->getAllItems() as $item)
+{
+	$options = $item->getProduct()->getTypeInstance(true)->getOrderOptions($item->getProduct());
+	if(isset($options['attributes_info']))
+	{
+		$attributes = $options['attributes_info'];
+	}
+}
+
+$product = $_item->getProduct();
+$selectionCollection = $product->getTypeInstance(true)->getSelectionsCollection($product->getTypeInstance(true)->getOptionsIds($product), $product);
+
+foreach($selectionCollection as $option)
+{ ?>        
+   	<dt></dt>	   	
+    <?php if($option->getTypeId() == 'configurable'):?>
+	    <?php foreach($attributes as $attribute){
+			if($attribute['label'] == 'Size')
+			{
+				$sizeDisplay = 'Size '.$attribute['value'];
+			}
+			if($attribute['label'] == 'Base Color')
+			{
+				$baseDisplay = $attribute['value'].' Base';
+			}
+		}?>
+    	<dd><?php echo $baseDisplay.' - '.$sizeDisplay ?></dd>
+    <?php else:?>
+    	<dd><?php echo $option->getName() ?></dd>
+    <?php endif;?>
+<?php }?>	
 </dl>
 <?php endif;?>
