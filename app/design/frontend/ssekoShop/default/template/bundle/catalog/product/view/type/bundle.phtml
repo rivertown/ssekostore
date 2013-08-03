@@ -44,9 +44,14 @@
                         jQuery.each(value.attributes, function(index,value){                            
                             if(value.code == 'base_color')
                             {
-                                jQuery('#base-color').append('<ul id="'+ value.id +'" class="base-block"><li>Base Color</li></ul>');
+                                jQuery('#base-color').append('<ul id="'+ value.id +'" class="base-block"><li>Base Color</li></ul>');                                
                                 jQuery.each(value.options,function(index,value){
-                                    jQuery('.base-block').append('<li class="'+ value.label +'" id="'+ value.id +'" style="width:25px;height:25px;background-color:'+ value.label +'"></li>')
+                                	var baseColor = value.label;
+	                                if(baseColor == 'Brown')
+	                                {
+	                                	baseColor = '#6c4025';
+	                                }
+                                    jQuery('.base-block').append('<li class="'+ value.label +'" id="'+ value.id +'" style="width:25px;height:25px;background-color:'+ baseColor +'"></li>')
                                 });                             
                                 return false;
                             }
