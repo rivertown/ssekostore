@@ -11,13 +11,13 @@
 ?>
 <form action="" id="co-shipping-form" class="form row">
     <h2 class="span12" style="margin-bottom:30px;"><?php echo $this->__('Add your shipping address') ?><span>*Required Fields</span></h2>
-    <fieldset>
+    <fieldset class="span12">
     <?php if ($this->customerHasAddresses()): ?>
            <div class="control-group span12">
                <?php echo $this->getAddressesHtmlSelect('shipping') ?>
            </div>
     <?php endif ?>
-        <div id="shipping-new-address-form"<?php if ($this->customerHasAddresses()): ?> style="display:none;"<?php endif ?>>
+        <div id="shipping-new-address-form" class="row"<?php if ($this->customerHasAddresses()): ?> style="display:none;"<?php endif ?>>
             <fieldset class="span6">
                 <input type="hidden" name="shipping[address_id]" value="<?php echo $this->getAddress()->getId() ?>" id="shipping:address_id" />
                 <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getAddress())->setFieldIdFormat('shipping:%s')->setFieldNameFormat('shipping[%s]')->setFieldParams('onchange="shipping.setSameAsBilling(false)"')->toHtml() ?>

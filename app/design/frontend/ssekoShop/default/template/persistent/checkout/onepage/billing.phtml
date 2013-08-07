@@ -12,13 +12,13 @@
 ?>
 <form id="co-billing-form" action="" class="form row">
 <h2 class="span12" style="margin-bottom:30px;"><?php echo $this->__('Add your billing address') ?><span>*Required Fields</span></h2>
-    <fieldset>
+    <fieldset class="span12">
     <?php if ($this->customerHasAddresses()): ?>
             <div class="control-group span12">
                 <?php echo $this->getAddressesHtmlSelect('billing') ?>
             </div>
     <?php endif; ?>
-    <div id="billing-new-address-form"<?php if ($this->customerHasAddresses()): ?> style="display:none;"<?php endif; ?>>
+    <div id="billing-new-address-form" class="row" <?php if ($this->customerHasAddresses()): ?>style="display:none;"<?php endif; ?>>
         <fieldset class="span6">
             <input type="hidden" name="billing[address_id]" value="<?php echo $this->getAddress()->getId() ?>" id="billing:address_id" />
             <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getAddress()->getFirstname() ? $this->getAddress() : $this->getQuote()->getCustomer())->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml() ?>
