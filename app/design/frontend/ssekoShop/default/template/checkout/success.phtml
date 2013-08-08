@@ -177,19 +177,6 @@ $product_id = $item->getData('product_id');
 	<div class="span3">
 		<h2>Billing Info</h2>
 		<?php 
-		// Output the ship-to address information
-		echo "<h6>" . $shipping_address_data['firstname'];
-		echo " " . $shipping_address_data['lastname'];
-		echo "</h6><h6>" . $shipping_address_data['street'];
-		echo "</h6><h6>" . $shipping_address_data['city'];
-		echo ", " . $shipping_address_data['region'];
-		echo " " . $shipping_address_data['postcode'];
-		echo "</h6><h6>" . $shipping_address_data['country_id'];
-		echo "</h6><h6>" . $shipping_address_data['telephone']. "</h6>";?>
-	</div>
-	<div class="span3">
-		<h2>Shipping Info</h2>
-		<?php 
 		// Output the billing address information
 		echo "<h6>" . $billing_address_data['firstname'];
 		echo " " . $billing_address_data['lastname'];
@@ -199,6 +186,19 @@ $product_id = $item->getData('product_id');
 		echo " " . $billing_address_data['postcode'];
 		echo "</h6><h6>" . $billing_address_data['country_id'];
 		echo "</h6><h6>" . $billing_address_data['telephone']. "</h6>"; ?>
+	</div>
+	<div class="span3">
+		<h2>Shipping Info</h2>
+		<?php 
+		// Output the ship-to address information
+		echo "<h6>" . $shipping_address_data['firstname'];
+		echo " " . $shipping_address_data['lastname'];
+		echo "</h6><h6>" . $shipping_address_data['street'];
+		echo "</h6><h6>" . $shipping_address_data['city'];
+		echo ", " . $shipping_address_data['region'];
+		echo " " . $shipping_address_data['postcode'];
+		echo "</h6><h6>" . $shipping_address_data['country_id'];
+		echo "</h6><h6>" . $shipping_address_data['telephone']. "</h6>";?>
 	</div>
 	<div class="span6" style="margin-top:10px;">
 		<?php
