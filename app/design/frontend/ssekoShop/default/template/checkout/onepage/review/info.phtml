@@ -39,10 +39,13 @@ $shippingMethod = $cart->getShippingAddress();
                 </tr>
             <?php endif; ?>
 		<div class="cart-row confirm-row">
-	        <?php foreach($this->getItems() as $item): ?>
+	        <?php $session = Mage::getSingleton('checkout/session');?>
+			<?php foreach($session->getQuote()->getAllItems() as $item): ?>
 	            <div class="row" style="<?php if (!$item->getParentItemId()): ?>margin-bottom:10px; margin-top:10px;<?php endif;?>">
 					<div id="review-product-info" class="span5">
-						<?php echo $this->getItemHtml($item)?>
+						<?php if(!$item->getParentItemId()):?>
+							<?php echo $this->getItemHtml($item)?>
+						<?php endif;?>	
 					</div>
 					<div class="span3">
 						<?php if (!$item->getParentItemId()): ?>

@@ -13,39 +13,30 @@
 <p class="product-name"><?php echo $this->htmlEscape($this->getProductName()) ?></p>
 <?php if ($_options = $this->getOptionList()):?>
 <dl class="item-options">
-<?php 
-$session = Mage::getSingleton('checkout/session');
-$attributes = null;
-foreach ($session->getQuote()->getAllItems() as $item)
-{
-	$options = $item->getProduct()->getTypeInstance(true)->getOrderOptions($item->getProduct());
-	if(isset($options['attributes_info']))
+<?php 														 
+	if($_children = $_item->getChildren())
 	{
-		$attributes = $options['attributes_info'];
+		foreach($_children as $child)
+		{
+			if($child->getProductType() == 'configurable')
+			{
+				//The Product Id of the Simple Product
+		        $optionId = $child->getOptionByCode('simple_product')->getProductId();
+		
+		        //The Simple Product
+		        $configurableOption = Mage::getModel('catalog/product')->load($optionId);
+				$size = $configurableOption->getAttributeText('size');
+				$baseColor = $configurableOption->getAttributeText('base_color');
+				if(!empty($size) || !empty($baseColor)){?>
+				<dd><?php echo 'Size '.$size.' - '.$baseColor.' Base' ?></dd>
+				<?php }?>
+			<?php }	
+			else
+			{?>
+				<dd><?php echo $child->getName() ?></dd>
+			<?php }									
+		}
 	}
-}
-
-$product = $_item->getProduct();
-$selectionCollection = $product->getTypeInstance(true)->getSelectionsCollection($product->getTypeInstance(true)->getOptionsIds($product), $product);
-
-foreach($selectionCollection as $option)
-{ ?>        
-   	<dt></dt>	   	
-    <?php if($option->getTypeId() == 'configurable'):?>
-	    <?php foreach($attributes as $attribute){
-			if($attribute['label'] == 'Size')
-			{
-				$sizeDisplay = 'Size '.$attribute['value'];
-			}
-			if($attribute['label'] == 'Base Color')
-			{
-				$baseDisplay = $attribute['value'].' Base';
-			}
-		}?>
-    	<dd><?php echo $baseDisplay.' - '.$sizeDisplay ?></dd>
-    <?php else:?>
-    	<dd><?php echo $option->getName() ?></dd>
-    <?php endif;?>
-<?php }?>	
+?>							
 </dl>
 <?php endif;?>
