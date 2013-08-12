@@ -64,8 +64,11 @@
 	        	</div>
         	</div>
         	<?php $mergedCells = ($this->helper('tax')->displayCartBothPrices() ? 2 : 1); ?>
-			<?php foreach($this->getItems() as $_item): ?>
-				<?php echo $this->getItemHtml($_item) ?>
+			<?php $session = Mage::getSingleton('checkout/session');
+			foreach($session->getQuote()->getAllItems() as $_item): ?>
+				<?php if(!$_item->getParentItemId()):?>
+					<?php echo $this->getItemHtml($_item) ?>
+				<?php endif;?>	
 			<?php endforeach ?>
 			<?php if ($this->helper('tax')->displayCartBothPrices()): ?>
 				<?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?>
