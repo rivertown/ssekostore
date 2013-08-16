@@ -207,9 +207,12 @@ $product_id = $item->getData('product_id');
 		echo $this->getLayout()->createBlock('cms/block')->setBlockId('confirm_page')->toHtml(); ?>
 	</div>
 </div>
-
+<?php $subtotal = $order_details->subtotal;
+	$discount = $order_details->discount_amount;
+	$discountedTotal = $subtotal + $discount;
+?>
 <!--START AffiliateTraction CODE-->
-<iframe src="https://ssekodesigns.affiliatetechnology.com/trackingcode_sale.php?mid=1&sec_id=M_14aL4kF3nX8iQ&sale=<?php echo $order_details->subtotal; ?>&orderId=<?php echo $this->getOrderId()?>&promo=<?php echo $order_details->getCouponCode(); ?>" height="1" width="1" frameborder=no border=0 scrolling=no></iframe>
+<iframe src="https://ssekodesigns.affiliatetechnology.com/trackingcode_sale.php?mid=1&sec_id=M_14aL4kF3nX8iQ&sale=<?php echo $discountedTotal; ?>&orderId=<?php echo $this->getOrderId(); ?>&promo=<?php echo $order_details->getCouponCode(); ?>" height="1" width="1" frameborder=no border=0 scrolling=no></iframe>
 <!-- END AffiliateTraction CODE -->
 
 <?php $_customerId = Mage::getSingleton('customer/session')->getCustomerId(); $lastOrderId = Mage::getSingleton('checkout/session')->getLastOrderId(); $order = Mage::getSingleton('sales/order'); $order->load($lastOrderId); $_totalData =$order->getData(); $_sub = $_totalData['subtotal']; ?> <img src="https://shareasale.com/sale.cfm?tracking=<?php echo $this->getOrderId() ?>&amount=<?php echo $_sub ?>&transtype=sale&merchantID=41414" width="1" height="1">
