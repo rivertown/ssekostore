@@ -16,8 +16,10 @@
  * @see Mage_Checkout_Block_Cart_Totals
  * @var $this Mage_Checkout_Block_Cart_Totals
  */
- $cart = Mage::getModel('checkout/cart')->getQuote();
-$shippingMethod = $cart->getShippingAddress();
+	$cart = Mage::getModel('checkout/cart')->getQuote();
+	$cartData = $cart->getData();
+	$shippingMethod = $cart->getShippingAddress();
+	$discount = $cartData['base_subtotal'] - $cartData['base_subtotal_with_discount'];
 ?>
 <?php if ($this->canApplyMsrp()): ?>
     <div class="cart-msrp-totals"><?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?></div>
@@ -30,17 +32,12 @@ $shippingMethod = $cart->getShippingAddress();
 		<p><?php echo Mage::helper("core")->currency($cart['subtotal']); ?></p>
 	</div>
 </div>
-<?php if(isset($totals['discount']) && $totals['discount']->getValue()) {
-	$discount = round($totals['discount']->getValue()); //Discount value if applied
-} else {
-	$discount = "";
-}?>
 <div class="row 2">
 	<div class="span2">
 		<h6>Discount</h6>
 	</div>
 	<div class="span2">
-		<p><?php echo currency($discount); ?></p>
+		<p><?php echo Mage::helper('core')->currency($discount); ?></p>
 	</div>
 </div>
 <div class="row 2">
