@@ -25,7 +25,7 @@
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
 <div class="row">
 	<div class="span6">
-		<form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="form-validate" class="form">
+		<form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="form-validate" class="form" onsubmit="trackCreate()">
 				<fieldset class="registration">
 					<input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
 					<input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
@@ -199,5 +199,10 @@
     new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
     <?php endif; ?>
 //]]>
+	function trackCreate()
+	{
+		_gaq.push(['_trackEvent', 'Registration', 'Create My Account - Submit']);
+		ga('send', 'event', 'Registration', 'Create My Account - Submit');
+	}
 </script>
 </div>

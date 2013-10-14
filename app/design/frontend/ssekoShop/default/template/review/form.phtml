@@ -98,6 +98,35 @@
 	                        error = 1;
 	                    }
 	                }
+	                var quality = $('rating-star-form').select('div#review-inputs.row')[0];
+	                inputs = quality.select('input');
+	                for(i in inputs)
+	                {
+	                	if(inputs[i].checked == true)
+	                	{
+	                		quality = inputs[i].value;
+	                	}
+	                }
+	                var value = $('rating-star-form').select('div#review-inputs.row')[1];
+	                inputs = value.select('input');
+	                for(i in inputs)
+	                {
+	                	if(inputs[i].checked == true)
+	                	{
+	                		value = inputs[i].value - 5;
+	                	}
+	                }
+	                var comfort = $('rating-star-form').select('div#review-inputs.row')[2];
+	                inputs = comfort.select('input');
+	                for(i in inputs)
+	                {
+	                	if(inputs[i].checked == true)
+	                	{
+	                		comfort = inputs[i].value - 10;
+	                	}
+	                }
+	                _gaq.push(['_trackEvent', 'Shop', 'Product Review - <?php echo Mage::registry('current_product')->getName()?>', 'review', {'Quality' : quality, 'Value' : value, 'Comfort' : comfort}]);
+					ga('send', 'event', 'Shop', 'Product Review - <?php echo Mage::registry('current_product')->getName()?>', 'review', {'Quality' : quality, 'Value' : value, 'Comfort' : comfort});
 	                return true;
                 }]
         ]
