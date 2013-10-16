@@ -149,6 +149,46 @@
 			$('#progress3').addClass( 'progtrckr-active');
 			$('#progress3').removeClass( 'progtrckr-not');
 		});
+		if($('#opc-login').hasClass('active'))
+		{
+			_gaq.push(['trackPageview','/checkout/registration/'])
+			ga('send', 'pageview', '/checkout/registration/');
+		}
+		if($('#opc-billing').hasClass('active'))
+		{
+			_gaq.push(['trackPageview','/checkout/billing-information/'])
+			ga('send', 'pageview', '/checkout/billing-information/');
+		}
+		$('#billing-buttons-container button').click(function(){
+			var shipMethod = $('#co-billing-form .span3 input:radio').attr('name');
+		   	shipMethod = $('input[name=' + shipMethod + ']:radio:checked').val();
+			if(shipMethod == 1)
+			{
+				_gaq.push(['trackPageview','/checkout/shipping-method/'])
+				ga('send', 'pageview', '/checkout/shipping-method/');
+			}
+			else
+			{
+				_gaq.push(['trackPageview','/checkout/shipping-information/'])
+				ga('send', 'pageview', '/checkout/shipping-information/');
+			}	
+		});
+		$('#shipping-buttons-container button').click(function(){
+			_gaq.push(['trackPageview','/checkout/shipping-method/'])
+			ga('send', 'pageview', '/checkout/shipping-method/');
+		});
+		$('#shipping-method-buttons-container button').click(function(){
+			_gaq.push(['trackPageview','/checkout/payment-method/'])
+			ga('send', 'pageview', '/checkout/payment-method/');
+		});
+		$('#payment-buttons-container button').click(function(){
+			_gaq.push(['trackPageview','/checkout/order-review/'])
+			ga('send', 'pageview', '/checkout/order-review/');
+		});
+		$('.tabs_title li a').click(function(){
+			_gaq.push(['_trackEvent', 'PDP', 'Tabs - ' + $(this).html()]);
+			ga('send', 'event', 'PDP', 'Tabs - ' + $(this).html());
+		})
 		if ($('#order-complete').length == 0){
 			if ($('#opc-login').length == 0){
 				$('.progtrckr li').removeClass( 'progtrckr-active');
