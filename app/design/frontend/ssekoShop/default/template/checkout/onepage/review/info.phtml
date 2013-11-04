@@ -104,6 +104,8 @@ $shippingMethod = $cart->getShippingAddress();
 <?php echo $this->getChildHtml('items_after'); ?>
 <script type="text/javascript">
 //<![CDATA[
+	_gaq.push(['trackPageview','/checkout/order-review/']);
+	ga('send', 'pageview', '/checkout/order-review/');
     decorateTable('checkout-review-table');
     truncateOptions();
 //]]>

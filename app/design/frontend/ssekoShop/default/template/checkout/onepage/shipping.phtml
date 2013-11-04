@@ -125,6 +125,9 @@
     //shippingForm.setElementsRelation('shipping:country_id', 'shipping:region', '<?php echo $this->getUrl('directory/json/childRegion') ?>', '<?php echo $this->__('Select State/Province...') ?>');
     $('shipping-address-select') && shipping.newAddress(!$('shipping-address-select').value);
 
+	_gaq.push(['trackPageview','/checkout/shipping-information/']);
+	ga('send', 'pageview', '/checkout/shipping-information/');
+				
     var shippingRegionUpdater = new RegionUpdater('shipping:country_id', 'shipping:region', 'shipping:region_id', countryRegions, undefined, 'shipping:postcode');
 //]]>
 </script>

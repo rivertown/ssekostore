@@ -125,8 +125,8 @@
 	                		comfort = inputs[i].value - 10;
 	                	}
 	                }
-	                _gaq.push(['_trackEvent', 'Shop', 'Product Review - <?php echo Mage::registry('current_product')->getName()?>', 'review', {'Quality' : quality, 'Value' : value, 'Comfort' : comfort}]);
-					ga('send', 'event', 'Shop', 'Product Review - <?php echo Mage::registry('current_product')->getName()?>', 'review', {'Quality' : quality, 'Value' : value, 'Comfort' : comfort});
+	                _gaq.push(['_trackEvent', 'Shop', 'Product Review - <?php echo Mage::registry('current_product')->getName()?>', {'Quality' : quality, 'Value' : value, 'Comfort' : comfort}]);
+					ga('send', 'event', 'Shop', 'Product Review - <?php echo Mage::registry('current_product')->getName()?>', {'Quality' : quality, 'Value' : value, 'Comfort' : comfort});
 	                return true;
                 }]
         ]

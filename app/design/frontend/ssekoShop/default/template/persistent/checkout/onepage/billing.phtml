@@ -175,6 +175,9 @@
     //billingForm.setElementsRelation('billing:country_id', 'billing:region', '<?php echo $this->getUrl('directory/json/childRegion') ?>', '<?php echo $this->__('Select State/Province...') ?>');
     $('billing-address-select') && billing.newAddress(!$('billing-address-select').value);
 
+	_gaq.push(['trackPageview','/checkout/billing-information/']);
+	ga('send', 'pageview', '/checkout/billing-information/');
+	
     var billingRegionUpdater = new RegionUpdater('billing:country_id', 'billing:region', 'billing:region_id', countryRegions, undefined, 'billing:postcode');
     if ($('onepage-guest-register-button')) {
         Event.observe($('onepage-guest-register-button'), 'click', function(event) {
