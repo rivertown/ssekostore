@@ -38,6 +38,10 @@
         		<?php if($_product->getData('display_guide') != 0):?>
             		<li id="product_tabs_<?php echo $_tab['alias'] ?>" class="item active"><a href="#"><?php echo $_tab['title']?></a></li>
             	<?php endif;?>
+            	<?php elseif($_tab['alias'] == 'impact'):?>
+            		<?php if($_product['impact_description']):?>
+            			<li id="product_tabs_<?php echo $_tab['alias'] ?>" class="item active"><a href="#"><?php echo $_tab['title']?></a></li>
+        			<?php endif;?>
         		<?php else:?>
         			<li id="product_tabs_<?php echo $_tab['alias'] ?>" class="item active"><a href="#"><?php echo $_tab['title']?></a></li>
         	<?php endif;?>
@@ -50,6 +54,10 @@
     	<?php if($_tab['alias'] == 'size_guide'):?>
     		<?php if($_product->getData('display_guide') != 0):?>
     			<div class="product-tabs-content" id="product_tabs_<?php echo $_tab['alias'] ?>_contents"><?php echo $this->getChildHtml($_tab['alias']) ?></div>
+			<?php endif;?>
+		<?php elseif($_tab['alias'] == 'impact'):?>
+			<?php if($_product['impact_description']):?>
+				<div class="product-tabs-content" id="product_tabs_<?php echo $_tab['alias'] ?>_contents"><?php echo $_product['impact_description'] ?></div>
 			<?php endif;?>
     	<?php else:?>
 			<?php if($_tab['alias'] == 'description'):?>

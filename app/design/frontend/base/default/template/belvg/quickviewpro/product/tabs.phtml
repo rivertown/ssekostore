@@ -44,9 +44,9 @@
         $desc[]     = $block;
     }
     $block  = trim($this->getChildHtml('impact'));
-    if ($block) {
+    if ($block && $_product['impact_description']) {
         $title[]    = $this->__('Impact');
-        $desc[]     = $block;
+        $desc[]     = $_product['impact_description'];
     }
 ?>
 
