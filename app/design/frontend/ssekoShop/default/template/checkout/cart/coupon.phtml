@@ -19,12 +19,13 @@
 			<input type="hidden" name="remove" id="remove-coupone" value="0" />
             <input class="input-text" type="text" id="coupon_code" name="coupon_code" value="<?php echo $this->htmlEscape($this->getCouponCode()) ?>" />
 		</div>
-		<button type="submit" title="<?php echo $this->__('Apply Coupon') ?>" onclick="discountForm.submit(false)" value="<?php echo $this->__('Apply Coupon') ?>"></button>
+		<button type="submit" title="<?php echo $this->__('Apply Coupon') ?>" class="btn green-btn" onclick="discountForm.submit(false)" ><span><?php echo $this->__('Apply') ?></span></button>
+		<?php if(strlen($this->getCouponCode())): ?>
+			<div class="span5" style="margin-top:5px;">
+				<a title="<?php echo $this->__('Remove Coupon') ?>" onclick="discountForm.submit(true)" value="<?php echo $this->__('Remove Coupon') ?>"><?php echo $this->__('Remove Coupon') ?></a>
+			</div>
+		<?php endif;?>
 	</div>
-<?php if(strlen($this->getCouponCode())): ?>
-	<a title="<?php echo $this->__('Remove Coupon') ?>" onclick="discountForm.submit(true)" value="<?php echo $this->__('Remove Coupon') ?>"><?php echo $this->__('Remove Coupon') ?></a>
-<?php endif;?>
-
 </form>
 <script type="text/javascript">
 //<![CDATA[
